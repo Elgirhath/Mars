@@ -5,6 +5,13 @@
 [Bb]uilds/
 Assets/AssetStoreTools*
 
+# Plugins
+Plugins/
+[Pp]lugins.meta
+
+# Jet Brains files
+.idea/
+
 # Visual Studio cache directory
 .vs/
 
