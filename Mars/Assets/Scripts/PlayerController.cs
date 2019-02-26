@@ -15,11 +15,12 @@ public class PlayerController : MonoBehaviour
     }
 
     // Update is called once per frame
-    void Update()
-    {
+    void Update() {
         float mouseX = Input.GetAxis("Mouse X");
         float mouseY = Input.GetAxis("Mouse Y");
-        transform.RotateAround(transform.position, gameObject.transform.up, mouseX*sensitivity);
-        transform.RotateAround(transform.position, -gameObject.transform.right, mouseY*sensitivity);
+
+        Transform tr = transform;
+        transform.RotateAround(tr.position, tr.up, mouseX*sensitivity);
+        cam.transform.RotateAround(cam.transform.position, -tr.right, mouseY*sensitivity);
     }
 }
