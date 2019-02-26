@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 170076734}
-  m_IndirectSpecularColor: {r: 0.44657844, g: 0.49641222, b: 0.57481694, a: 1}
+  m_IndirectSpecularColor: {r: 0.44657898, g: 0.4964133, b: 0.5748178, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -175,7 +175,11 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 170076733}
   m_LocalRotation: {x: 0.40821788, y: -0.23456968, z: 0.10938163, w: 0.8754261}
+<<<<<<< HEAD
   m_LocalPosition: {x: 0, y: 5, z: 0}
+=======
+  m_LocalPosition: {x: 0, y: 27.7, z: 0}
+>>>>>>> 5c42195... PlayerController - Oskar
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -195,7 +199,11 @@ GameObject:
   - component: {fileID: 500106269}
   m_Layer: 0
   m_Name: Player
+<<<<<<< HEAD
   m_TagString: Untagged
+=======
+  m_TagString: Player
+>>>>>>> 5c42195... PlayerController - Oskar
   m_Icon: {fileID: -5397416234189338067, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -241,9 +249,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5a6f9c1f21c1cbb4f8ff12b9fb1c4f8a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+<<<<<<< HEAD
   sensitivity: 10
   moveSpeed: 1.5
   jumpHeight: 2
+=======
+  sensitivity: 5
+  moveSpeed: 10
+  jumpHeight: 4
+  angleLimit: 80
+>>>>>>> 5c42195... PlayerController - Oskar
 --- !u!54 &500106269
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -342,7 +357,11 @@ Transform:
   m_Father: {fileID: 500106267}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+<<<<<<< HEAD
 --- !u!1 &884384458
+=======
+--- !u!1 &758339573
+>>>>>>> 5c42195... PlayerController - Oskar
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -350,10 +369,17 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
+<<<<<<< HEAD
   - component: {fileID: 884384462}
   - component: {fileID: 884384461}
   - component: {fileID: 884384460}
   - component: {fileID: 884384459}
+=======
+  - component: {fileID: 758339577}
+  - component: {fileID: 758339576}
+  - component: {fileID: 758339575}
+  - component: {fileID: 758339574}
+>>>>>>> 5c42195... PlayerController - Oskar
   m_Layer: 0
   m_Name: Cube
   m_TagString: Untagged
@@ -361,26 +387,42 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+<<<<<<< HEAD
 --- !u!65 &884384459
+=======
+--- !u!65 &758339574
+>>>>>>> 5c42195... PlayerController - Oskar
 BoxCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
+<<<<<<< HEAD
   m_GameObject: {fileID: 884384458}
+=======
+  m_GameObject: {fileID: 758339573}
+>>>>>>> 5c42195... PlayerController - Oskar
   m_Material: {fileID: 0}
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
+<<<<<<< HEAD
 --- !u!23 &884384460
+=======
+--- !u!23 &758339575
+>>>>>>> 5c42195... PlayerController - Oskar
 MeshRenderer:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
+<<<<<<< HEAD
   m_GameObject: {fileID: 884384458}
+=======
+  m_GameObject: {fileID: 758339573}
+>>>>>>> 5c42195... PlayerController - Oskar
   m_Enabled: 1
   m_CastShadows: 1
   m_ReceiveShadows: 1
@@ -411,24 +453,41 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
+<<<<<<< HEAD
 --- !u!33 &884384461
+=======
+--- !u!33 &758339576
+>>>>>>> 5c42195... PlayerController - Oskar
 MeshFilter:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
+<<<<<<< HEAD
   m_GameObject: {fileID: 884384458}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
 --- !u!4 &884384462
+=======
+  m_GameObject: {fileID: 758339573}
+  m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!4 &758339577
+>>>>>>> 5c42195... PlayerController - Oskar
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
+<<<<<<< HEAD
   m_GameObject: {fileID: 884384458}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 1, z: 3.47}
   m_LocalScale: {x: 1, y: 2, z: 1}
+=======
+  m_GameObject: {fileID: 758339573}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 51.14, y: 2.49, z: 20.17}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+>>>>>>> 5c42195... PlayerController - Oskar
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 3
@@ -446,7 +505,7 @@ GameObject:
   - component: {fileID: 1966149868}
   m_Layer: 0
   m_Name: Terrain
-  m_TagString: Untagged
+  m_TagString: Terrain
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 4294967295
