@@ -207,7 +207,7 @@ CapsuleCollider:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 500106265}
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 13400000, guid: 8e0e860aaef0f0f4abdc3cda6a1b16af, type: 2}
   m_IsTrigger: 0
   m_Enabled: 1
   m_Radius: 0.4
@@ -243,7 +243,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   sensitivity: 10
   moveSpeed: 1.5
-  jumpHeight: 2
+  jumpHeight: 3
+  angleLimit: 80
 --- !u!54 &500106269
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -254,7 +255,7 @@ Rigidbody:
   serializedVersion: 2
   m_Mass: 1
   m_Drag: 0
-  m_AngularDrag: 0.05
+  m_AngularDrag: 0
   m_UseGravity: 1
   m_IsKinematic: 0
   m_Interpolate: 1
@@ -458,7 +459,7 @@ TerrainCollider:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1966149867}
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 13400000, guid: 8e0e860aaef0f0f4abdc3cda6a1b16af, type: 2}
   m_Enabled: 1
   m_TerrainData: {fileID: 15600000, guid: d39d67c761c528c43ad52db1fb7abd33, type: 2}
   m_EnableTreeColliders: 1
