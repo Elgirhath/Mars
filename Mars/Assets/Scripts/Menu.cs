@@ -61,6 +61,8 @@ public class Menu : MonoBehaviour {
 			obj.transform.position = rounded;
 		}
 	}
+	
+	//TODO: snap object pivot to scene pivot
 
 	// SCENE VIEW NAVIGATION
 
