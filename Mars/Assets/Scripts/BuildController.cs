@@ -15,6 +15,8 @@ public class BuildController : MonoBehaviour {
 	private TerrainData terrain;
 
 	private Vector3 placePosition;
+	private int defaultLayer;
+	private int ignoreRaycastLayer;
 	
 	// Update is called once per frame
 	void Start() {
@@ -22,10 +24,7 @@ public class BuildController : MonoBehaviour {
 		cam = GameObject.FindGameObjectWithTag("Player").GetComponentInChildren<Camera>().transform;
 		terrain = Terrain.activeTerrain.terrainData;
 		placePosition = Vector3.zero;
-		try {
-			defaultMaterial = scheme.GetComponent<Renderer>().material;
-		}
-		catch {}
+		ignoreRaycastLayer = LayerMask.NameToLayer("Ignore Raycast");
 	}
 	
 	void Update() {
@@ -39,8 +38,12 @@ public class BuildController : MonoBehaviour {
 			isPlacing = true;
 			scheme = Instantiate(prefab, placePosition, Quaternion.identity);
 			scheme.transform.up = wasHit && isInRange ? hitInfo.normal : scheme.transform.up;
+			
+			defaultLayer = scheme.layer;
+			scheme.layer = ignoreRaycastLayer;
 
 			try {
+				defaultMaterial = scheme.GetComponent<Renderer>().material;
 				scheme.GetComponent<Collider>().enabled = false;
 				scheme.GetComponent<Renderer>().material = schemeMaterial;
 			}
@@ -62,7 +65,8 @@ public class BuildController : MonoBehaviour {
 					scheme.GetComponent<Renderer>().material = defaultMaterial;
 				}
 				catch {}
-				
+
+				scheme.layer = defaultLayer;
 				scheme = null;
 				isPlacing = false;
 			}
