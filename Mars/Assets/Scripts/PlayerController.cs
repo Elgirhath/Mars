@@ -1,21 +1,13 @@
-<<<<<<< HEAD
-﻿using UnityEngine;
-
-public class PlayerController : MonoBehaviour {
-=======
-﻿using TMPro;
 using UnityEngine;
 
-public class PlayerController : MonoBehaviour
-{
->>>>>>> 5c42195... PlayerController - Oskar
+public class PlayerController : MonoBehaviour {
 	public float sensitivity;
-	public float moveSpeed;
+	public float walkSpeed;
+	public float runSpeed;
 	public float jumpHeight;
 	public float angleLimit;
 	
 	private Camera cam;
-<<<<<<< HEAD
 	private Rigidbody rb;
 	private Transform tr;
 	private CapsuleCollider col;
@@ -32,19 +24,15 @@ public class PlayerController : MonoBehaviour
 	}
 
 	private void Update() {
-		camLook();
-		jump();
+		CamLook();
+		Jump();
 	}
 
 	private void FixedUpdate() {
-		move();
+		Move();
 	}
 
-	bool isGrounded() {
-		return Physics.Raycast(tr.TransformPoint(col.center), -Vector3.up, out var hitInfo, col.height / 2 + 0.1f);
-	}
-
-	void camLook() {
+	void CamLook() {
 		float mouseX = Input.GetAxis("Mouse X");
 		float mouseY = Input.GetAxis("Mouse Y");
 
@@ -57,67 +45,30 @@ public class PlayerController : MonoBehaviour
 			cam.transform.RotateAround(cam.transform.position, -cam.transform.right, angle);
 	}
 
-	void move() {
+	void Move() {
 		float moveX = Input.GetAxisRaw("Horizontal");
 		float moveY = Input.GetAxisRaw("Vertical");
 
-		Vector3 moveVector = moveX * tr.right + moveY * tr.forward;
+		Vector3 moveDirection = Vector3.Normalize(moveX * tr.right + moveY * tr.forward);
+		
+		float moveSpeed = isRunning() ? runSpeed : walkSpeed;  			//check whether player is running and set his speed
+		moveSpeed *= Time.fixedDeltaTime * 100;								//apply time to moveSpeed
+		
+		Vector3 moveVector = moveDirection * moveSpeed;
 
-		rb.velocity = moveVector * Time.deltaTime * moveSpeed * 100 + rb.velocity.y * tr.up;
+		rb.velocity = moveVector + rb.velocity.y * tr.up; 				//moveVector is set in 2d, missing the Y axis, which should remain unchanged
 	}
 
-	void jump() {
+	void Jump() {
 		if (Input.GetButtonDown("Jump") && isGrounded()) {
 			rb.velocity += Vector3.up * jumpHeight;
 		}
 	}
-}
-=======
-	private Rigidbody rBody;
-	private Transform tr;
-	private CapsuleCollider col;
 
-
-	// Start is called before the first frame update
-	private void Start()
-	{
-		Cursor.visible = false;
-		Cursor.lockState = CursorLockMode.Locked;
-		cam = GetComponentInChildren<Camera>();
-		tr = transform;
-		rBody = GetComponent<Rigidbody>();
-		col = GetComponent<CapsuleCollider>();
+	bool isRunning() {
+		return Input.GetButton("Run");
 	}
-
-	private void Update()
-	{
-		float mouseX = Input.GetAxis("Mouse X");
-		float mouseY = Input.GetAxis("Mouse Y");
-		float angle = mouseY * sensitivity;
-		float currentAngle = Vector3.Angle(-tr.up, cam.transform.forward) - 90;
-
-		
-		transform.RotateAround(tr.position, tr.up, mouseX * sensitivity);
-		if (Mathf.Abs(currentAngle + angle) < angleLimit)
-		{
-			cam.transform.RotateAround(cam.transform.position, -cam.transform.right, angle);
-		}
-		
-		// Jumping
-		if (Input.GetButtonDown("Jump") && Physics.Raycast(tr.TransformPoint(col.center), -Vector3.up, out var hitInfo,col.height/2 + 0.1f))
-		{
-			rBody.velocity = Vector3.up * jumpHeight;
-		}
-	}
-
-	private void FixedUpdate()
-	{
-		// Player movement
-		float moveX = Input.GetAxisRaw("Horizontal");
-		float moveY = Input.GetAxisRaw("Vertical");
-		Vector3 moveVector = moveX * tr.right + moveY * tr.forward;
-		rBody.velocity = moveVector.normalized * Time.deltaTime * moveSpeed * 100 + tr.up * rBody.velocity.y;
-
+	bool isGrounded() {
+		return Physics.Raycast(tr.TransformPoint(col.center), -Vector3.up, out var hitInfo, col.height / 2 + 0.1f);
 	}
 }
->>>>>>> 5c42195... PlayerController - Oskar

@@ -1,4 +1,5 @@
-﻿using UnityEditor;
+﻿using System;
+using UnityEditor;
 using UnityEngine;
 
 public class Menu : MonoBehaviour
@@ -30,6 +31,8 @@ public class Menu : MonoBehaviour
 	[MenuItem("GameObject/Reset transform &r")] // reset transform
 	private static void ResetTransform()
 	{
+		if (!Application.isEditor)
+			throw new Exception();
 		var selectedObjects = Selection.gameObjects;
 		foreach (var obj in selectedObjects)
 		{
@@ -39,24 +42,23 @@ public class Menu : MonoBehaviour
 	}
 
 
-	[MenuItem("GameObject/Snap/To pivot #s")] // reset transform
-	private static void SnapToPivot()
-	{
+	[MenuItem("GameObject/Snap/To pivot #s")] // snap to pivot
+	private static void SnapToPivot() {
 		var selectedObjects = Selection.gameObjects;
 		foreach (var obj in selectedObjects)
 		{
-			Undo.RecordObject(obj.transform, "Reset transform");
+			Undo.RecordObject(obj.transform, "Snap to pivot");
 			obj.transform.position = SceneView.lastActiveSceneView.pivot;
 		}
 	}
 
-	[MenuItem("GameObject/Snap/To grid &#s")] // reset transform
+	[MenuItem("GameObject/Snap/To grid &#s")] // snap to grid
 	private static void SnapToGrid()
 	{
 		var selectedObjects = Selection.gameObjects;
 		foreach (var obj in selectedObjects)
 		{
-			Undo.RecordObject(obj.transform, "Reset transform");
+			Undo.RecordObject(obj.transform, "Snap to grid");
 			var rounded = Vector3Int.RoundToInt(obj.transform.position);
 			obj.transform.position = rounded;
 		}
