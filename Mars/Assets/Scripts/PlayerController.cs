@@ -55,7 +55,6 @@ public class PlayerController : MonoBehaviour {
 		Vector3 moveDirection = Vector3.Normalize(moveX * tr.right + moveY * tr.forward);
 
 		float moveSpeed = IsRunning() ? runSpeed : walkSpeed; //check whether player is running and set his speed
-		moveSpeed *= 100; //apply time to moveSpeed
 
 		Vector3 moveVector = moveDirection * moveSpeed;
 
