@@ -241,8 +241,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5a6f9c1f21c1cbb4f8ff12b9fb1c4f8a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  sensitivity: 10
-  moveSpeed: 1.5
+  sensitivity: 5
+  walkSpeed: 3
+  runSpeed: 5
   jumpHeight: 3
   angleLimit: 80
 --- !u!54 &500106269
