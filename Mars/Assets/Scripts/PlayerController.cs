@@ -39,7 +39,7 @@ public class PlayerController : MonoBehaviour {
 
 		tr.RotateAround(tr.position, tr.up, mouseX * sensitivity);
 
-		float currentAngle = Vector3.Angle(-tr.up, cam.transform.forward) - 90;
+		float currentAngle = Vector3.Angle(-tr.up, cam.transform.forward) - 90; //makes currentAngle [0,90] when looking up and [0,-90] when looking down
 		float angle = mouseY * sensitivity;
 
 		if (Mathf.Abs(currentAngle + angle) < angleLimit) {
@@ -55,7 +55,7 @@ public class PlayerController : MonoBehaviour {
 		Vector3 moveDirection = Vector3.Normalize(moveX * tr.right + moveY * tr.forward);
 
 		float moveSpeed = IsRunning() ? runSpeed : walkSpeed; //check whether player is running and set his speed
-		moveSpeed *= Time.fixedDeltaTime * 100; //apply time to moveSpeed
+		moveSpeed *= 100; //apply time to moveSpeed
 
 		Vector3 moveVector = moveDirection * moveSpeed;
 
