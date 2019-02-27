@@ -34,6 +34,8 @@ public class PlayerController : MonoBehaviour {
 	}
 
 	private void CamLook() {
+		//TODO: interpolate cam movement: http://www.kinematicsoup.com/news/2016/8/9/rrypp5tkubynjwxhxjzd42s3o034o8?fbclid=IwAR09F2udjxU9i_D7VuLsjHUXPco0tGQ4Gnf96emKsRcBNCt6ubW43xnlO-c
+		
 		float mouseX = Input.GetAxis("Mouse X");
 		float mouseY = Input.GetAxis("Mouse Y");
 
