@@ -47,6 +47,7 @@ public class ItemCollectingController : MonoBehaviour {
 			allowCollecting = true;
 			target = itemsInFront.First().Item1.gameObject;
 		}
+		Debug.Log(itemsInFront.Count);
 
 		//OLD HITCAST
 		/*
