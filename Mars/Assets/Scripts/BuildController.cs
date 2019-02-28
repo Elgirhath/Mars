@@ -16,7 +16,6 @@ public class BuildController : MonoBehaviour {
 	private Transform cam;
 	private bool isPlacing;
 	private GameObject scheme;
-	private TerrainData terrain;
 	private BuildingState savedState;
 	
 	private float schemeYRotation;
@@ -27,7 +26,6 @@ public class BuildController : MonoBehaviour {
 	void Start() {
 		isPlacing = false;
 		cam = GameObject.FindGameObjectWithTag("Player").GetComponentInChildren<Camera>().transform;
-		terrain = Terrain.activeTerrain.terrainData;
 		placePosition = Vector3.zero;
 		schemeLayer = LayerMask.NameToLayer("Ignore Raycast");
 		schemeYRotation = 0.0f;
@@ -51,9 +49,20 @@ public class BuildController : MonoBehaviour {
 		}
 
 		if (isPlacing) {
-			scheme.transform.position = placePosition;
 			Vector3 oldUpVector = scheme.transform.up;
-			Vector3 newUpVector = wasHit && isInRange ? hitInfo.normal : oldUpVector;
+			Vector3 newUpVector = oldUpVector;
+			
+			if (!wasHit || !isInRange) {
+				Utilities.ArchRaycast(cam.position, maxDistance, cam.forward, -cam.up, out RaycastHit hit,
+					10.0f);
+				placePosition = hit.point;
+				newUpVector = hit.normal;
+			}
+			else {
+				newUpVector = hitInfo.normal;
+			}
+			scheme.transform.position = placePosition;
+			
 
 			if (Input.GetButton("Rotate Scheme")) { //Rotate scheme
 				schemeYRotation += rotationSpeed * Time.deltaTime;
@@ -72,21 +81,23 @@ public class BuildController : MonoBehaviour {
 		}
 	}
 
-	public BuildingState SavePrefabState(GameObject obj) {
+	private BuildingState SavePrefabState(GameObject obj) {
 		return new BuildingState(obj);
 	}
 
-	public void setSchemeState(GameObject obj) {
-		BuildingState schemeState = new BuildingState();
-		schemeState.material = schemeMaterial;
-		schemeState.colliderEnable = false;
-		schemeState.layer = schemeLayer;
-		
+	private void setSchemeState(GameObject obj) {
+		BuildingState schemeState = new BuildingState {
+			material = schemeMaterial,
+			colliderEnable = false,
+			layer = schemeLayer
+		};
+
 		schemeState.apply(obj);
 	}
 }
 
 public class BuildingState {
+	//TODO: Multiobject states
 	public Material material;
 	public bool colliderEnable;
 	public int layer;
