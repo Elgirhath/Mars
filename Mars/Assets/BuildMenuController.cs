@@ -7,31 +7,39 @@ public class BuildMenuController : MonoBehaviour, Menu {
 	public BuildMenuItem[] items;
 	public GameObject button;
 
+	private Transform panel;
 	private GameObject gameController;
 	private BuildController buildController;
 
 	private void Start() {
 		gameController = GameObject.FindGameObjectWithTag("GameController");
-		Debug.Log("D: " + gameController.name);
 		buildController = gameController.GetComponent<BuildController>();
-		Debug.Log("C: " + buildController.gameObject.name);
+		panel = transform.GetChild(0);
 		
-		foreach (Transform child in transform) {
-			Destroy(child.gameObject);
-		}
-		foreach (BuildMenuItem item in items) {
-			GameObject newObj = Instantiate(button, transform);
-			Button newButton = newObj.GetComponent<Button>();
-			newButton.GetComponentInChildren<Text>().text = item.name;
-			newButton.onClick.AddListener(delegate { StartPlacing(item); } );
-		}
+		RemoveItems();
+		AddItems();
 		
 		Close();
 	}
 
+	private void AddItems() {
+		foreach (BuildMenuItem item in items) {
+			GameObject newObj = Instantiate(button, panel);
+			Button newButton = newObj.GetComponent<Button>();
+			newButton.GetComponentInChildren<Text>().text = item.name;
+			newButton.onClick.AddListener(delegate { StartPlacing(item); } );
+		}
+	}
+	
+	private void RemoveItems() {
+		foreach (Transform item in panel) {
+			Destroy(item.gameObject);
+		}
+	}
+
 	private void Update() {
-//		if (Input.GetButtonDown("Open Building Menu"))
-//			Open();
+		if (Input.GetButtonDown("Open Building Menu"))
+			Open();
 	}
 
 	private void StartPlacing(BuildMenuItem item) {
@@ -44,8 +52,7 @@ public class BuildMenuController : MonoBehaviour, Menu {
 		Cursor.visible = true;
 		Cursor.lockState = CursorLockMode.None;
 		
-		GetComponent<Image>().enabled = true;
-		foreach (Transform child in transform) {
+		foreach (Transform child in transform) { //enable all children
 			child.gameObject.SetActive(true);
 		}
 	}
@@ -53,9 +60,8 @@ public class BuildMenuController : MonoBehaviour, Menu {
 	public void Close() {
 		Cursor.visible = false;
 		Cursor.lockState = CursorLockMode.Locked;
-		
-		GetComponent<Image>().enabled = false;
-		foreach (Transform child in transform) {
+
+		foreach (Transform child in transform) { //disable all children
 			child.gameObject.SetActive(false);
 		}
 	}
