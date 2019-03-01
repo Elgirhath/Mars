@@ -2,8 +2,6 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public interface Menu {
-	void Open();
-
-	void Close();
+public class BuildMenuItem : MonoBehaviour {
+	public Sprite sprite;
 }
