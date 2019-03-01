@@ -601,7 +601,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 33431a43a5a1bc5429a7e4e0c612a8ee, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  prefab: {fileID: 2944860708868975691, guid: 16c068abf7edd954da103b0b513b6531, type: 3}
+  prefab: {fileID: 5309060762522423145, guid: a5ed0fe10cc54ba46b174968369de34d, type: 3}
   maxDistance: 5
   rotLerpSpeed: 20
   rotationSpeed: 70
