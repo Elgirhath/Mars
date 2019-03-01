@@ -7,7 +7,6 @@ using Quaternion = UnityEngine.Quaternion;
 using Vector3 = UnityEngine.Vector3;
 
 public class BuildController : MonoBehaviour {
-	public GameObject prefab;
 	public float maxDistance;
 	public float rotLerpSpeed;
 	public float rotationSpeed;
@@ -23,9 +22,6 @@ public class BuildController : MonoBehaviour {
 	private Vector3 placePosition;
 	private int schemeLayer;
 	
-	
-
-	// Update is called once per frame
 	void Start() {
 		isPlacing = false;
 		cam = GameObject.FindGameObjectWithTag("Player").GetComponentInChildren<Camera>().transform;
@@ -40,20 +36,9 @@ public class BuildController : MonoBehaviour {
 		bool isInRange = Vector3.Distance(hitInfo.point, cam.position) < maxDistance;
 		
 		placePosition = wasHit && isInRange ? hitInfo.point : placePosition;
-
-		if (Input.GetKeyDown(KeyCode.Q) && !isPlacing) {  //TODO: Choose building via a menu or sth and not with Q
-			isPlacing = true;
-			scheme = Instantiate(prefab, placePosition, Quaternion.identity);
-			scheme.transform.up = wasHit && isInRange ? hitInfo.normal : scheme.transform.up;
-
-			
-			savedState = SavePrefabState(scheme);
-			setSchemeState(scheme);
-		}
-
 		if (isPlacing) {
 			Vector3 oldUpVector = scheme.transform.up;
-			Vector3 newUpVector = oldUpVector;
+			Vector3 newUpVector;
 			
 			if (!wasHit || !isInRange) {
 				Utilities.ArchRaycast(cam.position, maxDistance, cam.forward, -cam.up, out RaycastHit hit,
@@ -82,6 +67,21 @@ public class BuildController : MonoBehaviour {
 				schemeYRotation = 0.0f;
 			}
 		}
+	}
+
+	public void StartPlacing(GameObject obj) {
+		bool wasHit = Physics.Raycast(cam.position, cam.forward, out RaycastHit hitInfo);
+
+		bool isInRange = Vector3.Distance(hitInfo.point, cam.position) < maxDistance;
+		
+		placePosition = wasHit && isInRange ? hitInfo.point : placePosition;
+		
+		isPlacing = true;
+		scheme = Instantiate(obj, placePosition, Quaternion.identity);
+		scheme.transform.up = wasHit && isInRange ? hitInfo.normal : scheme.transform.up;
+
+		savedState = SavePrefabState(scheme);
+		setSchemeState(scheme);
 	}
 
 	private ObjectTreeState SavePrefabState(GameObject obj) {
