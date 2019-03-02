@@ -100,7 +100,8 @@ public class BuildController : MonoBehaviour {
 }
 
 public class ObjectTreeState { // Keeps ObjectState for every object in the subtree
-	private Dictionary<Transform, ObjectState> states = new Dictionary<Transform, ObjectState>();
+	private ObjectState parentState;
+	private Dictionary<Transform, ObjectTreeState> childStates = new Dictionary<Transform, ObjectTreeState>();
 	
 	public ObjectTreeState() {}
 	
@@ -108,19 +109,18 @@ public class ObjectTreeState { // Keeps ObjectState for every object in the subt
 		get(obj);
 	}
 	public void get(GameObject obj) {
-		ObjectState parentState = new ObjectState(obj);
-		states.Add(obj.transform, parentState);
+		parentState = new ObjectState(obj);
 		foreach (Transform child in obj.transform) {
-			ObjectState childState = new ObjectState(child.gameObject);
-			states.Add(child, childState);
+			ObjectTreeState subtree = new ObjectTreeState(child.gameObject);
+			childStates.Add(child, subtree);
 		}
 	}
 	
 	public void apply(GameObject obj) {
-		states[obj.transform].apply(obj);
+		parentState.apply(obj);
 		foreach (Transform child in obj.transform) {
 			try {
-				states[child].apply(child.gameObject);
+				childStates[child].apply(child.gameObject);
 			}
 			catch {}
 		}
@@ -129,7 +129,7 @@ public class ObjectTreeState { // Keeps ObjectState for every object in the subt
 	public static void apply(GameObject obj, ObjectState state) {
 		state.apply(obj);
 		foreach (Transform child in obj.transform) {
-			state.apply(child.gameObject);
+			apply(child.gameObject, state);
 		}
 	}
 }
