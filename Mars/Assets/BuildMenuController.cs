@@ -10,11 +10,13 @@ public class BuildMenuController : MonoBehaviour, Menu {
 	private Transform panel;
 	private GameObject gameController;
 	private BuildController buildController;
+	private PlayerController playerController;
 
 	private void Start() {
 		gameController = GameObject.FindGameObjectWithTag("GameController");
 		buildController = gameController.GetComponent<BuildController>();
 		panel = transform.GetChild(0);
+		playerController = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerController>();
 		
 		RemoveItems();
 		AddItems();
@@ -51,6 +53,10 @@ public class BuildMenuController : MonoBehaviour, Menu {
 	public void Open() {
 		Cursor.visible = true;
 		Cursor.lockState = CursorLockMode.None;
+
+		Time.timeScale = 0.0f; //pause game
+		
+		playerController.camLockState = true;
 		
 		foreach (Transform child in transform) { //enable all children
 			child.gameObject.SetActive(true);
@@ -60,6 +66,10 @@ public class BuildMenuController : MonoBehaviour, Menu {
 	public void Close() {
 		Cursor.visible = false;
 		Cursor.lockState = CursorLockMode.Locked;
+
+		Time.timeScale = 1.0f; //resume game
+
+		playerController.camLockState = false;
 
 		foreach (Transform child in transform) { //disable all children
 			child.gameObject.SetActive(false);
