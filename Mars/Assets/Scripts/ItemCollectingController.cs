@@ -22,6 +22,7 @@ public class ItemCollectingController : MonoBehaviour {
 	private Collider[] nearItems;
 	private List<Tuple<Transform, float>> itemsInFront = new List<Tuple<Transform, float>>();
 	private GameObject target;
+	private Material targetMaterial;
 
 	private InventoryController inventory;
 
@@ -52,12 +53,12 @@ public class ItemCollectingController : MonoBehaviour {
 
 	void addTooltip()
 	{
-		Material targetMaterial = target.GetComponent<Renderer>().material;
+		targetMaterial = target.GetComponent<Renderer>().material;
 		Vector3 itemPosition = cam.WorldToScreenPoint(target.transform.position);
 		
 		targetMaterial.shader = outline;
-		targetMaterial.SetColor("_FirstOutlineColor", firstOutlineColor); // z jakiegos powodu dzialaja tylko built-in kolory...
-		targetMaterial.SetVector("_SecondOutlineColor", secondOutlineColor);
+		targetMaterial.SetColor("_FirstOutlineColor", firstOutlineColor);
+		targetMaterial.SetColor("_SecondOutlineColor", secondOutlineColor);
 		targetMaterial.SetFloat("_FirstOutlineWidth", firstOutlineWidth);
 		targetMaterial.SetFloat("_SecondOutlineWidth", secondOutlineWidth);
 
@@ -67,7 +68,7 @@ public class ItemCollectingController : MonoBehaviour {
 
 	void removeTooltip()
 	{
-		target.GetComponent<Renderer>().material.shader = standardShader;
+		targetMaterial.shader = standardShader;
 		tooltip.SetActive(false);
 	}
 
@@ -94,14 +95,14 @@ public class ItemCollectingController : MonoBehaviour {
 		itemsInFront.Sort((a, b) => a.Item2.CompareTo(b.Item2));
 		if (itemsInFront.Count > 0) {
 			allowCollecting = true;
-			if (target != null)
+			if (target)
 			{
 				removeTooltip();
 			}
 			target = itemsInFront.First().Item1.gameObject;
 			addTooltip();
 		}
-		else if (target != null)
+		else if (target)
 		{
 			removeTooltip();
 		}
@@ -129,6 +130,7 @@ public class ItemCollectingController : MonoBehaviour {
 				inventory.AddItem(target.GetComponent<InventoryItem>());
 				removeTooltip();
 				Destroy(target);
+				tooltip.SetActive(false);
 				Debug.Log("Added to inventory");
 			}
 		}
