@@ -51,18 +51,21 @@ public class ItemCollectingController : MonoBehaviour {
 		inventory = GameObject.FindGameObjectWithTag("Inventory").GetComponent<InventoryController>();
 	}
 
+	void moveTooltip()
+	{
+		Vector3 itemPosition = cam.WorldToScreenPoint(target.transform.position);
+		tooltipTransform.anchoredPosition = itemPosition;
+	}
 	void addTooltip()
 	{
 		targetMaterial = target.GetComponent<Renderer>().material;
-		Vector3 itemPosition = cam.WorldToScreenPoint(target.transform.position);
 		
 		targetMaterial.shader = outline;
 		targetMaterial.SetColor("_FirstOutlineColor", firstOutlineColor);
 		targetMaterial.SetColor("_SecondOutlineColor", secondOutlineColor);
 		targetMaterial.SetFloat("_FirstOutlineWidth", firstOutlineWidth);
 		targetMaterial.SetFloat("_SecondOutlineWidth", secondOutlineWidth);
-
-		tooltipTransform.anchoredPosition = itemPosition;
+		moveTooltip();
 		tooltip.SetActive(true);
 	}
 
@@ -72,12 +75,17 @@ public class ItemCollectingController : MonoBehaviour {
 		tooltip.SetActive(false);
 	}
 
-	void Update() {
+	void Update()
+	{
+		Collider closestItem = null;
+		float closestItemFactor = 0;
 		
 		allowCollecting = false;
-		itemsInFront.Clear();
+		//itemsInFront.Clear();
 
 		nearItems = Physics.OverlapSphere(transform.position, maxCollectDistance); //get all objects in range
+		
+		
 		for (int i = 0; i < nearItems.Length; ++i) {
 			Vector3 camItemVector = nearItems[i].transform.position - camTransform.position; //vector from camera to the object
 			float angle = Vector3.Angle(camItemVector, camTransform.forward);
@@ -87,12 +95,38 @@ public class ItemCollectingController : MonoBehaviour {
 				ItemProperties properties = nearItems[i].transform.gameObject.GetComponent<InventoryItem>().Properties;
 				if (properties.collectible) {
 					float factor = weight * camItemVector.magnitude + (1 - weight) * angle; //selecting the right object by the lowest factor
-					itemsInFront.Add(new Tuple<Transform, float>(nearItems[i].transform, factor));
+					if (factor < closestItemFactor || !closestItem)
+					{
+						closestItemFactor = factor;
+						closestItem = nearItems[i];
+					}
+					//itemsInFront.Add(new Tuple<Transform, float>(nearItems[i].transform, factor));
 				}
 			}
 			catch {}
 		}
 
+		if (closestItem)
+		{
+			allowCollecting = true;
+			if (closestItem.gameObject != target)
+			{
+				if(target)
+					removeTooltip();
+				target = closestItem.gameObject;
+				addTooltip();
+			}
+			else
+			{
+				moveTooltip();
+			}
+		}
+		else if(target)
+		{
+			removeTooltip();
+			target = null;
+		}
+		/*
 		itemsInFront.Sort((a, b) => a.Item2.CompareTo(b.Item2));
 		if (itemsInFront.Count > 0) {
 			allowCollecting = true;
@@ -107,6 +141,7 @@ public class ItemCollectingController : MonoBehaviour {
 		{
 			removeTooltip();
 		}
+		*/
 //		Debug.Log(itemsInFront.Count);
 
 		//OLD HITCAST
