@@ -49,7 +49,7 @@ public class ItemCollectingController : MonoBehaviour {
 	void addTooltip()
 	{
 		Material targetMaterial = target.GetComponent<Renderer>().material;
-		Vector3 itemPosition = cam.ScreenToWorldPoint(target.transform.position);
+		Vector3 itemPosition = cam.WorldToScreenPoint(target.transform.position);
 		
 		targetMaterial.shader = outline;
 		targetMaterial.SetColor("_FirstOutlineColor", new Color32(71,122,172,0)); // z jakiegos powodu dzialaja tylko built-in kolory...
@@ -57,7 +57,7 @@ public class ItemCollectingController : MonoBehaviour {
 		targetMaterial.SetFloat("_FirstOutlineWidth", firstOutlineWidth);
 		targetMaterial.SetFloat("_SecondOutlineWidth", secondOutlineWidth);
 
-		//tooltipTransform.anchoredPosition(itemPosition);
+		tooltipTransform.anchoredPosition = itemPosition;
 		tooltip.SetActive(true);
 	}
 
@@ -68,6 +68,7 @@ public class ItemCollectingController : MonoBehaviour {
 	}
 
 	void Update() {
+		
 		allowCollecting = false;
 		itemsInFront.Clear();
 
@@ -122,7 +123,7 @@ public class ItemCollectingController : MonoBehaviour {
 		if (allowCollecting) {
 			if (Input.GetButtonDown("Use")) {
 				Destroy(target);
-				Debug.Log("Dodano do ekwipunku");
+				Debug.Log("Added to inventory");
 			}
 		}
 		
