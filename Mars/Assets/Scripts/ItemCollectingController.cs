@@ -23,6 +23,8 @@ public class ItemCollectingController : MonoBehaviour {
 	private List<Tuple<Transform, float>> itemsInFront = new List<Tuple<Transform, float>>();
 	private GameObject target;
 
+	private InventoryController inventory;
+
 	private GameObject tooltip;
 	private RectTransform tooltipTransform;
 
@@ -30,8 +32,8 @@ public class ItemCollectingController : MonoBehaviour {
 	private Shader outline;
 	
 	//Shader settings
-	public Color firstOutlineColor;
-	public Color secondOutlineColor;
+	public Color firstOutlineColor = Color.white;
+	public Color secondOutlineColor = Color.white;
 	public float firstOutlineWidth;
 	public float secondOutlineWidth;
 
@@ -44,6 +46,8 @@ public class ItemCollectingController : MonoBehaviour {
 		tooltip = GameObject.Find("Collect Tooltip");
 		tooltip.SetActive(false);
 		tooltipTransform = tooltip.GetComponent<RectTransform>();
+
+		inventory = GameObject.FindGameObjectWithTag("Inventory").GetComponent<InventoryController>();
 	}
 
 	void addTooltip()
@@ -52,8 +56,8 @@ public class ItemCollectingController : MonoBehaviour {
 		Vector3 itemPosition = cam.WorldToScreenPoint(target.transform.position);
 		
 		targetMaterial.shader = outline;
-		targetMaterial.SetColor("_FirstOutlineColor", new Color32(71,122,172,0)); // z jakiegos powodu dzialaja tylko built-in kolory...
-		targetMaterial.SetVector("_SecondOutlineColor", Color.cyan);
+		targetMaterial.SetColor("_FirstOutlineColor", firstOutlineColor); // z jakiegos powodu dzialaja tylko built-in kolory...
+		targetMaterial.SetVector("_SecondOutlineColor", secondOutlineColor);
 		targetMaterial.SetFloat("_FirstOutlineWidth", firstOutlineWidth);
 		targetMaterial.SetFloat("_SecondOutlineWidth", secondOutlineWidth);
 
@@ -122,6 +126,8 @@ public class ItemCollectingController : MonoBehaviour {
 		
 		if (allowCollecting) {
 			if (Input.GetButtonDown("Use")) {
+				inventory.AddItem(target.GetComponent<InventoryItem>());
+				removeTooltip();
 				Destroy(target);
 				Debug.Log("Added to inventory");
 			}

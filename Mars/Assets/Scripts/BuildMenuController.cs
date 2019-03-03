@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class BuildMenuController : MonoBehaviour, Menu {
+public class BuildMenuController : MonoBehaviour {
 	public BuildMenuItem[] items;
 	public GameObject button;
 
@@ -23,6 +23,11 @@ public class BuildMenuController : MonoBehaviour, Menu {
 		
 		Close();
 	}
+	
+	private void Update() {
+		if (Input.GetButtonDown("Open Building Menu"))
+			Open();
+	}
 
 	private void AddItems() {
 		foreach (BuildMenuItem item in items) {
@@ -39,10 +44,6 @@ public class BuildMenuController : MonoBehaviour, Menu {
 		}
 	}
 
-	private void Update() {
-		if (Input.GetButtonDown("Open Building Menu"))
-			Open();
-	}
 
 	private void StartPlacing(BuildMenuItem item) {
 		buildController.StartPlacing(item.gameObject);
