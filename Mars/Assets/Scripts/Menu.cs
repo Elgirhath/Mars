@@ -2,8 +2,16 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public interface Menu {
-	void Open();
-
-	void Close();
+public class Menu : MonoBehaviour {
+	
+	public void Open() {
+		foreach (Transform child in transform) { //enable all children
+			child.gameObject.SetActive(true);
+		}
+	}
+	public void Close() {
+		foreach (Transform child in transform) { //disable all children
+			child.gameObject.SetActive(false);
+		}
+	}
 }
