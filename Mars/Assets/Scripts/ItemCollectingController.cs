@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 using UnityEngine.Serialization;
+using UnityEngine.SocialPlatforms;
 
 public class ItemCollectingController : MonoBehaviour {
 	[Tooltip("Max distance from camera in which objects can be collected")]
@@ -15,16 +16,55 @@ public class ItemCollectingController : MonoBehaviour {
 	[Range(0.0f, 90.0f)]
 	public float maxAngle;
 
-	private float distanceWeight;
-	private float angleWeight;
+	private Camera cam;
 	private Transform camTransform;
 	private bool allowCollecting;
 	private Collider[] nearItems;
 	private List<Tuple<Transform, float>> itemsInFront = new List<Tuple<Transform, float>>();
 	private GameObject target;
 
+	private GameObject tooltip;
+	private RectTransform tooltipTransform;
+
+	private Shader standardShader;
+	private Shader outline;
+	
+	//Shader settings
+	public Color firstOutlineColor;
+	public Color secondOutlineColor;
+	public float firstOutlineWidth;
+	public float secondOutlineWidth;
+
 	void Start() {
-		camTransform = GetComponentInChildren<Camera>().transform;
+		cam = GetComponentInChildren<Camera>();
+		camTransform = cam.transform;
+		target = null;
+		standardShader = Shader.Find("Standard");
+		outline = Shader.Find("Outlined/UltimateOutline");
+		tooltip = GameObject.Find("Collect Tooltip");
+		tooltip.SetActive(false);
+		tooltipTransform = tooltip.GetComponent<RectTransform>();
+	}
+
+	void addTooltip()
+	{
+		Material targetMaterial = target.GetComponent<Renderer>().material;
+		Vector3 itemPosition = cam.ScreenToWorldPoint(target.transform.position);
+		
+		targetMaterial.shader = outline;
+		targetMaterial.SetColor("_FirstOutlineColor", new Color32(71,122,172,0)); // z jakiegos powodu dzialaja tylko built-in kolory...
+		targetMaterial.SetVector("_SecondOutlineColor", Color.cyan);
+		targetMaterial.SetFloat("_FirstOutlineWidth", firstOutlineWidth);
+		targetMaterial.SetFloat("_SecondOutlineWidth", secondOutlineWidth);
+
+		//tooltipTransform.anchoredPosition(itemPosition);
+		tooltip.SetActive(true);
+	}
+
+	void removeTooltip()
+	{
+		target.GetComponent<Renderer>().material.shader = standardShader;
+		tooltip.SetActive(false);
 	}
 
 	void Update() {
@@ -49,7 +89,16 @@ public class ItemCollectingController : MonoBehaviour {
 		itemsInFront.Sort((a, b) => a.Item2.CompareTo(b.Item2));
 		if (itemsInFront.Count > 0) {
 			allowCollecting = true;
+			if (target != null)
+			{
+				removeTooltip();
+			}
 			target = itemsInFront.First().Item1.gameObject;
+			addTooltip();
+		}
+		else if (target != null)
+		{
+			removeTooltip();
 		}
 //		Debug.Log(itemsInFront.Count);
 
