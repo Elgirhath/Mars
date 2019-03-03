@@ -1134,10 +1134,10 @@ MonoBehaviour:
   maxCollectDistance: 1.75
   weight: 0.52
   maxAngle: 35
-  firstOutlineColor: {r: 0.027634379, g: 0.46797535, b: 0.6509434, a: 1}
-  secondOutlineColor: {r: 0, g: 0.64603204, b: 0.7264151, a: 1}
-  firstOutlineWidth: 0.04
-  secondOutlineWidth: 0.02
+  firstOutlineColor: {r: 0.2784314, g: 0.47843137, b: 0.6745098, a: 1}
+  secondOutlineColor: {r: 0.2784314, g: 0.5686275, b: 0.6745098, a: 1}
+  firstOutlineWidth: 0.015
+  secondOutlineWidth: 0.007
 --- !u!1 &521186294
 GameObject:
   m_ObjectHideFlags: 0
