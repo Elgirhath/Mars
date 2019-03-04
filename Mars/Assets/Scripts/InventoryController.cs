@@ -5,7 +5,6 @@ using UnityEngine.UI;
 
 public class InventoryController : MonoBehaviour
 {
-    public List<InventoryItem> items;
     public GameObject button;
 
     private bool isOpened = true;
@@ -34,18 +33,12 @@ public class InventoryController : MonoBehaviour
         }
     }
 
-    public void AddItem(InventoryItem item) {
-        items.Add(item);
+    public void AddItem(ItemProperties item) {
+        GameObject newObj = Instantiate(button, panel);
+        Button newButton = newObj.GetComponent<Button>();
+        newButton.GetComponentInChildren<Text>().text = item.name;
+        newButton.onClick = item.onUse;
         Debug.Log(item.name);
-    }
-    
-    private void AddItems() {
-        foreach (InventoryItem item in items) {
-            GameObject newObj = Instantiate(button, panel);
-            Button newButton = newObj.GetComponent<Button>();
-            newButton.GetComponentInChildren<Text>().text = item.name;
-            newButton.onClick.AddListener(delegate { UseItem(item); } );
-        }
     }
 	
     private void RemoveItems() {
@@ -54,7 +47,7 @@ public class InventoryController : MonoBehaviour
         }
     }
 
-    private void UseItem(InventoryItem item) {
+    private void UseItem(ItemProperties item) {
         Close();
     }
     

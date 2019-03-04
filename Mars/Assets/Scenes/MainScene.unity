@@ -1582,11 +1582,19 @@ MonoBehaviour:
   m_GameObject: {fileID: 797499888}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d17f12f2b3721ba40b88d7be8563e41b, type: 3}
+  m_Script: {fileID: 11500000, guid: c5c917cd1f5f68b4db51cc4261c49cdb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  tags:
-  - Collectible
+  properties:
+    collectible: 1
+    name: KuLKa
+    sprite: {fileID: 0}
+    prefab: {fileID: 0}
+    onUse:
+      m_PersistentCalls:
+        m_Calls: []
+      m_TypeName: ItemUseEvent, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
+        PublicKeyToken=null
 --- !u!135 &797499890
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -2004,11 +2012,19 @@ MonoBehaviour:
   m_GameObject: {fileID: 986072198}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d17f12f2b3721ba40b88d7be8563e41b, type: 3}
+  m_Script: {fileID: 11500000, guid: c5c917cd1f5f68b4db51cc4261c49cdb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  tags:
-  - Collectible
+  properties:
+    collectible: 1
+    name: Kuula
+    sprite: {fileID: 0}
+    prefab: {fileID: 0}
+    onUse:
+      m_PersistentCalls:
+        m_Calls: []
+      m_TypeName: ItemUseEvent, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
+        PublicKeyToken=null
 --- !u!135 &986072200
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -2130,8 +2146,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7cef62d78443fb448a787d187e2138d6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  items:
-  - {fileID: 3897474054042421865, guid: 1a7a59115496f2445bcf5dad869b8d3c, type: 3}
   button: {fileID: 4216981210539095208, guid: 5ec373264f4c72d43a3a8aaef0923e76, type: 3}
 --- !u!1 &1188196148
 GameObject:
@@ -2309,6 +2323,21 @@ PrefabInstance:
       propertyPath: m_Pivot.y
       value: 0.5
       objectReference: {fileID: 0}
+    - target: {fileID: 4216981210539095214, guid: 5ec373264f4c72d43a3a8aaef0923e76,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.size
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4216981210539095214, guid: 5ec373264f4c72d43a3a8aaef0923e76,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4216981210539095214, guid: 5ec373264f4c72d43a3a8aaef0923e76,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 5ec373264f4c72d43a3a8aaef0923e76, type: 3}
 --- !u!1 &1468339237
@@ -2355,7 +2384,6 @@ GameObject:
   - component: {fileID: 1513997996}
   - component: {fileID: 1513997995}
   - component: {fileID: 1513997994}
-  - component: {fileID: 1513997999}
   m_Layer: 0
   m_Name: Sphere (1)
   m_TagString: Collectible
@@ -2372,11 +2400,19 @@ MonoBehaviour:
   m_GameObject: {fileID: 1513997993}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d17f12f2b3721ba40b88d7be8563e41b, type: 3}
+  m_Script: {fileID: 11500000, guid: c5c917cd1f5f68b4db51cc4261c49cdb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  tags:
-  - Collectible
+  properties:
+    collectible: 1
+    name: Kuleczka
+    sprite: {fileID: 0}
+    prefab: {fileID: 0}
+    onUse:
+      m_PersistentCalls:
+        m_Calls: []
+      m_TypeName: ItemUseEvent, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
+        PublicKeyToken=null
 --- !u!135 &1513997995
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -2449,21 +2485,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1513997999
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1513997993}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a808092f6857a534c9794a149db5c85b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  collectible: 1
-  name: 
-  sprite: {fileID: 0}
 --- !u!224 &1700031263 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 4216981210539095215, guid: 5ec373264f4c72d43a3a8aaef0923e76,
@@ -2505,11 +2526,19 @@ MonoBehaviour:
   m_GameObject: {fileID: 1904246022}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d17f12f2b3721ba40b88d7be8563e41b, type: 3}
+  m_Script: {fileID: 11500000, guid: c5c917cd1f5f68b4db51cc4261c49cdb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  tags:
-  - Collectible
+  properties:
+    collectible: 1
+    name: Inna kulka
+    sprite: {fileID: 0}
+    prefab: {fileID: 0}
+    onUse:
+      m_PersistentCalls:
+        m_Calls: []
+      m_TypeName: ItemUseEvent, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
+        PublicKeyToken=null
 --- !u!135 &1904246024
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -2690,11 +2719,19 @@ MonoBehaviour:
   m_GameObject: {fileID: 2070496093}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d17f12f2b3721ba40b88d7be8563e41b, type: 3}
+  m_Script: {fileID: 11500000, guid: c5c917cd1f5f68b4db51cc4261c49cdb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  tags:
-  - Collectible
+  properties:
+    collectible: 1
+    name: "Ma\u0142a kulka"
+    sprite: {fileID: 0}
+    prefab: {fileID: 2070496093}
+    onUse:
+      m_PersistentCalls:
+        m_Calls: []
+      m_TypeName: ItemUseEvent, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
+        PublicKeyToken=null
 --- !u!135 &2070496095
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -2910,72 +2947,88 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 16c068abf7edd954da103b0b513b6531, type: 3}
---- !u!1001 &3897474055438297640
+--- !u!1001 &4101174428143944250
 PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 3897474054042421864, guid: 1a7a59115496f2445bcf5dad869b8d3c,
+    - target: {fileID: 5399376825074929637, guid: 1a7a59115496f2445bcf5dad869b8d3c,
         type: 3}
       propertyPath: m_Name
       value: Item
       objectReference: {fileID: 0}
-    - target: {fileID: 3897474054042421870, guid: 1a7a59115496f2445bcf5dad869b8d3c,
+    - target: {fileID: 5040954604850710523, guid: 1a7a59115496f2445bcf5dad869b8d3c,
         type: 3}
       propertyPath: m_LocalPosition.x
       value: -4.56
       objectReference: {fileID: 0}
-    - target: {fileID: 3897474054042421870, guid: 1a7a59115496f2445bcf5dad869b8d3c,
+    - target: {fileID: 5040954604850710523, guid: 1a7a59115496f2445bcf5dad869b8d3c,
         type: 3}
       propertyPath: m_LocalPosition.y
       value: 0.9465077
       objectReference: {fileID: 0}
-    - target: {fileID: 3897474054042421870, guid: 1a7a59115496f2445bcf5dad869b8d3c,
+    - target: {fileID: 5040954604850710523, guid: 1a7a59115496f2445bcf5dad869b8d3c,
         type: 3}
       propertyPath: m_LocalPosition.z
       value: 4.658
       objectReference: {fileID: 0}
-    - target: {fileID: 3897474054042421870, guid: 1a7a59115496f2445bcf5dad869b8d3c,
+    - target: {fileID: 5040954604850710523, guid: 1a7a59115496f2445bcf5dad869b8d3c,
         type: 3}
       propertyPath: m_LocalRotation.x
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 3897474054042421870, guid: 1a7a59115496f2445bcf5dad869b8d3c,
+    - target: {fileID: 5040954604850710523, guid: 1a7a59115496f2445bcf5dad869b8d3c,
         type: 3}
       propertyPath: m_LocalRotation.y
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 3897474054042421870, guid: 1a7a59115496f2445bcf5dad869b8d3c,
+    - target: {fileID: 5040954604850710523, guid: 1a7a59115496f2445bcf5dad869b8d3c,
         type: 3}
       propertyPath: m_LocalRotation.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 3897474054042421870, guid: 1a7a59115496f2445bcf5dad869b8d3c,
+    - target: {fileID: 5040954604850710523, guid: 1a7a59115496f2445bcf5dad869b8d3c,
         type: 3}
       propertyPath: m_LocalRotation.w
       value: 1
       objectReference: {fileID: 0}
-    - target: {fileID: 3897474054042421870, guid: 1a7a59115496f2445bcf5dad869b8d3c,
+    - target: {fileID: 5040954604850710523, guid: 1a7a59115496f2445bcf5dad869b8d3c,
         type: 3}
       propertyPath: m_RootOrder
       value: 13
       objectReference: {fileID: 0}
-    - target: {fileID: 3897474054042421870, guid: 1a7a59115496f2445bcf5dad869b8d3c,
+    - target: {fileID: 5040954604850710523, guid: 1a7a59115496f2445bcf5dad869b8d3c,
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 3897474054042421870, guid: 1a7a59115496f2445bcf5dad869b8d3c,
+    - target: {fileID: 5040954604850710523, guid: 1a7a59115496f2445bcf5dad869b8d3c,
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.y
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 3897474054042421870, guid: 1a7a59115496f2445bcf5dad869b8d3c,
+    - target: {fileID: 5040954604850710523, guid: 1a7a59115496f2445bcf5dad869b8d3c,
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 8346340783830729795, guid: 1a7a59115496f2445bcf5dad869b8d3c,
+        type: 3}
+      propertyPath: properties.name
+      value: Kulka
+      objectReference: {fileID: 0}
+    - target: {fileID: 8346340783830729795, guid: 1a7a59115496f2445bcf5dad869b8d3c,
+        type: 3}
+      propertyPath: properties.collectible
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8346340783830729795, guid: 1a7a59115496f2445bcf5dad869b8d3c,
+        type: 3}
+      propertyPath: properties.prefab
+      value: 
+      objectReference: {fileID: 5399376825074929637, guid: 1a7a59115496f2445bcf5dad869b8d3c,
+        type: 3}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 1a7a59115496f2445bcf5dad869b8d3c, type: 3}
