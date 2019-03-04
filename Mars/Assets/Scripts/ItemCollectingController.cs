@@ -84,7 +84,8 @@ public class ItemCollectingController : MonoBehaviour {
 			if (angle > maxAngle)
 				continue;
 			try {
-				if (nearItems[i].transform.gameObject.GetComponent<MultiTag>().Contains("Collectible")) {
+				ItemProperties properties = nearItems[i].transform.gameObject.GetComponent<InventoryItem>().Properties;
+				if (properties.collectible) {
 					float factor = weight * camItemVector.magnitude + (1 - weight) * angle; //selecting the right object by the lowest factor
 					itemsInFront.Add(new Tuple<Transform, float>(nearItems[i].transform, factor));
 				}
@@ -127,7 +128,7 @@ public class ItemCollectingController : MonoBehaviour {
 		
 		if (allowCollecting) {
 			if (Input.GetButtonDown("Use")) {
-				inventory.AddItem(target.GetComponent<InventoryItem>());
+				inventory.AddItem(target.GetComponent<InventoryItem>().Properties);
 				removeTooltip();
 				Destroy(target);
 				tooltip.SetActive(false);
