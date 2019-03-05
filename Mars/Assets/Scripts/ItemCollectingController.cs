@@ -20,7 +20,6 @@ public class ItemCollectingController : MonoBehaviour {
 	private Transform camTransform;
 	private bool allowCollecting;
 	private Collider[] nearItems;
-	private List<Tuple<Transform, float>> itemsInFront = new List<Tuple<Transform, float>>();
 	private GameObject target;
 	private Material targetMaterial;
 

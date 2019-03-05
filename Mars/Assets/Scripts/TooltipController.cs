@@ -48,7 +48,7 @@ public class TooltipController : MonoBehaviour {
 
 	public void OpenPickupTooltip(Transform target, string objectName) {
 		this.target = target;
-		textField.text = "Press E to pick up " + objectName;
+		SetText("Press E to pick up " + objectName);
 		MoveToTarget();
 		
 		Enable();
