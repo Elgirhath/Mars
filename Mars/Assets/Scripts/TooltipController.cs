@@ -1,8 +1,5 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using System.Net.Mime;
+﻿using System;
 using UnityEngine;
-using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
 public class TooltipController : MonoBehaviour {
@@ -35,9 +32,14 @@ public class TooltipController : MonoBehaviour {
 	}
 
 	private void Update() {
-		if (target) {
-			textTransform.anchoredPosition = cam.WorldToScreenPoint(target.position);
-		}
+		if (target)
+			MoveToTarget();
+	}
+
+	private void MoveToTarget() {
+		if (!target)
+			throw new NullReferenceException();
+		textTransform.anchoredPosition = cam.WorldToScreenPoint(target.position);
 	}
 
 	public void SetText(string text) {
@@ -47,12 +49,14 @@ public class TooltipController : MonoBehaviour {
 	public void OpenPickupTooltip(Transform target, string objectName) {
 		this.target = target;
 		textField.text = "Press E to pick up " + objectName;
+		MoveToTarget();
 		
 		Enable();
 	}
 
 	public void Disable() {
 		textField.gameObject.SetActive(false);
+		target = null;
 	}
 
 	public void Enable() {
