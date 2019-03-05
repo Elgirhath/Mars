@@ -26,8 +26,7 @@ public class ItemCollectingController : MonoBehaviour {
 
 	private InventoryController inventory;
 
-	private GameObject tooltip;
-	private RectTransform tooltipTransform;
+	private TooltipController tooltip;
 
 	private Shader standardShader;
 	private Shader outline;
@@ -44,36 +43,12 @@ public class ItemCollectingController : MonoBehaviour {
 		target = null;
 		standardShader = Shader.Find("Standard");
 		outline = Shader.Find("Outlined/UltimateOutline");
-		tooltip = GameObject.Find("Collect Tooltip");
-		tooltip.SetActive(false);
-		tooltipTransform = tooltip.GetComponent<RectTransform>();
+		tooltip = TooltipController.instance;
 
 		inventory = GameObject.FindGameObjectWithTag("Inventory").GetComponent<InventoryController>();
 	}
 
-	void moveTooltip()
-	{
-		Vector3 itemPosition = cam.WorldToScreenPoint(target.transform.position);
-		tooltipTransform.anchoredPosition = itemPosition;
-	}
-	void addTooltip()
-	{
-		targetMaterial = target.GetComponent<Renderer>().material;
-		
-		targetMaterial.shader = outline;
-		targetMaterial.SetColor("_FirstOutlineColor", firstOutlineColor);
-		targetMaterial.SetColor("_SecondOutlineColor", secondOutlineColor);
-		targetMaterial.SetFloat("_FirstOutlineWidth", firstOutlineWidth);
-		targetMaterial.SetFloat("_SecondOutlineWidth", secondOutlineWidth);
-		moveTooltip();
-		tooltip.SetActive(true);
-	}
-
-	void removeTooltip()
-	{
-		targetMaterial.shader = standardShader;
-		tooltip.SetActive(false);
-	}
+	
 
 	void Update()
 	{
@@ -81,7 +56,6 @@ public class ItemCollectingController : MonoBehaviour {
 		float closestItemFactor = 0;
 		
 		allowCollecting = false;
-		//itemsInFront.Clear();
 
 		nearItems = Physics.OverlapSphere(transform.position, maxCollectDistance); //get all objects in range
 		
@@ -100,76 +74,53 @@ public class ItemCollectingController : MonoBehaviour {
 						closestItemFactor = factor;
 						closestItem = nearItems[i];
 					}
-					//itemsInFront.Add(new Tuple<Transform, float>(nearItems[i].transform, factor));
 				}
 			}
 			catch {}
 		}
 
-		if (closestItem)
+		if (closestItem) // if any item can be collected
 		{
 			allowCollecting = true;
-			if (closestItem.gameObject != target)
-			{
+			if (closestItem.gameObject != target) { // if our current target isn't the one we want to pick up - change current target
 				if(target)
-					removeTooltip();
+					Deselect();
 				target = closestItem.gameObject;
-				addTooltip();
-			}
-			else
-			{
-				moveTooltip();
+				Select();
 			}
 		}
 		else if(target)
 		{
-			removeTooltip();
+			Deselect();
 			target = null;
 		}
-		/*
-		itemsInFront.Sort((a, b) => a.Item2.CompareTo(b.Item2));
-		if (itemsInFront.Count > 0) {
-			allowCollecting = true;
-			if (target)
-			{
-				removeTooltip();
-			}
-			target = itemsInFront.First().Item1.gameObject;
-			addTooltip();
-		}
-		else if (target)
-		{
-			removeTooltip();
-		}
-		*/
-//		Debug.Log(itemsInFront.Count);
-
-		//OLD HITCAST
-		/*
-		RaycastHit hit = new RaycastHit();
-		if (Physics.Raycast(cam.transform.position, cam.transform.TransformDirection(Vector3.forward), out hit)) {
-			try {
-				if (hit.transform.gameObject.GetComponent<MultiTag>().Contains("Collectible"))
-				{
-					if (hit.distance <= maxCollectDistance) {
-						target = hit.transform.gameObject;
-						allowCollecting = true;
-					}
-				}
-			}
-			catch {}
-		}
-		*/
 		
 		if (allowCollecting) {
 			if (Input.GetButtonDown("Use")) {
 				inventory.AddItem(target.GetComponent<InventoryItem>().Properties);
-				removeTooltip();
+				Deselect();
 				Destroy(target);
-				tooltip.SetActive(false);
 				Debug.Log("Added to inventory");
 			}
 		}
 		
+	}
+	void Select()
+	{
+		targetMaterial = target.GetComponent<Renderer>().material;
+		
+		targetMaterial.shader = outline;
+		targetMaterial.SetColor("_FirstOutlineColor", firstOutlineColor);
+		targetMaterial.SetColor("_SecondOutlineColor", secondOutlineColor);
+		targetMaterial.SetFloat("_FirstOutlineWidth", firstOutlineWidth);
+		targetMaterial.SetFloat("_SecondOutlineWidth", secondOutlineWidth);
+		
+		tooltip.OpenPickupTooltip(target.transform, target.GetComponent<InventoryItem>().Properties.name);
+	}
+
+	void Deselect()
+	{
+		targetMaterial.shader = standardShader;
+		tooltip.Disable();
 	}
 }
