@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class BuildMenuController : MonoBehaviour {
+public class BuildMenu : MonoBehaviour {
 	public BuildMenuItem[] items;
 	public GameObject button;
 

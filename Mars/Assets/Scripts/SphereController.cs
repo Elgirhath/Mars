@@ -1,17 +1,18 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Serialization;
 
-public class SphereController : MonoBehaviour, InventoryItem {
+public class SphereController : MonoBehaviour, ItemController {
 	[SerializeField]
-	private ItemProperties properties;
-	public ItemProperties Properties {
-		get => properties;
-		set => properties = value;
+	private Item _item;
+	public Item item {
+		get => _item;
+		set => _item = value;
 	}
 
 	private void Start() {
-		properties.onUse.AddListener(delegate { UseFunc(); });
+		_item.onUse.AddListener(UseFunc);
 	}
 
 	private void UseFunc() {
