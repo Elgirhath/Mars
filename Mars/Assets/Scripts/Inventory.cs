@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class InventoryController : MonoBehaviour
+public class Inventory : MonoBehaviour
 {
     public GameObject button;
 
@@ -12,6 +12,17 @@ public class InventoryController : MonoBehaviour
     private Transform panel;
     private GameObject gameController;
     private PlayerController playerController;
+
+    public static Inventory instance;
+
+    private void Awake() {
+        if (!instance) {
+            instance = this;
+        }
+        else if (instance != this) {
+            Destroy(gameObject);
+        }
+    }
 
     private void Start() {
         gameController = GameObject.FindGameObjectWithTag("GameController");
@@ -33,7 +44,7 @@ public class InventoryController : MonoBehaviour
         }
     }
 
-    public void AddItem(ItemProperties item) {
+    public void AddItem(Item item) {
         GameObject newObj = Instantiate(button, panel);
         Button newButton = newObj.GetComponent<Button>();
         newButton.GetComponentInChildren<Text>().text = item.name;
@@ -47,7 +58,7 @@ public class InventoryController : MonoBehaviour
         }
     }
 
-    private void UseItem(ItemProperties item) {
+    private void UseItem(Item item) {
         Close();
     }
     

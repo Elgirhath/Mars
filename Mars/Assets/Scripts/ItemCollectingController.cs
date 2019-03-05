@@ -24,7 +24,7 @@ public class ItemCollectingController : MonoBehaviour {
 	private GameObject target;
 	private Material targetMaterial;
 
-	private InventoryController inventory;
+	private Inventory inventory;
 
 	private TooltipController tooltip;
 
@@ -43,9 +43,9 @@ public class ItemCollectingController : MonoBehaviour {
 		target = null;
 		standardShader = Shader.Find("Standard");
 		outline = Shader.Find("Outlined/UltimateOutline");
+		
 		tooltip = TooltipController.instance;
-
-		inventory = GameObject.FindGameObjectWithTag("Inventory").GetComponent<InventoryController>();
+		inventory = Inventory.instance;
 	}
 
 	
@@ -66,7 +66,7 @@ public class ItemCollectingController : MonoBehaviour {
 			if (angle > maxAngle)
 				continue;
 			try {
-				ItemProperties properties = nearItems[i].transform.gameObject.GetComponent<InventoryItem>().Properties;
+				Item properties = nearItems[i].transform.gameObject.GetComponent<ItemController>().item;
 				if (properties.collectible) {
 					float factor = weight * camItemVector.magnitude + (1 - weight) * angle; //selecting the right object by the lowest factor
 					if (factor < closestItemFactor || !closestItem)
@@ -97,7 +97,7 @@ public class ItemCollectingController : MonoBehaviour {
 		
 		if (allowCollecting) {
 			if (Input.GetButtonDown("Use")) {
-				inventory.AddItem(target.GetComponent<InventoryItem>().Properties);
+				inventory.AddItem(target.GetComponent<ItemController>().item);
 				Deselect();
 				Destroy(target);
 				Debug.Log("Added to inventory");
@@ -115,7 +115,7 @@ public class ItemCollectingController : MonoBehaviour {
 		targetMaterial.SetFloat("_FirstOutlineWidth", firstOutlineWidth);
 		targetMaterial.SetFloat("_SecondOutlineWidth", secondOutlineWidth);
 		
-		tooltip.OpenPickupTooltip(target.transform, target.GetComponent<InventoryItem>().Properties.name);
+		tooltip.OpenPickupTooltip(target.transform, target.GetComponent<ItemController>().item.name);
 	}
 
 	void Deselect()
