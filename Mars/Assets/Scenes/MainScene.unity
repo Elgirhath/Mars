@@ -1338,7 +1338,7 @@ GameObject:
   - component: {fileID: 629507953}
   - component: {fileID: 629507954}
   m_Layer: 5
-  m_Name: ToolTip
+  m_Name: Tooltip
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1634,16 +1634,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c5c917cd1f5f68b4db51cc4261c49cdb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  properties:
-    collectible: 1
-    name: KuLKa
-    sprite: {fileID: 0}
-    prefab: {fileID: 0}
-    onUse:
-      m_PersistentCalls:
-        m_Calls: []
-      m_TypeName: ItemUseEvent, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
-        PublicKeyToken=null
+  _item: {fileID: 0}
 --- !u!135 &797499890
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -2013,12 +2004,12 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 852591208}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: -0.31412554, y: -0.9465077, z: -0.24133253}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
-  m_Father: {fileID: 0}
-  m_RootOrder: 12
+  m_Father: {fileID: 1188196150}
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!224 &930869258 stripped
 RectTransform:
@@ -2064,16 +2055,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c5c917cd1f5f68b4db51cc4261c49cdb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  properties:
-    collectible: 1
-    name: Kuula
-    sprite: {fileID: 0}
-    prefab: {fileID: 0}
-    onUse:
-      m_PersistentCalls:
-        m_Calls: []
-      m_TypeName: ItemUseEvent, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
-        PublicKeyToken=null
+  _item: {fileID: 0}
 --- !u!135 &986072200
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -2239,7 +2221,8 @@ Transform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0.31412554, y: 0.9465077, z: 0.24133253}
   m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
+  m_Children:
+  - {fileID: 852591211}
   m_Father: {fileID: 0}
   m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -2452,16 +2435,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c5c917cd1f5f68b4db51cc4261c49cdb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  properties:
-    collectible: 1
-    name: Kuleczka
-    sprite: {fileID: 0}
-    prefab: {fileID: 0}
-    onUse:
-      m_PersistentCalls:
-        m_Calls: []
-      m_TypeName: ItemUseEvent, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
-        PublicKeyToken=null
+  _item: {fileID: 0}
 --- !u!135 &1513997995
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -2578,16 +2552,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c5c917cd1f5f68b4db51cc4261c49cdb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  properties:
-    collectible: 1
-    name: Inna kulka
-    sprite: {fileID: 0}
-    prefab: {fileID: 0}
-    onUse:
-      m_PersistentCalls:
-        m_Calls: []
-      m_TypeName: ItemUseEvent, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
-        PublicKeyToken=null
+  _item: {fileID: 11400000, guid: 58ed12fe83a215c429889009412e76ea, type: 2}
 --- !u!135 &1904246024
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -2771,16 +2736,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c5c917cd1f5f68b4db51cc4261c49cdb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  properties:
-    collectible: 1
-    name: "Ma\u0142a kulka"
-    sprite: {fileID: 0}
-    prefab: {fileID: 2070496093}
-    onUse:
-      m_PersistentCalls:
-        m_Calls: []
-      m_TypeName: ItemUseEvent, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
-        PublicKeyToken=null
+  _item: {fileID: 11400000, guid: 58ed12fe83a215c429889009412e76ea, type: 2}
 --- !u!135 &2070496095
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -3046,7 +3002,7 @@ PrefabInstance:
     - target: {fileID: 5040954604850710523, guid: 1a7a59115496f2445bcf5dad869b8d3c,
         type: 3}
       propertyPath: m_RootOrder
-      value: 13
+      value: 12
       objectReference: {fileID: 0}
     - target: {fileID: 5040954604850710523, guid: 1a7a59115496f2445bcf5dad869b8d3c,
         type: 3}

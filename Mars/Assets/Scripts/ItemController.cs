@@ -4,18 +4,20 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.Serialization;
+using System.Collections;
 
 public interface ItemController {
 	[SerializeField]
 	Item item { get; set; }
 }
 
-[Serializable]
-public class Item {
+[CreateAssetMenu(fileName = "NewItem", menuName="Item", order = 81)]
+public class Item : ScriptableObject {
 	public bool collectible;
 	public string name;
 	public Sprite sprite;
 	public GameObject prefab;
+	public int stackLimit;
 
 	public ItemUseEvent onUse; //called when an item is used with LMB in inventory
 
@@ -30,6 +32,7 @@ public class Item {
 		sprite = other.sprite;
 		onUse = other.onUse;
 		prefab = other.prefab;
+		stackLimit = other.stackLimit;
 	}
 }
 
