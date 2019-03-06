@@ -13,6 +13,8 @@ public class Inventory : MonoBehaviour
     private GameObject gameController;
     private PlayerController playerController;
 
+    private ScrollingInfoController scrollingInfoController;
+
     public static Inventory instance;
 
     private void Awake() {
@@ -28,6 +30,7 @@ public class Inventory : MonoBehaviour
         gameController = GameObject.FindGameObjectWithTag("GameController");
         panel = transform.GetChild(0);
         playerController = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerController>();
+        scrollingInfoController = GameObject.FindGameObjectWithTag("ScrollingInfo").GetComponent<ScrollingInfoController>();
 		
         RemoveItems();
 		
@@ -49,6 +52,7 @@ public class Inventory : MonoBehaviour
         Button newButton = newObj.GetComponent<Button>();
         newButton.GetComponentInChildren<Text>().text = item.name;
         newButton.onClick = item.onUse;
+        scrollingInfoController.AddText(item.name);
         Debug.Log(item.name);
     }
 	
