@@ -13,9 +13,10 @@ public class SphereController : MonoBehaviour, ItemController {
 
 	private void Start()
 	{
-		_item.collectible = true;
-		_item.name = "Sphere";
-		_item.onUse.AddListener(UseFunc);
+		try {
+			_item.onUse.AddListener(UseFunc);
+		}
+		catch {}
 	}
 
 	private void UseFunc() {
