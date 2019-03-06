@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Sphere
   m_EditorClassIdentifier: Assembly-CSharp::Item
   collectible: 1
-  name: chuj
+  name: Kulka
   sprite: {fileID: 0}
   prefab: {fileID: 0}
   stackLimit: 3
