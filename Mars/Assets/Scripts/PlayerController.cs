@@ -13,6 +13,8 @@ public class PlayerController : MonoBehaviour {
 	public float walkSpeed;
 	private bool locked;
 
+	public static PlayerController instance;
+
 // Start is called before the first frame update
 	private void Start() {
 		cam = GetComponentInChildren<Camera>();
@@ -22,6 +24,13 @@ public class PlayerController : MonoBehaviour {
 
 		Cursor.visible = false;
 		Cursor.lockState = CursorLockMode.Locked;
+	}
+
+	private void Awake() {
+		if (!instance)
+			instance = this;
+		else if (instance!=this)
+			Destroy(gameObject);
 	}
 
 

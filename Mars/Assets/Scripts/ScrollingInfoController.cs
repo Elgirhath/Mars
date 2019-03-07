@@ -48,7 +48,6 @@ public class ScrollingInfoController : MonoBehaviour
     void Update()
     {
         float curTime = Time.time;
-        Debug.Log(oldestInfo);
         if (panel.childCount > 0)
         {
             oldestInfo = panel.GetChild(0);
