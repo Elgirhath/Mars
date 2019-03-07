@@ -7,11 +7,7 @@ public class Inventory : MonoBehaviour
 {
     public GameObject button;
 
-    private bool isOpened = true;
-
     private Transform panel;
-    private GameObject gameController;
-    private PlayerController playerController;
 
     private ScrollingInfoController scrollingInfoController;
 
@@ -27,33 +23,19 @@ public class Inventory : MonoBehaviour
     }
 
     private void Start() {
-        gameController = GameObject.FindGameObjectWithTag("GameController");
         panel = transform.GetChild(0);
-        playerController = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerController>();
         scrollingInfoController = GameObject.FindGameObjectWithTag("ScrollingInfo").GetComponent<ScrollingInfoController>();
 		
         RemoveItems();
-		
-        Close();
-    }
-
-    // Update is called once per frame
-    void Update() {
-        if (Input.GetButtonDown("Inventory")) {
-            if (isOpened)
-                Close();
-            else
-                Open();
-        }
     }
 
     public void AddItem(Item item) {
         GameObject newObj = Instantiate(button, panel);
         Button newButton = newObj.GetComponent<Button>();
-        newButton.GetComponentInChildren<Text>().text = item.name;
+        newButton.GetComponentInChildren<Text>().text = item.itemName;
         newButton.onClick = item.onUse;
-        scrollingInfoController.AddText(item.name);
-        Debug.Log(item.name);
+        scrollingInfoController.AddText(item.itemName);
+        Debug.Log(item.itemName);
     }
 	
     private void RemoveItems() {
@@ -67,30 +49,12 @@ public class Inventory : MonoBehaviour
     }
     
     public void Open() {
-        Cursor.visible = true;
-        Cursor.lockState = CursorLockMode.None;
-
-        Time.timeScale = 0.0f; //pause game
-
-        isOpened = true;
-		
-        playerController.camLockState = true;
-		
         foreach (Transform child in transform) { //enable all children
             child.gameObject.SetActive(true);
         }
     }
 
     public void Close() {
-        Cursor.visible = false;
-        Cursor.lockState = CursorLockMode.Locked;
-
-        isOpened = false;
-
-        Time.timeScale = 1.0f; //resume game
-
-        playerController.camLockState = false;
-
         foreach (Transform child in transform) { //disable all children
             child.gameObject.SetActive(false);
         }
