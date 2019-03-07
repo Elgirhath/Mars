@@ -3,14 +3,14 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class ThirstBar : MonoBehaviour {
+public class HungerBar : MonoBehaviour {
     public int maxValue;
     public int value;
 
     private Text conditionText;
     private Slider slider;
 
-    private ThirstController thirstController;
+    private HungerController hungerController;
 
     private void Awake() {
         conditionText = GetComponentInChildren<Text>();
@@ -18,14 +18,14 @@ public class ThirstBar : MonoBehaviour {
     }
 
     private void Start() {
-        thirstController = ThirstController.instance;
+        hungerController = HungerController.instance;
 
-        maxValue = thirstController.maxThirst;
-        value = (int) thirstController.thirst;
+        maxValue = hungerController.maxHunger;
+        value = (int) hungerController.hunger;
     }
 
     private void Update() {
-        value = (int) thirstController.thirst;
+        value = (int) hungerController.hunger;
         conditionText.text = value + "/" + maxValue;
         slider.value = (float)value / maxValue;
     }

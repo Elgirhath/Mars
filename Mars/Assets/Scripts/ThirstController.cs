@@ -5,11 +5,11 @@ using UnityEngine;
 public class ThirstController : MonoBehaviour {
 	public int maxThirst;
 	public int initThirst;
-	public ThirstBar thirstBar;
 
-	private float thirst;
-	public float GetThirst {
-		get => thirst;
+	private float _thirst;
+	public float thirst {
+		get => _thirst;
+		set => _thirst = Mathf.Clamp(value, 0, maxThirst);
 	}
 	
 	[Tooltip("Points per second")]
@@ -25,16 +25,13 @@ public class ThirstController : MonoBehaviour {
 	}
 
 	private void Start() {
-		thirst = initThirst;
-		thirstBar.maxValue = maxThirst;
-		thirstBar.value = initThirst;
+		_thirst = initThirst;
 	}
 
 	private void Update() {
-		thirst -= dropSpeed * Time.deltaTime;
-		thirstBar.value = (int)thirst;
+		_thirst -= dropSpeed * Time.deltaTime;
 
-		if (thirst <= 0.0f) {
+		if (_thirst <= 0.0f) {
 			Debug.Log("U ded");
 		}
 	}
