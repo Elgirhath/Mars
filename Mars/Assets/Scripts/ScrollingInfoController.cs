@@ -30,6 +30,9 @@ public class ScrollingInfoController : MonoBehaviour
         gameController = GameObject.FindGameObjectWithTag("GameController");
         panel = transform.GetChild(0);
         oldestInfo = null;
+        foreach (Transform item in panel) {
+            Destroy(item.gameObject);
+        }
     }
 
     public void AddText(String itemName)
@@ -38,6 +41,7 @@ public class ScrollingInfoController : MonoBehaviour
         newObj.GetComponent<ScrollingInfoTextController>().collectTime = Time.time;
         String textString = newObj.GetComponent<Text>().text;
         textString = itemName + textString;
+        newObj.GetComponent<Text>().text = textString;
     }
 
     // Update is called once per frame
