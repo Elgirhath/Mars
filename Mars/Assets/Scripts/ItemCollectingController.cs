@@ -114,7 +114,7 @@ public class ItemCollectingController : MonoBehaviour {
 		targetMaterial.SetFloat("_FirstOutlineWidth", firstOutlineWidth);
 		targetMaterial.SetFloat("_SecondOutlineWidth", secondOutlineWidth);
 		
-		tooltip.OpenPickupTooltip(target.transform, target.GetComponent<ItemController>().item.name);
+		tooltip.OpenPickupTooltip(target.transform, target.GetComponent<ItemController>().item.itemName);
 	}
 
 	void Deselect()

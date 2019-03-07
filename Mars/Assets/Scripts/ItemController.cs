@@ -1,10 +1,5 @@
 ﻿using System;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.Events;
-using UnityEngine.Serialization;
-using System.Collections;
 
 public interface ItemController {
 	[SerializeField]
@@ -14,7 +9,7 @@ public interface ItemController {
 [CreateAssetMenu(fileName = "NewItem", menuName="Item", order = 81)]
 public class Item : ScriptableObject {
 	public bool collectible;
-	public string name;
+	public string itemName;
 	public Sprite sprite;
 	public GameObject prefab;
 	public int stackLimit;
@@ -28,7 +23,7 @@ public class Item : ScriptableObject {
 
 	public void Set(Item other) {
 		collectible = other.collectible;
-		name = other.name;
+		itemName = other.itemName;
 		sprite = other.sprite;
 		onUse = other.onUse;
 		prefab = other.prefab;
