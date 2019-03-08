@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   collectible: 1
   itemName: Butelka wody
-  sprite: {fileID: 0}
+  sprite: {fileID: 21300000, guid: b0894ddc3ac72eb44bb4c02bbc5c3950, type: 3}
   prefab: {fileID: 0}
   stackLimit: 2
   pointsOnDrink: 10

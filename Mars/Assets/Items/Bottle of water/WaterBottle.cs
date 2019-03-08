@@ -10,11 +10,12 @@ public class WaterBottle : Item {
     public int pointsOnDrink;
     
     private PlayerController playerController;
+    private ThirstController thirstController;
 
     private void Drink() {
         Debug.Log("You drunk a bottle of water!");
-        playerController = PlayerController.instance;
-        playerController.GetComponent<ThirstController>().thirst += pointsOnDrink;
+        thirstController = ThirstController.instance;
+        thirstController.thirst += pointsOnDrink;
     }
 
     public override void Use() {
