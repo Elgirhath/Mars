@@ -33,7 +33,6 @@ public class PlayerController : MonoBehaviour {
 			Destroy(gameObject);
 	}
 
-
 	private void Update() {
 		CamLook();
 		Jump();
