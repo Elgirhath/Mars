@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
@@ -33,9 +34,9 @@ public class Inventory : MonoBehaviour
         GameObject newObj = Instantiate(button, panel);
         Button newButton = newObj.GetComponent<Button>();
         newButton.GetComponentInChildren<Text>().text = item.itemName;
-        newButton.onClick = item.onUse;
+        newButton.onClick.AddListener(item.Use);
+        
         scrollingInfoController.AddText(item.itemName);
-        Debug.Log(item.itemName);
     }
 	
     private void RemoveItems() {
