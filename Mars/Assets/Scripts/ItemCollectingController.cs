@@ -99,7 +99,6 @@ public class ItemCollectingController : MonoBehaviour {
 				inventory.AddItem(target.GetComponent<ItemController>().item);
 				Deselect();
 				Destroy(target);
-				Debug.Log("Added to inventory");
 			}
 		}
 		
