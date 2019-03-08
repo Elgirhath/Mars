@@ -33,10 +33,22 @@ public class Inventory : MonoBehaviour
     public void AddItem(Item item) {
         GameObject newObj = Instantiate(button, panel);
         Button newButton = newObj.GetComponent<Button>();
-        newButton.GetComponentInChildren<Text>().text = item.itemName;
+        try {
+            newObj.GetComponent<Image>().sprite = item.sprite;
+            newButton.GetComponentInChildren<Text>().text = "";
+        }
+        catch {
+            newButton.GetComponentInChildren<Text>().text = item.itemName;
+        }
+
         newButton.onClick.AddListener(item.Use);
+        newButton.onClick.AddListener(delegate { RemoveButtonObject(newObj); });
         
         scrollingInfoController.AddText(item.itemName);
+    }
+
+    public void RemoveButtonObject(GameObject obj) {
+        Destroy(obj);
     }
 	
     private void RemoveItems() {
