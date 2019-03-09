@@ -38,7 +38,11 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 170076734}
+<<<<<<< HEAD
   m_IndirectSpecularColor: {r: 0.44657844, g: 0.49641222, b: 0.57481694, a: 1}
+=======
+  m_IndirectSpecularColor: {r: 0.44657898, g: 0.4964133, b: 0.5748178, a: 1}
+>>>>>>> parent of ea716dc... Merge branch 'master' of https://github.com/Elgirhath/Mars
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -1100,6 +1104,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 5ec373264f4c72d43a3a8aaef0923e76, type: 3}
+<<<<<<< HEAD
 --- !u!1 &391056966
 GameObject:
   m_ObjectHideFlags: 0
@@ -1143,6 +1148,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 60c37aeafe69c1947a2ce1f681cfe7f5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+=======
+>>>>>>> parent of ea716dc... Merge branch 'master' of https://github.com/Elgirhath/Mars
 --- !u!1001 &436092014
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1410,7 +1417,10 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 534669905}
+<<<<<<< HEAD
   - {fileID: 391056967}
+=======
+>>>>>>> parent of ea716dc... Merge branch 'master' of https://github.com/Elgirhath/Mars
   m_Father: {fileID: 0}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -2983,6 +2993,9 @@ PrefabInstance:
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 5ec373264f4c72d43a3a8aaef0923e76, type: 3}
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> parent of ea716dc... Merge branch 'master' of https://github.com/Elgirhath/Mars
 --- !u!1 &1513997993
 GameObject:
   m_ObjectHideFlags: 0
@@ -3191,8 +3204,11 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1576059386}
   m_CullTransparentMesh: 0
+<<<<<<< HEAD
 =======
 >>>>>>> d5bd314dfc24445a32e53c7979c40c2c6d9b324b
+=======
+>>>>>>> parent of ea716dc... Merge branch 'master' of https://github.com/Elgirhath/Mars
 --- !u!1 &1649471882
 GameObject:
   m_ObjectHideFlags: 0
@@ -4054,6 +4070,7 @@ RectTransform:
     type: 3}
   m_PrefabInstance: {fileID: 7212612189540272283}
   m_PrefabAsset: {fileID: 0}
+<<<<<<< HEAD
 --- !u!1001 &5555670817720386008
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -4123,6 +4140,8 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 128ccaef1a1490844850248d840b0872, type: 3}
+=======
+>>>>>>> parent of ea716dc... Merge branch 'master' of https://github.com/Elgirhath/Mars
 --- !u!1001 &5779954360943168290
 PrefabInstance:
   m_ObjectHideFlags: 0

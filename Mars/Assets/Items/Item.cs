@@ -24,20 +24,4 @@ public abstract class Item : ScriptableObject {
 	}
 
 	public abstract void Use();
-
-	public GameObject Instantiate(Vector3 pos) {
-		GameObject obj = Instantiate(prefab, pos, Quaternion.identity);
-		ItemController itemController = obj.GetComponent<ItemController>();
-		if (itemController == null) {
-			itemController = obj.AddComponent<ItemController>();
-			itemController.item = this;
-		} else if (itemController.item == null)
-			itemController.item = this;
-		
-		return obj;
-	}
-
-	public void Drop() {
-		ItemDropdownController.instance.Drop(this);
-	}
 }

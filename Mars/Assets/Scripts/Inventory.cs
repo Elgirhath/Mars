@@ -9,7 +9,6 @@ public class Inventory : MonoBehaviour
     public GameObject button;
 
     private Transform panel;
-    private ItemDropdownController dropdown;
 
     private ScrollingInfoController scrollingInfoController;
 
@@ -25,7 +24,6 @@ public class Inventory : MonoBehaviour
     }
 
     private void Start() {
-        dropdown = ItemDropdownController.instance;
         panel = transform.GetChild(0);
         scrollingInfoController = ScrollingInfoController.instance;
         RemoveItems();
@@ -42,12 +40,8 @@ public class Inventory : MonoBehaviour
             newButton.GetComponentInChildren<Text>().text = item.itemName;
         }
 
-        InventoryButton invButton = newObj.GetComponent<InventoryButton>();
-        invButton.onRightClick += delegate { dropdown.Drop(item); }; 
-        invButton.onLeftClick += delegate { item.Use(); };
-        
-        invButton.onRightClick += delegate { RemoveButtonObject(newObj); };
-        invButton.onLeftClick += delegate { RemoveButtonObject(newObj); };
+        newButton.onClick.AddListener(item.Use);
+        newButton.onClick.AddListener(delegate { RemoveButtonObject(newObj); });
         
         scrollingInfoController.AddText(item.itemName, isItem: true);
     }
