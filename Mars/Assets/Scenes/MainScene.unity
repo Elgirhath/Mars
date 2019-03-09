@@ -340,6 +340,7 @@ RectTransform:
   - {fileID: 629507953}
   - {fileID: 273451890}
   - {fileID: 1047543498}
+  - {fileID: 1576059387}
   - {fileID: 960701534}
   m_Father: {fileID: 0}
   m_RootOrder: 13
@@ -548,7 +549,7 @@ PrefabInstance:
     - target: {fileID: 5779954361914424275, guid: 7503c52f300fa0643950d5ce19b3e27f,
         type: 3}
       propertyPath: m_Name
-      value: OthersBar
+      value: HealthBar
       objectReference: {fileID: 0}
     - target: {fileID: 5779954361914424272, guid: 7503c52f300fa0643950d5ce19b3e27f,
         type: 3}
@@ -690,6 +691,12 @@ PrefabInstance:
       propertyPath: m_Value
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 5779954361431374922, guid: 7503c52f300fa0643950d5ce19b3e27f,
+        type: 3}
+      propertyPath: m_FontData.m_Font
+      value: 
+      objectReference: {fileID: 12800000, guid: 4abbf50f1fd0ac3498298f6c26861e85,
+        type: 3}
     m_RemovedComponents:
     - {fileID: 5779954361914424273, guid: 7503c52f300fa0643950d5ce19b3e27f, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 7503c52f300fa0643950d5ce19b3e27f, type: 3}
@@ -1377,6 +1384,7 @@ GameObject:
   - component: {fileID: 500106270}
   - component: {fileID: 500106271}
   - component: {fileID: 500106272}
+  - component: {fileID: 500106273}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -1480,6 +1488,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxThirst: 100
   initThirst: 70
+  dehydrationDamage: 12
   dropSpeed: 2
 --- !u!114 &500106272
 MonoBehaviour:
@@ -1495,7 +1504,23 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxHunger: 100
   initHunger: 90
+  starvationDamage: 6
+  recoverySpeed: 3
   dropSpeed: 0.7
+--- !u!114 &500106273
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 500106265}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 43133bdde22fe2c45a4d57769ca6b6de, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  maxHealth: 100
+  initHealth: 100
 --- !u!1 &521186294
 GameObject:
   m_ObjectHideFlags: 0
@@ -1679,6 +1704,26 @@ Transform:
   m_Father: {fileID: 500106267}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &557959706 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 5779954361914424275, guid: 7503c52f300fa0643950d5ce19b3e27f,
+    type: 3}
+  m_PrefabInstance: {fileID: 244292005}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &557959707
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 557959706}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5ad7f676d9561724ea540428407ba2a1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  maxValue: 100
+  value: 80
 --- !u!224 &619620914 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 4216981210539095215, guid: 5ec373264f4c72d43a3a8aaef0923e76,
@@ -1988,6 +2033,12 @@ PrefabInstance:
       propertyPath: m_Color.b
       value: 0.035294104
       objectReference: {fileID: 0}
+    - target: {fileID: 5779954361431374922, guid: 7503c52f300fa0643950d5ce19b3e27f,
+        type: 3}
+      propertyPath: m_FontData.m_Font
+      value: 
+      objectReference: {fileID: 12800000, guid: 4abbf50f1fd0ac3498298f6c26861e85,
+        type: 3}
     m_RemovedComponents:
     - {fileID: 5779954361914424273, guid: 7503c52f300fa0643950d5ce19b3e27f, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 7503c52f300fa0643950d5ce19b3e27f, type: 3}
@@ -2569,7 +2620,7 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 159481600}
-  m_RootOrder: 4
+  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -2603,6 +2654,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 73b569aa66627544485ca45323c7bd48, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _active: 0
 --- !u!114 &960701537
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3226,7 +3278,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 73b569aa66627544485ca45323c7bd48, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _enabled: 0
+  _active: 0
 --- !u!114 &1576059389
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4341,6 +4393,12 @@ PrefabInstance:
       propertyPath: m_Value
       value: 0.795
       objectReference: {fileID: 0}
+    - target: {fileID: 5779954361431374922, guid: 7503c52f300fa0643950d5ce19b3e27f,
+        type: 3}
+      propertyPath: m_FontData.m_Font
+      value: 
+      objectReference: {fileID: 12800000, guid: 4abbf50f1fd0ac3498298f6c26861e85,
+        type: 3}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 7503c52f300fa0643950d5ce19b3e27f, type: 3}
 --- !u!1001 &7212612189540272283
