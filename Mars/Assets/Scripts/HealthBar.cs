@@ -19,6 +19,7 @@ public class HealthBar : MonoBehaviour {
             instance = this;
         else if (instance != this)
             Destroy(gameObject);
+        
         conditionText = GetComponentInChildren<Text>();
         slider = GetComponentInChildren<Slider>();
     }

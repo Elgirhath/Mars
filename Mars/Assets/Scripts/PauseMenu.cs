@@ -5,20 +5,19 @@ using UnityEngine;
 public class PauseMenu : MonoBehaviour
 {
     private Transform panel;
-    private GameObject gameController;
     private PlayerController playerController;
     private Crosshair crosshair;
     private bool opened;
     private TooltipController tooltip;
-    private bool _block;
     
-    public static PauseMenu instance;
-
+    private bool _block;
     public bool block
     {
         get => _block;
         set => _block = value;
     }
+    
+    public static PauseMenu instance;
 
     private void Awake() {
         if (!instance)
@@ -30,9 +29,8 @@ public class PauseMenu : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        playerController = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerController>();
+        playerController = PlayerController.instance;
         crosshair = Crosshair.instance;
-        gameController = GameObject.FindGameObjectWithTag("GameController");
         panel = transform.GetChild(0);
         panel.gameObject.SetActive(false);
         tooltip = TooltipController.instance;
