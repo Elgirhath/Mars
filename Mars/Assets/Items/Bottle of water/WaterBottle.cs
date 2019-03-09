@@ -12,8 +12,10 @@ public class WaterBottle : Item {
     private PlayerController playerController;
     private ThirstController thirstController;
 
-    private void Drink() {
-        Debug.Log("You drunk a bottle of water!");
+    private void Drink() 
+    {
+        string info = "You drunk a bottle of water. (+" + pointsOnDrink + ")";
+        GameObject.FindGameObjectWithTag("ScrollingInfo").GetComponent<ScrollingInfoController>().AddText(info, isItem: false);
         thirstController = ThirstController.instance;
         thirstController.thirst += pointsOnDrink;
     }
