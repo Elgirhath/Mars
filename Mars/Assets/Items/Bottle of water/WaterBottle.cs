@@ -15,7 +15,7 @@ public class WaterBottle : Item {
     private void Drink() 
     {
         string info = "You drunk a bottle of water. (+" + pointsOnDrink + ")";
-        GameObject.FindGameObjectWithTag("ScrollingInfo").GetComponent<ScrollingInfoController>().AddText(info, isItem: false);
+        ScrollingInfoController.instance.AddText(info, isItem: false);
         thirstController = ThirstController.instance;
         thirstController.thirst += pointsOnDrink;
     }

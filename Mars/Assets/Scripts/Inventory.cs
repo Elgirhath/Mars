@@ -27,8 +27,7 @@ public class Inventory : MonoBehaviour
     private void Start() {
         dropdown = ItemDropdownController.instance;
         panel = transform.GetChild(0);
-        scrollingInfoController = GameObject.FindGameObjectWithTag("ScrollingInfo").GetComponent<ScrollingInfoController>();
-		
+        scrollingInfoController = ScrollingInfoController.instance;
         RemoveItems();
     }
 
