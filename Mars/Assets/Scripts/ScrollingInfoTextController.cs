@@ -12,13 +12,12 @@ public class ScrollingInfoTextController : MonoBehaviour
 
     private Text textController;
 
-    public void SetValues(float t, string name, int quan)
+    public void SetValues(float time, string name, int quantity)
     {
-        textController = gameObject.GetComponent<Text>();
         Fading = false;
         ItemName = name;
-        collectTime = t;
-        Quantity = quan;
+        collectTime = time;
+        Quantity = quantity;
     }
 
     public int Quantity
@@ -55,6 +54,7 @@ public class ScrollingInfoTextController : MonoBehaviour
     void Start()
     {
         fadingDuration = 1.5f;
+        textController = gameObject.GetComponent<Text>();
     }
 
     // Update is called once per frame
