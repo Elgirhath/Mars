@@ -5,12 +5,15 @@ using UnityEngine;
 public class PlayerPanelController : MonoBehaviour
 {
     private PlayerController playerController;
-    private bool isOpened = false;
+    private bool _opened;
     private Inventory inventory;
     private ConditionPanel condition;
     
     public static PlayerPanelController instance;
     private Crosshair _crosshair;
+    private PauseMenu _pauseMenu;
+
+    public bool opened => _opened;
 
     private void Awake() {
         if (!instance)
@@ -25,16 +28,22 @@ public class PlayerPanelController : MonoBehaviour
         Debug.Log(inventory.name);
         condition = ConditionPanel.instance;
         _crosshair = Crosshair.instance;
+        _pauseMenu = PauseMenu.instance;
         
         Close();
     }
 
     void Update() {
-        if (Input.GetButtonDown("Inventory")) {
-            if (isOpened)
+        if (Input.GetButtonDown("Inventory"))
+        {
+            if (opened)
                 Close();
             else
                 Open();
+        }
+        else if (opened && Input.GetButtonDown("Cancel"))
+        {
+            Close();
         }
     }
     
@@ -49,8 +58,9 @@ public class PlayerPanelController : MonoBehaviour
         inventory.Open();
         condition.Open();
         _crosshair.active = false;
+        _pauseMenu.block = true;
 
-        isOpened = true;
+        _opened = true;
     }
 
     public void Close() {
@@ -64,7 +74,8 @@ public class PlayerPanelController : MonoBehaviour
         inventory.Close();
         condition.Close();
         _crosshair.active = true;
+        _pauseMenu.block = false;
 
-        isOpened = false;
+        _opened = false;
     }
 }
