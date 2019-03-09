@@ -15,6 +15,6 @@ MonoBehaviour:
   collectible: 1
   itemName: Racje zywnosciowe
   sprite: {fileID: 21300000, guid: 1ff72c06bd7e9454ea5fc26ac5cba78e, type: 3}
-  prefab: {fileID: 0}
+  prefab: {fileID: 5555670816743982961, guid: 128ccaef1a1490844850248d840b0872, type: 3}
   stackLimit: 2
   pointsOnEat: 10
