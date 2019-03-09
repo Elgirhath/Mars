@@ -2,21 +2,22 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class CrosshairController : MonoBehaviour
+public class Crosshair : MonoBehaviour
 {
-    private bool enabled;
-    
-    public static CrosshairController instance;
+    [SerializeField]
+    private bool _active;
 
-    public bool Status
+    public bool active
     {
-        get => instance.enabled;
+        get => _active;
         set
         {
-            instance.enabled = value;
-            gameObject.SetActive(instance.enabled);
+            _active = value;
+            gameObject.SetActive(_active);
         }
     }
+    
+    public static Crosshair instance;
     
     private void Awake() {
         if (!instance) {
@@ -30,7 +31,7 @@ public class CrosshairController : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        instance.enabled = true;
+        active = true;
     }
 
     // Update is called once per frame

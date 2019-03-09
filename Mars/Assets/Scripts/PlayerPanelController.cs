@@ -10,7 +10,7 @@ public class PlayerPanelController : MonoBehaviour
     private ConditionPanel condition;
     
     public static PlayerPanelController instance;
-    private CrosshairController crosshairController;
+    private Crosshair _crosshair;
 
     private void Awake() {
         if (!instance)
@@ -24,7 +24,7 @@ public class PlayerPanelController : MonoBehaviour
         inventory = Inventory.instance;
         Debug.Log(inventory.name);
         condition = ConditionPanel.instance;
-        crosshairController = CrosshairController.instance;
+        _crosshair = Crosshair.instance;
         
         Close();
     }
@@ -48,7 +48,7 @@ public class PlayerPanelController : MonoBehaviour
 
         inventory.Open();
         condition.Open();
-        crosshairController.Status = false;
+        _crosshair.active = false;
 
         isOpened = true;
     }
@@ -63,7 +63,7 @@ public class PlayerPanelController : MonoBehaviour
 
         inventory.Close();
         condition.Close();
-        crosshairController.Status = true;
+        _crosshair.active = true;
 
         isOpened = false;
     }

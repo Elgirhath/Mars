@@ -9,14 +9,14 @@ public class ItemDropdownController : MonoBehaviour {
 
     class Target {
         public Transform transform;
-        public bool hadRigidbody;
+//        public bool hadRigidbody;
         private Renderer renderer;
 
         public Bounds bounds {
             get => renderer.bounds;
         }
         
-        public Rigidbody savedRigidbody;
+//        public Rigidbody savedRigidbody;
 
         public Vector3 pivot {
             get => bounds.center + Vector3.down * bounds.extents.y;

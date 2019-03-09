@@ -342,7 +342,7 @@ RectTransform:
   - {fileID: 1047543498}
   - {fileID: 1576059387}
   m_Father: {fileID: 0}
-  m_RootOrder: 11
+  m_RootOrder: 13
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
@@ -1372,8 +1372,8 @@ GameObject:
   m_Component:
   - component: {fileID: 500106267}
   - component: {fileID: 500106266}
-  - component: {fileID: 500106268}
   - component: {fileID: 500106269}
+  - component: {fileID: 500106268}
   - component: {fileID: 500106270}
   - component: {fileID: 500106271}
   - component: {fileID: 500106272}
@@ -2213,7 +2213,7 @@ Transform:
   m_LocalScale: {x: 0.6463745, y: 0.6463745, z: 0.6463745}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 8
+  m_RootOrder: 9
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &830762049
 PrefabInstance:
@@ -2967,7 +2967,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 5ec373264f4c72d43a3a8aaef0923e76, type: 3}
-<<<<<<< HEAD
 --- !u!1 &1513997993
 GameObject:
   m_ObjectHideFlags: 0
@@ -3071,7 +3070,7 @@ Transform:
   m_LocalScale: {x: 0.3673, y: 0.3673, z: 0.3673}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 7
+  m_RootOrder: 8
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1576059386
 GameObject:
@@ -3124,6 +3123,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 73b569aa66627544485ca45323c7bd48, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _enabled: 0
 --- !u!114 &1576059389
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3137,7 +3137,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_EffectColor: {r: 0.4811321, g: 0.4811321, b: 0.4811321, a: 0.5}
-  m_EffectDistance: {x: 1, y: -1}
+  m_EffectDistance: {x: 1, y: 1}
   m_UseGraphicAlpha: 1
 --- !u!114 &1576059390
 MonoBehaviour:
@@ -3176,8 +3176,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1576059386}
   m_CullTransparentMesh: 0
-=======
->>>>>>> d5bd314dfc24445a32e53c7979c40c2c6d9b324b
 --- !u!1 &1649471882
 GameObject:
   m_ObjectHideFlags: 0
@@ -3512,7 +3510,7 @@ Transform:
   m_LocalScale: {x: 0.6463745, y: 0.6463745, z: 0.6463745}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 9
+  m_RootOrder: 10
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!224 &1923951959 stripped
 RectTransform:
@@ -3728,7 +3726,7 @@ Transform:
   m_LocalScale: {x: 0.6463745, y: 0.6463745, z: 0.6463745}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 10
+  m_RootOrder: 11
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &2127328650
 GameObject:

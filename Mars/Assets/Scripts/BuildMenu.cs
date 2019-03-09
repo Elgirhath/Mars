@@ -11,14 +11,14 @@ public class BuildMenu : MonoBehaviour {
 	private GameObject gameController;
 	private BuildController buildController;
 	private PlayerController playerController;
-	private CrosshairController crosshairController;
+	private Crosshair crosshair;
 
 	private void Start() {
 		gameController = GameObject.FindGameObjectWithTag("GameController");
 		buildController = gameController.GetComponent<BuildController>();
 		panel = transform.GetChild(0);
 		playerController = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerController>();
-		crosshairController = CrosshairController.instance;
+		crosshair = Crosshair.instance;
 		
 		RemoveItems();
 		AddItems();
@@ -65,7 +65,7 @@ public class BuildMenu : MonoBehaviour {
 			child.gameObject.SetActive(true);
 		}
 
-		crosshairController.Status = false;
+		crosshair.active = false;
 	}
 
 	public void Close() {
@@ -80,6 +80,6 @@ public class BuildMenu : MonoBehaviour {
 			child.gameObject.SetActive(false);
 		}
 		
-		crosshairController.Status = true;
+		crosshair.active = true;
 	}
 }
