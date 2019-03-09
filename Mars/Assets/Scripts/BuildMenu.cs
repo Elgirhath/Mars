@@ -12,6 +12,11 @@ public class BuildMenu : MonoBehaviour {
 	private BuildController buildController;
 	private PlayerController playerController;
 	private Crosshair crosshair;
+	private PauseMenu _pauseMenu;
+	
+	private bool _opened;
+
+	public bool opened => _opened;
 
 	private void Start() {
 		gameController = GameObject.FindGameObjectWithTag("GameController");
@@ -19,6 +24,7 @@ public class BuildMenu : MonoBehaviour {
 		panel = transform.GetChild(0);
 		playerController = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerController>();
 		crosshair = Crosshair.instance;
+		_pauseMenu = PauseMenu.instance;
 		
 		RemoveItems();
 		AddItems();
@@ -28,7 +34,16 @@ public class BuildMenu : MonoBehaviour {
 	
 	private void Update() {
 		if (Input.GetButtonDown("Open Building Menu"))
-			Open();
+		{
+			if (opened)
+				Close();
+			else
+				Open();
+		}
+		else if (opened && Input.GetButtonDown("Cancel"))
+		{
+			Close();
+		}
 	}
 
 	private void AddItems() {
@@ -66,6 +81,8 @@ public class BuildMenu : MonoBehaviour {
 		}
 
 		crosshair.active = false;
+		_pauseMenu.block = true;
+		_opened = true;
 	}
 
 	public void Close() {
@@ -81,5 +98,7 @@ public class BuildMenu : MonoBehaviour {
 		}
 		
 		crosshair.active = true;
+		_pauseMenu.block = false;
+		_opened = false;
 	}
 }
