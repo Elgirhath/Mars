@@ -10,6 +10,7 @@ public class Inventory : MonoBehaviour
 
     private Transform panel;
     private ItemDropdownController dropdown;
+    private ItemSlot[] slots;
 
     private ScrollingInfoController scrollingInfoController;
 
@@ -28,42 +29,29 @@ public class Inventory : MonoBehaviour
         dropdown = ItemDropdownController.instance;
         panel = transform.GetChild(0);
         scrollingInfoController = ScrollingInfoController.instance;
-        RemoveItems();
+
+        slots = panel.GetComponentsInChildren<ItemSlot>();
     }
 
     public void AddItem(Item item) {
-        GameObject newObj = Instantiate(button, panel);
-        Button newButton = newObj.GetComponent<Button>();
-        try {
-            newObj.GetComponent<Image>().sprite = item.sprite;
-            newButton.GetComponentInChildren<Text>().text = "";
-        }
-        catch {
-            newButton.GetComponentInChildren<Text>().text = item.itemName;
-        }
+        foreach (var slot in slots) {
+            if (slot.item) {
+                if (slot.item != item)
+                    continue;
+                if (slot.amount >= item.stackLimit)
+                    continue;
+            }
 
-        InventoryButton invButton = newObj.GetComponent<InventoryButton>();
-        invButton.onRightClick += delegate { dropdown.Drop(item); }; 
-        invButton.onLeftClick += delegate { item.Use(); };
-        
-        invButton.onRightClick += delegate { RemoveButtonObject(newObj); };
-        invButton.onLeftClick += delegate { RemoveButtonObject(newObj); };
+            try {
+                slot.AddItem(item); //if item can be added to the slot, add it. Else try to add to next slot
+                break;
+            }
+            catch {
+                return;
+            }
+        }
         
         scrollingInfoController.AddText(item.itemName, isItem: true);
-    }
-
-    public void RemoveButtonObject(GameObject obj) {
-        Destroy(obj);
-    }
-	
-    private void RemoveItems() {
-        foreach (Transform item in panel) {
-            Destroy(item.gameObject);
-        }
-    }
-
-    private void UseItem(Item item) {
-        Close();
     }
     
     public void Open() {
