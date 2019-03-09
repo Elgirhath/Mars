@@ -9,6 +9,8 @@ TagManager:
   - Inventory
   - ScrollingInfo
   - Crosshair
+  - BuildMenu
+  - PlayerPanel
   layers:
   - Default
   - TransparentFX
