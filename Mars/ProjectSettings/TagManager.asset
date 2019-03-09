@@ -8,7 +8,6 @@ TagManager:
   - Collectible
   - Inventory
   - ScrollingInfo
-  - Crosshair
   layers:
   - Default
   - TransparentFX
