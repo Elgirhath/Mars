@@ -33,6 +33,7 @@ public class HealthController : MonoBehaviour {
             _health = 0;
         else
             health += diff;
+        
         healthBar.ChangeHealthBar();
         if (_health <= 0.0f) {
             Debug.Log("You died");
