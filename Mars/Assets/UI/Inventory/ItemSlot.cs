@@ -55,7 +55,8 @@ public class ItemSlot : MonoBehaviour {
 
 	public void RemoveItem() {
 		UnsubscribeEvents();
-		item = null;
+		_item = null;
+		button.gameObject.GetComponent<Image>().sprite = null;
 		
 		Disable();
 	}
@@ -84,7 +85,7 @@ public class ItemSlot : MonoBehaviour {
 	}
 
 	public void RemoveItemUnit() {
-		amount -= 1;
+		amount--;
 		if (amount < 1)
 			RemoveItem();
 	}

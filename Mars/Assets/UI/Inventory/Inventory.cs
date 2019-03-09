@@ -6,7 +6,6 @@ using UnityEngine.UI;
 
 public class Inventory : MonoBehaviour
 {
-    public GameObject button;
 
     private Transform panel;
     private ItemDropdownController dropdown;
