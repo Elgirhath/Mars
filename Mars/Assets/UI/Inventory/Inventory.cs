@@ -33,20 +33,32 @@ public class Inventory : MonoBehaviour
     }
 
     public void AddItem(Item item) {
-        foreach (var slot in slots) {
-            if (slot.item) {
-                if (slot.item != item)
-                    continue;
-                if (slot.amount >= item.stackLimit)
-                    continue;
-            }
-
+        bool isStacked = false;
+        foreach (var slot in slots) { //check if can be stacked
+            if (slot.item != item)
+                continue;
             try {
-                slot.AddItem(item); //if item can be added to the slot, add it. Else try to add to next slot
-                break;
+                slot.AddItem(item);
+                isStacked = true;
             }
-            catch {
-                return;
+            catch{}
+        }
+        if (!isStacked) {
+            foreach (var slot in slots) {
+                if (slot.item) {
+                    if (slot.item != item)
+                        continue;
+                    if (slot.amount >= item.stackLimit)
+                        continue;
+                }
+
+                try {
+                    slot.AddItem(item); //if item can be added to the slot, add it. Else try to add to next slot
+                    break;
+                }
+                catch {
+                    throw new Exception("No space in backpack");
+                }
             }
         }
         

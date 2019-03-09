@@ -5,16 +5,23 @@ using UnityEngine;
 using UnityEngine.UI;
 
 public class ItemSlot : MonoBehaviour {
+	public GameObject buttonPrefab;
+	
 	private Item _item = null;
 	public Item item {
 		get => _item;
 		set {
-			AddItem(value);
+			if (!value) {
+				UnsubscribeEvents();
+				_item = null;
+			}
+			else
+				AddItem(value);
 		}
 	}
 	private Text amountText;
 	private Button button;
-	private InventoryButton invButton;
+	private ClickHandler clickHandler;
 
 	private uint _amount = 0;
 
@@ -27,53 +34,46 @@ public class ItemSlot : MonoBehaviour {
 		}
 	}
 
-	private void Awake() {
-		button = GetComponentInChildren<Button>();
-		invButton = GetComponentInChildren<InventoryButton>();
-		amountText = GetComponentInChildren<Text>();
-
-		Disable();
-	}
-
 	public void AddItem(Item item) {
-		Enable();
-		
 		if (item == this.item) {
 			AddItemUnit();
 
 			return;
 		}
-		button.gameObject.GetComponent<Image>().sprite = item.sprite;
-		invButton = button.gameObject.GetComponent<InventoryButton>();
+
+		button = Instantiate(buttonPrefab, transform).GetComponent<Button>();
+		amountText = GetComponentInChildren<Text>();
+		clickHandler = GetComponentInChildren<ClickHandler>();
+		
+		button.GetComponent<Image>().sprite = item.sprite;
 		UnsubscribeEvents();
 
 		_item = item;
 		amount = 1;
 
+		Debug.Log("A");
 		SubscribeEvents();
 	}
 
 	public void RemoveItem() {
-		UnsubscribeEvents();
-		_item = null;
-		button.gameObject.GetComponent<Image>().sprite = null;
-		
-		Disable();
+		item = null;
+		Destroy(button.gameObject);
 	}
 
 	public void SubscribeEvents() {
-		invButton.onLeftClick += item.Use;
-		invButton.onLeftClick += RemoveItemUnit;
-		invButton.onRightClick += item.Drop;
-		invButton.onRightClick += RemoveItemUnit;
+		Debug.Log(clickHandler.ToString());
+		clickHandler.onLeftClick += item.Use;
+		clickHandler.onLeftClick += RemoveItemUnit;
+		clickHandler.onRightClick += item.Drop;
+		clickHandler.onRightClick += RemoveItemUnit;
 	}
 
 	public void UnsubscribeEvents() {
 		try {
-			invButton.onLeftClick -= item.Use;
-			invButton.onLeftClick -= RemoveItemUnit;
-			invButton.onRightClick -= item.Drop;
-			invButton.onRightClick -= RemoveItemUnit;
+			clickHandler.onLeftClick -= item.Use;
+			clickHandler.onLeftClick -= RemoveItemUnit;
+			clickHandler.onRightClick -= item.Drop;
+			clickHandler.onRightClick -= RemoveItemUnit;
 		}
 		catch {}
 	}
@@ -88,17 +88,5 @@ public class ItemSlot : MonoBehaviour {
 		amount--;
 		if (amount < 1)
 			RemoveItem();
-	}
-
-	public void Enable() {
-		foreach (Transform child in transform) {
-			child.gameObject.SetActive(true);
-		}
-	}
-
-	public void Disable() {
-		foreach (Transform child in transform) {
-			child.gameObject.SetActive(false);
-		}
 	}
 }

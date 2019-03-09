@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
-public class InventoryButton : MonoBehaviour, IPointerClickHandler {
+public class ClickHandler : MonoBehaviour, IPointerClickHandler {
     public delegate void ClickAction();
 
     public event ClickAction onLeftClick;
