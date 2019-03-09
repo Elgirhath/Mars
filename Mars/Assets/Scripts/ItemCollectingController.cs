@@ -29,6 +29,9 @@ public class ItemCollectingController : MonoBehaviour {
 
 	private Shader standardShader;
 	private Shader outline;
+			
+	private Collider closestItem;
+	private float closestItemFactor;
 	
 	//Shader settings
 	public Color firstOutlineColor = Color.white;
@@ -45,39 +48,22 @@ public class ItemCollectingController : MonoBehaviour {
 		
 		tooltip = TooltipController.instance;
 		inventory = Inventory.instance;
+		
+		closestItem = null;
+		closestItemFactor = 0;
 	}
-
 	
-
 	void Update()
 	{
-		Collider closestItem = null;
-		float closestItemFactor = 0;
-		
 		allowCollecting = false;
-
-		nearItems = Physics.OverlapSphere(transform.position, maxCollectDistance); //get all objects in range
+		closestItem = null;
+		closestItemFactor = 0;
 		
-		
-		for (int i = 0; i < nearItems.Length; ++i) {
-			Vector3 camItemVector = nearItems[i].transform.position - camTransform.position; //vector from camera to the object
-			float angle = Vector3.Angle(camItemVector, camTransform.forward);
-			if (angle > maxAngle)
-				continue;
-			try {
-				Item properties = nearItems[i].transform.gameObject.GetComponent<ItemController>().item;
-				if (properties.collectible) {
-					float factor = weight * camItemVector.magnitude + (1 - weight) * angle; //selecting the right object by the lowest factor
-					if (factor < closestItemFactor || !closestItem)
-					{
-						closestItemFactor = factor;
-						closestItem = nearItems[i];
-					}
-				}
-			}
-			catch {}
+		if (!HitScan())
+		{
+			AreaScan();
 		}
-
+		
 		if (closestItem) // if any item can be collected
 		{
 			allowCollecting = true;
@@ -101,8 +87,53 @@ public class ItemCollectingController : MonoBehaviour {
 				Destroy(target);
 			}
 		}
-		
 	}
+	
+	
+	private bool HitScan()
+	{
+		RaycastHit hit = new RaycastHit();
+		if (Physics.Raycast(cam.transform.position, cam.transform.TransformDirection(Vector3.forward), out hit)) {
+			try {
+				if (hit.distance <= maxCollectDistance)
+				{
+					Item properties = hit.transform.gameObject.GetComponent<ItemController>().item;
+					if (properties.collectible)
+					{
+						closestItem = hit.transform.gameObject.GetComponent<Collider>();
+						return true;
+					}
+				}
+			}
+			catch {}
+		}
+
+		return false;
+	}
+
+	private void AreaScan()
+	{
+		nearItems = Physics.OverlapSphere(transform.position, maxCollectDistance); //get all objects in range
+		for (int i = 0; i < nearItems.Length; ++i) {
+			Vector3 camItemVector = nearItems[i].transform.position - camTransform.position; //vector from camera to the object
+			float angle = Vector3.Angle(camItemVector, camTransform.forward);
+			if (angle > maxAngle)
+				continue;
+			try {
+				Item properties = nearItems[i].transform.gameObject.GetComponent<ItemController>().item;
+				if (properties.collectible) {
+					float factor = weight * camItemVector.magnitude + (1 - weight) * angle; //selecting the right object by the lowest factor
+					if (factor < closestItemFactor || !closestItem)
+					{
+						closestItemFactor = factor;
+						closestItem = nearItems[i];
+					}
+				}
+			}
+			catch {}
+		}
+	}
+	
 	void Select()
 	{
 		targetMaterial = target.GetComponent<Renderer>().material;
