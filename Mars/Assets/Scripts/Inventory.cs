@@ -44,7 +44,7 @@ public class Inventory : MonoBehaviour
         newButton.onClick.AddListener(item.Use);
         newButton.onClick.AddListener(delegate { RemoveButtonObject(newObj); });
         
-        scrollingInfoController.AddText(item.itemName);
+        scrollingInfoController.AddText(item.itemName, isItem: true);
     }
 
     public void RemoveButtonObject(GameObject obj) {

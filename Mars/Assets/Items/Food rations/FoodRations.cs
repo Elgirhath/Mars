@@ -12,8 +12,10 @@ public class FoodRations : Item {
     private PlayerController playerController;
     private HungerController hungerController;
 
-    private void Eat() {
-        Debug.Log("You ate some food rations!");
+    private void Eat()
+    {
+        string info = "You ate some food rations. (+" + pointsOnEat + ")";
+        GameObject.FindGameObjectWithTag("ScrollingInfo").GetComponent<ScrollingInfoController>().AddText(info, isItem: false);
         hungerController = HungerController.instance;
         hungerController.hunger += pointsOnEat;
     }
