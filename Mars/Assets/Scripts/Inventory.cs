@@ -50,7 +50,7 @@ public class Inventory : MonoBehaviour
         invButton.onRightClick += delegate { RemoveButtonObject(newObj); };
         invButton.onLeftClick += delegate { RemoveButtonObject(newObj); };
         
-        scrollingInfoController.AddText(item.itemName);
+        scrollingInfoController.AddText(item.itemName, isItem: true);
     }
 
     public void RemoveButtonObject(GameObject obj) {

@@ -32,28 +32,42 @@ public class ScrollingInfoController : MonoBehaviour
         defaultText = " added to inventory.";
     }
 
-    public void AddText(string itemName)
+    public void AddText(string content, bool isItem)
     {
-        bool multipleItems = false;
-        foreach (ScrollingInfoTextController line in panel.GetComponentsInChildren<ScrollingInfoTextController>())
+        if (isItem)
         {
-            if (itemName == line.ItemName)
+            bool multipleItems = false;
+            foreach (ScrollingInfoTextController line in panel.GetComponentsInChildren<ScrollingInfoTextController>())
             {
-                // if there is a line with the same name, destroy it and add a new one with incremented quantity
-                multipleItems = true;
-                AddNewLine(itemName, line.Quantity+1);
-                Destroy(line.gameObject);
+                if (content == line.ItemName)
+                {
+                    // if there is a line with the same name, destroy it and add a new one with incremented quantity
+                    multipleItems = true;
+                    AddNewItemLine(content, line.Quantity + 1);
+                    Destroy(line.gameObject);
+                }
+            }
+
+            if (!multipleItems)
+            {
+                // if no line with the same name has been found, add a new one with quantity = 1
+                AddNewItemLine(content, 1);
             }
         }
-
-        if (!multipleItems)
+        else
         {
-            // if no line with the same name has been found, add a new one with quantity = 1
-            AddNewLine(itemName, 1);
+            AddNewLine(content);
         }
     }
+
+    private void AddNewLine(string content)
+    {
+        GameObject newObj = Instantiate(textObject, panel);
+        newObj.GetComponent<ScrollingInfoTextController>().collectTime = Time.time;
+        newObj.GetComponent<Text>().text = content;
+    }
     
-    private void AddNewLine(string itemName, int quantity)
+    private void AddNewItemLine(string itemName, int quantity)
     {
         GameObject newObj = Instantiate(textObject, panel);
         ScrollingInfoTextController line = newObj.GetComponent<ScrollingInfoTextController>();
