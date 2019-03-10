@@ -56,6 +56,7 @@ public class DragHandler : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndD
 				leftAmount = newVal - item.stackLimit;
 			}
 			
+			Debug.Log("Left: " + leftAmount);
 			Destroy(gameObject);
 			origin.item = item;
 			origin.amount = leftAmount;
