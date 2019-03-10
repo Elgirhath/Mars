@@ -5,8 +5,9 @@ using UnityEngine;
 public class HungerController : MonoBehaviour {
     public int maxHunger;
     public int initHunger;
-    public int starvationDamage;
-    public int recoverySpeed;
+    public float starvationDamage;
+    public float recoverySpeed;
+    public float recoveryThreshold;
 
     private float _hunger;
     public float hunger {
@@ -34,16 +35,19 @@ public class HungerController : MonoBehaviour {
     }
 
     private void Update() {
-        _hunger -= dropSpeed * Time.deltaTime;
-
         if (_hunger <= 0.0f) {
             Debug.Log("You are dying out of hunger!");
-            healthController.ChangeHealth(-starvationDamage);
+            healthController.ChangeHealth(-starvationDamage  * Time.deltaTime);
         }
-        else if (_hunger >= 0.9 * maxHunger)
+        else
         {
-            Debug.Log("You are well fed, so you are slowly regaining your health.");
-            healthController.ChangeHealth(recoverySpeed);
+            _hunger -= dropSpeed * Time.deltaTime;
+            
+            if (healthController.health < healthController.maxHealth && _hunger >= recoveryThreshold * maxHunger)
+            {
+                Debug.Log("You are well fed, so you are slowly regaining your health.");
+                healthController.ChangeHealth(recoverySpeed  * Time.deltaTime);
+            }
         }
     }
 }

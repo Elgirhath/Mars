@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
+using UnityEngine.UI;
 
 public class DragHandler : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHandler {
 	private Canvas canvas;
@@ -49,19 +50,30 @@ public class DragHandler : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndD
 		}
 
 		if (closestSlot.item) {
-			uint leftAmount = amount;
-			Debug.Log("Original amount: " + amount);
 			if (closestSlot.item == item) {
+				uint leftAmount = amount;
 				uint newAmount = closestSlot.amount + amount;
 				Debug.Log("New amount: " + newAmount);
 				closestSlot.amount = newAmount > item.stackLimit ? item.stackLimit : newAmount;
-				leftAmount = newAmount - closestSlot.amount; //closestSlot.amount
+				leftAmount = newAmount - closestSlot.amount;
+				origin.item = item;
+				origin.amount = leftAmount;
+			}
+			else { //swap
+				Debug.Log("Original amount: " + amount);
+				Debug.Log("Dest amount: " + closestSlot.amount);
+				origin.item = closestSlot.item;
+				origin.amount = closestSlot.amount;
+				closestSlot.item = item;
+				closestSlot.amount = amount;
+				Debug.Log(closestSlot.name);
+				Debug.Log("Slot: " + closestSlot.name);
+				Debug.Log("Amount: " + closestSlot.gameObject.GetComponentInChildren<Text>().text);
+				Debug.Break();
 			}
 			
-			Debug.Log("Left: " + leftAmount);
 			Destroy(gameObject);
-			origin.item = item;
-			origin.amount = leftAmount;
+			
 		}
 		else {
 			Destroy(gameObject);

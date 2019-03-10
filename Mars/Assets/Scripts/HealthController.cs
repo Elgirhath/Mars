@@ -27,12 +27,18 @@ public class HealthController : MonoBehaviour {
         healthBar = HealthBar.instance;
     }
 
-    public void ChangeHealth(int diff)
+    public void ChangeHealth(float diff)
     {
         if (_health + diff < 0)
             _health = 0;
+        else if (_health + diff > maxHealth)
+        {
+            _health = maxHealth;
+        }
         else
+        {
             health += diff;
+        }
         
         healthBar.ChangeHealthBar();
         if (_health <= 0.0f) {
