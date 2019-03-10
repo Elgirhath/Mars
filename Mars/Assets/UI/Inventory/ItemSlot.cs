@@ -12,7 +12,15 @@ public class ItemSlot : MonoBehaviour {
 		get => _item;
 		set {
 			if (!value) {
-				UnsubscribeEvents();
+				Debug.Log("Set item = null");
+				if (_item) {
+					UnsubscribeEvents();
+					foreach (Transform child in transform)
+						Destroy(child.gameObject);
+					button = null;
+					clickHandler = null;
+					amountText = null;
+				}
 				_item = null;
 			}
 			else
@@ -32,8 +40,10 @@ public class ItemSlot : MonoBehaviour {
 			if (_amount < 1) {
 				item = null;
 			}
-			string amountString = _amount < 2 ? "" : _amount.ToString();
-			amountText.text = amountString;
+			else {
+				string amountString = _amount < 2 ? "" : _amount.ToString();
+				amountText.text = amountString;
+			}
 		}
 	}
 
@@ -55,11 +65,6 @@ public class ItemSlot : MonoBehaviour {
 		amount = 1;
 
 		SubscribeEvents();
-	}
-
-	public void RemoveItem() {
-		item = null;
-		Destroy(button.gameObject);
 	}
 
 	public void SubscribeEvents() {
@@ -88,6 +93,6 @@ public class ItemSlot : MonoBehaviour {
 	public void RemoveItemUnit() {
 		amount--;
 		if (amount < 1)
-			RemoveItem();
+			item = null;
 	}
 }
