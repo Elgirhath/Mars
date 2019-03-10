@@ -25,7 +25,6 @@ public class PlayerPanelController : MonoBehaviour
     void Start() {
         playerController = PlayerController.instance;
         inventory = Inventory.instance;
-        Debug.Log(inventory.name);
         condition = ConditionPanel.instance;
         _crosshair = Crosshair.instance;
         _pauseMenu = PauseMenu.instance;

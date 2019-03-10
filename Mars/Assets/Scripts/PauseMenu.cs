@@ -10,7 +10,7 @@ public class PauseMenu : MonoBehaviour
     private PlayerController playerController;
     private Crosshair crosshair;
     private bool opened;
-    private TooltipController tooltip;
+    private Tooltip tooltip;
     
     private bool _block;
     public bool block
@@ -35,7 +35,7 @@ public class PauseMenu : MonoBehaviour
         crosshair = Crosshair.instance;
         panel = transform.GetChild(0);
         panel.gameObject.SetActive(false);
-        tooltip = TooltipController.instance;
+        tooltip = Tooltip.instance;
         
         block = false;
         opened = false;
