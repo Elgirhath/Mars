@@ -9,6 +9,10 @@ public abstract class Item : ScriptableObject {
 	public Sprite sprite;
 	public GameObject prefab;
 	public uint stackLimit;
+	
+	public string tooltip {
+		get => "Press [E] to collect " + itemName;
+	}
 
 	public Item() {}
 	public Item(Item other) : this() {
@@ -27,12 +31,12 @@ public abstract class Item : ScriptableObject {
 
 	public GameObject Instantiate(Vector3 pos) {
 		GameObject obj = Instantiate(prefab, pos, Quaternion.identity);
-		ItemController itemController = obj.GetComponent<ItemController>();
-		if (itemController == null) {
-			itemController = obj.AddComponent<ItemController>();
-			itemController.item = this;
-		} else if (itemController.item == null)
-			itemController.item = this;
+		ItemHandler itemHandler = obj.GetComponent<ItemHandler>();
+		if (itemHandler == null) {
+			itemHandler = obj.AddComponent<ItemHandler>();
+			itemHandler.item = this;
+		} else if (itemHandler.item == null)
+			itemHandler.item = this;
 		
 		return obj;
 	}

@@ -50,10 +50,12 @@ public class DragHandler : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndD
 
 		if (closestSlot.item) {
 			uint leftAmount = amount;
+			Debug.Log("Original amount: " + amount);
 			if (closestSlot.item == item) {
-				uint newVal = closestSlot.amount + amount;
-				closestSlot.amount = newVal > item.stackLimit ? item.stackLimit : newVal;
-				leftAmount = newVal - item.stackLimit;
+				uint newAmount = closestSlot.amount + amount;
+				Debug.Log("New amount: " + newAmount);
+				closestSlot.amount = newAmount > item.stackLimit ? item.stackLimit : newAmount;
+				leftAmount = newAmount - closestSlot.amount; //closestSlot.amount
 			}
 			
 			Debug.Log("Left: " + leftAmount);

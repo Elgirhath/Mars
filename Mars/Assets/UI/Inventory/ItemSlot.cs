@@ -12,7 +12,6 @@ public class ItemSlot : MonoBehaviour {
 		get => _item;
 		set {
 			if (!value) {
-				Debug.Log("Set item = null");
 				if (_item) {
 					UnsubscribeEvents();
 					foreach (Transform child in transform)
