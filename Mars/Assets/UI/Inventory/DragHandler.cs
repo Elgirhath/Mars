@@ -7,6 +7,7 @@ public class DragHandler : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndD
 	private Canvas canvas;
 	private RectTransform rectTransform;
 	private ItemSlot[] slots;
+	private ItemSlot origin;
 	private Inventory inventory;
 	
 	private Item item;
@@ -23,11 +24,11 @@ public class DragHandler : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndD
 	}
 
 	public void OnBeginDrag(PointerEventData eventData) {
-		ItemSlot parent = GetComponentInParent<ItemSlot>();
-		item = parent.item;
-		amount = parent.amount;
+		origin = GetComponentInParent<ItemSlot>();
+		item = origin.item;
+		amount = origin.amount;
 		transform.SetParent(canvas.transform, true);
-		parent.item = null;
+		origin.item = null;
 	}
 
 	public void OnDrag(PointerEventData eventData) {
@@ -41,17 +42,29 @@ public class DragHandler : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndD
 		foreach (ItemSlot slot in slots) {
 			float distance = Vector2.Distance(slot.transform.position, rectTransform.position);
 			
-			if (slot.item) continue;
 			if (closestSlot && !(distance < minDist)) continue;
 			
 			closestSlot = slot;
 			minDist = distance;
 		}
-		
-		rectTransform.position = closestSlot.transform.position;
-		Destroy(gameObject);
-		
-		closestSlot.item = item;
-		closestSlot.amount = amount;
+
+		if (closestSlot.item) {
+			uint leftAmount = amount;
+			if (closestSlot.item == item) {
+				uint newVal = closestSlot.amount + amount;
+				closestSlot.amount = newVal > item.stackLimit ? item.stackLimit : newVal;
+				leftAmount = newVal - item.stackLimit;
+			}
+			
+			Destroy(gameObject);
+			origin.item = item;
+			origin.amount = leftAmount;
+		}
+		else {
+			Destroy(gameObject);
+
+			closestSlot.item = item;
+			closestSlot.amount = amount;
+		}
 	}
 }

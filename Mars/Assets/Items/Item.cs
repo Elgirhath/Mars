@@ -8,7 +8,7 @@ public abstract class Item : ScriptableObject {
 	public string itemName;
 	public Sprite sprite;
 	public GameObject prefab;
-	public int stackLimit;
+	public uint stackLimit;
 
 	public Item() {}
 	public Item(Item other) : this() {

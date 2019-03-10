@@ -57,6 +57,7 @@ public class Inventory : MonoBehaviour
                     break;
                 }
                 catch {
+                    //TODO: correct message that there is no space in backpack and pickup disabled
                     throw new Exception("No space in backpack");
                 }
             }
