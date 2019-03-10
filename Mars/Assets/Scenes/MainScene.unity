@@ -429,6 +429,7 @@ RectTransform:
   - {fileID: 629507953}
   - {fileID: 273451890}
   - {fileID: 1047543498}
+  - {fileID: 1218895507}
   - {fileID: 1576059387}
   m_Father: {fileID: 0}
   m_RootOrder: 21
@@ -759,7 +760,7 @@ GameObject:
   - component: {fileID: 203231795}
   - component: {fileID: 203231794}
   m_Layer: 5
-  m_Name: Exit Game
+  m_Name: Exit Game Button
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -994,8 +995,13 @@ PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Modification:
-    m_TransformParent: {fileID: 1063983276}
+    m_TransformParent: {fileID: 159481600}
     m_Modifications:
+    - target: {fileID: 5779954361914424275, guid: 7503c52f300fa0643950d5ce19b3e27f,
+        type: 3}
+      propertyPath: m_Name
+      value: HealthBar
+      objectReference: {fileID: 0}
     - target: {fileID: 5779954360829624911, guid: 7503c52f300fa0643950d5ce19b3e27f,
         type: 3}
       propertyPath: m_Value
@@ -1050,7 +1056,7 @@ PrefabInstance:
     - target: {fileID: 5779954361914424272, guid: 7503c52f300fa0643950d5ce19b3e27f,
         type: 3}
       propertyPath: m_RootOrder
-      value: 2
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 5779954361914424272, guid: 7503c52f300fa0643950d5ce19b3e27f,
         type: 3}
@@ -1070,17 +1076,17 @@ PrefabInstance:
     - target: {fileID: 5779954361914424272, guid: 7503c52f300fa0643950d5ce19b3e27f,
         type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 0
+      value: 193
       objectReference: {fileID: 0}
     - target: {fileID: 5779954361914424272, guid: 7503c52f300fa0643950d5ce19b3e27f,
         type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: -60
+      value: 18
       objectReference: {fileID: 0}
     - target: {fileID: 5779954361914424272, guid: 7503c52f300fa0643950d5ce19b3e27f,
         type: 3}
       propertyPath: m_SizeDelta.x
-      value: 0
+      value: 373
       objectReference: {fileID: 0}
     - target: {fileID: 5779954361914424272, guid: 7503c52f300fa0643950d5ce19b3e27f,
         type: 3}
@@ -1095,17 +1101,17 @@ PrefabInstance:
     - target: {fileID: 5779954361914424272, guid: 7503c52f300fa0643950d5ce19b3e27f,
         type: 3}
       propertyPath: m_AnchorMin.y
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5779954361914424272, guid: 7503c52f300fa0643950d5ce19b3e27f,
         type: 3}
       propertyPath: m_AnchorMax.x
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5779954361914424272, guid: 7503c52f300fa0643950d5ce19b3e27f,
         type: 3}
       propertyPath: m_AnchorMax.y
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5779954361914424272, guid: 7503c52f300fa0643950d5ce19b3e27f,
         type: 3}
@@ -1115,7 +1121,7 @@ PrefabInstance:
     - target: {fileID: 5779954361914424272, guid: 7503c52f300fa0643950d5ce19b3e27f,
         type: 3}
       propertyPath: m_Pivot.y
-      value: 1
+      value: 0.5
       objectReference: {fileID: 0}
     - target: {fileID: 5779954361914424273, guid: 7503c52f300fa0643950d5ce19b3e27f,
         type: 3}
@@ -1126,11 +1132,6 @@ PrefabInstance:
         type: 3}
       propertyPath: maxValue
       value: 54
-      objectReference: {fileID: 0}
-    - target: {fileID: 5779954361914424275, guid: 7503c52f300fa0643950d5ce19b3e27f,
-        type: 3}
-      propertyPath: m_Name
-      value: HealthBar
       objectReference: {fileID: 0}
     - target: {fileID: 5779954362058248200, guid: 7503c52f300fa0643950d5ce19b3e27f,
         type: 3}
@@ -1236,7 +1237,7 @@ GameObject:
   - component: {fileID: 286374198}
   - component: {fileID: 286374197}
   m_Layer: 5
-  m_Name: Resume
+  m_Name: Resume Button
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3446,6 +3447,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1063983276}
     m_Modifications:
+    - target: {fileID: 5779954361914424275, guid: 7503c52f300fa0643950d5ce19b3e27f,
+        type: 3}
+      propertyPath: m_Name
+      value: HungerBar
+      objectReference: {fileID: 0}
     - target: {fileID: 5779954361431374922, guid: 7503c52f300fa0643950d5ce19b3e27f,
         type: 3}
       propertyPath: m_FontData.m_Font
@@ -3566,11 +3572,6 @@ PrefabInstance:
         type: 3}
       propertyPath: value
       value: 100
-      objectReference: {fileID: 0}
-    - target: {fileID: 5779954361914424275, guid: 7503c52f300fa0643950d5ce19b3e27f,
-        type: 3}
-      propertyPath: m_Name
-      value: HungerBar
       objectReference: {fileID: 0}
     - target: {fileID: 5779954362058248200, guid: 7503c52f300fa0643950d5ce19b3e27f,
         type: 3}
@@ -4351,7 +4352,6 @@ RectTransform:
   m_Children:
   - {fileID: 2048667890}
   - {fileID: 1923951959}
-  - {fileID: 1218895507}
   m_Father: {fileID: 131323485}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -5995,7 +5995,7 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 159481600}
-  m_RootOrder: 5
+  m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -8130,6 +8130,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1063983276}
     m_Modifications:
+    - target: {fileID: 5779954361914424275, guid: 7503c52f300fa0643950d5ce19b3e27f,
+        type: 3}
+      propertyPath: m_Name
+      value: ThirstBar
+      objectReference: {fileID: 0}
     - target: {fileID: 5779954360829624911, guid: 7503c52f300fa0643950d5ce19b3e27f,
         type: 3}
       propertyPath: m_Value
@@ -8250,11 +8255,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Pivot.y
       value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 5779954361914424275, guid: 7503c52f300fa0643950d5ce19b3e27f,
-        type: 3}
-      propertyPath: m_Name
-      value: ThirstBar
       objectReference: {fileID: 0}
     - target: {fileID: 5779954362058248200, guid: 7503c52f300fa0643950d5ce19b3e27f,
         type: 3}
