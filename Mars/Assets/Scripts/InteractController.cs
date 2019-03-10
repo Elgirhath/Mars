@@ -6,7 +6,7 @@ using UnityEngine;
 using UnityEngine.Serialization;
 using UnityEngine.SocialPlatforms;
 
-public class ItemCollectingController : MonoBehaviour {
+public class InteractController : MonoBehaviour {
 	[Tooltip("Max distance from camera in which objects can be collected")]
 	public float maxCollectDistance;
 	[Tooltip("Weight from 0 to 1. 0 means distance only, 1 means angle only.")]
@@ -18,14 +18,12 @@ public class ItemCollectingController : MonoBehaviour {
 
 	private Camera cam;
 	private Transform camTransform;
-	private bool allowCollecting;
+	private bool allowInteract;
 	private Collider[] nearItems;
 	private GameObject target;
 	private Material targetMaterial;
 
-	private Inventory inventory;
-
-	private TooltipController tooltip;
+	private Tooltip tooltip;
 
 	private Shader standardShader;
 	private Shader outline;
@@ -46,8 +44,7 @@ public class ItemCollectingController : MonoBehaviour {
 		standardShader = Shader.Find("Standard");
 		outline = Shader.Find("Outlined/UltimateOutline");
 		
-		tooltip = TooltipController.instance;
-		inventory = Inventory.instance;
+		tooltip = Tooltip.instance;
 		
 		closestItem = null;
 		closestItemFactor = 0;
@@ -55,7 +52,7 @@ public class ItemCollectingController : MonoBehaviour {
 	
 	void Update()
 	{
-		allowCollecting = false;
+		allowInteract = false;
 		closestItem = null;
 		closestItemFactor = 0;
 		
@@ -66,7 +63,7 @@ public class ItemCollectingController : MonoBehaviour {
 		
 		if (closestItem) // if any item can be collected
 		{
-			allowCollecting = true;
+			allowInteract = true;
 			if (closestItem.gameObject != target) { // if our current target isn't the one we want to pick up - change current target
 				if(target)
 					Deselect();
@@ -80,11 +77,10 @@ public class ItemCollectingController : MonoBehaviour {
 			target = null;
 		}
 		
-		if (allowCollecting) {
+		if (allowInteract) {
 			if (Input.GetButtonDown("Use")) {
-				inventory.AddItem(target.GetComponent<ItemController>().item);
+				target.GetComponent<Interactable>().Interact();
 				Deselect();
-				Destroy(target);
 			}
 		}
 	}
@@ -92,20 +88,14 @@ public class ItemCollectingController : MonoBehaviour {
 	
 	private bool HitScan()
 	{
-		RaycastHit hit = new RaycastHit();
-		if (Physics.Raycast(cam.transform.position, cam.transform.TransformDirection(Vector3.forward), out hit)) {
-			try {
-				if (hit.distance <= maxCollectDistance * 0.85f)
-				{
-					Item properties = hit.transform.gameObject.GetComponent<ItemController>().item;
-					if (properties.collectible)
-					{
-						closestItem = hit.transform.gameObject.GetComponent<Collider>();
-						return true;
-					}
+		if (Physics.Raycast(cam.transform.position, cam.transform.forward, out RaycastHit hit)) {
+			if (hit.distance <= maxCollectDistance * 0.85f)
+			{
+				if (hit.transform.gameObject.GetComponent<Interactable>() != null) {
+					closestItem = hit.transform.gameObject.GetComponent<Collider>();
+					return true;
 				}
 			}
-			catch {}
 		}
 
 		return false;
@@ -119,18 +109,15 @@ public class ItemCollectingController : MonoBehaviour {
 			float angle = Vector3.Angle(camItemVector, camTransform.forward);
 			if (angle > maxAngle)
 				continue;
-			try {
-				Item properties = nearItems[i].transform.gameObject.GetComponent<ItemController>().item;
-				if (properties.collectible) {
-					float factor = weight * camItemVector.magnitude + (1 - weight) * angle; //selecting the right object by the lowest factor
-					if (factor < closestItemFactor || !closestItem)
-					{
-						closestItemFactor = factor;
-						closestItem = nearItems[i];
-					}
+			
+			if (nearItems[i].transform.gameObject.GetComponent<Interactable>() != null) {
+				float factor = weight * camItemVector.magnitude + (1 - weight) * angle; //selecting the right object by the lowest factor
+				if (factor < closestItemFactor || !closestItem)
+				{
+					closestItemFactor = factor;
+					closestItem = nearItems[i];
 				}
 			}
-			catch {}
 		}
 	}
 	
@@ -144,7 +131,7 @@ public class ItemCollectingController : MonoBehaviour {
 		targetMaterial.SetFloat("_FirstOutlineWidth", firstOutlineWidth);
 		targetMaterial.SetFloat("_SecondOutlineWidth", secondOutlineWidth);
 		
-		tooltip.OpenPickupTooltip(target.transform, target.GetComponent<ItemController>().item.itemName);
+		tooltip.OpenTooltip(target.transform, target.GetComponent<Interactable>().tooltipText);
 	}
 
 	void Deselect()

@@ -2,13 +2,13 @@
 using UnityEngine;
 using UnityEngine.UI;
 
-public class TooltipController : MonoBehaviour {
+public class Tooltip : MonoBehaviour {
 	private string buttonName;
 	private string actionName;
 	private Text textField;
 	private RectTransform textTransform;
 
-	public static TooltipController instance;
+	public static Tooltip instance;
 
 	private Transform target;
 
@@ -46,9 +46,9 @@ public class TooltipController : MonoBehaviour {
 		textField.text = text;
 	}
 
-	public void OpenPickupTooltip(Transform target, string objectName) {
+	public void OpenTooltip(Transform target, string text) {
 		this.target = target;
-		SetText("Press E to pick up " + objectName);
+		SetText(text);
 		MoveToTarget();
 		
 		Enable();
