@@ -29,6 +29,9 @@ public class ItemSlot : MonoBehaviour {
 		get => _amount;
 		set {
 			_amount = value;
+			if (_amount < 1) {
+				item = null;
+			}
 			string amountString = _amount < 2 ? "" : _amount.ToString();
 			amountText.text = amountString;
 		}
@@ -51,7 +54,6 @@ public class ItemSlot : MonoBehaviour {
 		_item = item;
 		amount = 1;
 
-		Debug.Log("A");
 		SubscribeEvents();
 	}
 
@@ -61,7 +63,6 @@ public class ItemSlot : MonoBehaviour {
 	}
 
 	public void SubscribeEvents() {
-		Debug.Log(clickHandler.ToString());
 		clickHandler.onLeftClick += item.Use;
 		clickHandler.onLeftClick += RemoveItemUnit;
 		clickHandler.onRightClick += item.Drop;
