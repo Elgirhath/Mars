@@ -95,7 +95,7 @@ public class ItemCollectingController : MonoBehaviour {
 		RaycastHit hit = new RaycastHit();
 		if (Physics.Raycast(cam.transform.position, cam.transform.TransformDirection(Vector3.forward), out hit)) {
 			try {
-				if (hit.distance <= maxCollectDistance)
+				if (hit.distance <= maxCollectDistance * 0.85f)
 				{
 					Item properties = hit.transform.gameObject.GetComponent<ItemController>().item;
 					if (properties.collectible)
