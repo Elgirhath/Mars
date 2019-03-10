@@ -63,8 +63,10 @@ public class ItemSlot : MonoBehaviour {
 	private void RemoveItem() {
 		if (_item) {
 			UnsubscribeEvents();
-			foreach (Transform child in transform)
+			foreach (Transform child in transform) {
+				child.parent = null;
 				Destroy(child.gameObject);
+			}
 		}
 		button = null;
 		clickHandler = null;

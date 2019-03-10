@@ -64,12 +64,14 @@ public class DragHandler : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndD
 				Debug.Log("Dest amount: " + closestSlot.amount);
 				origin.item = closestSlot.item;
 				origin.amount = closestSlot.amount;
+				closestSlot.item = null;
+				
 				closestSlot.item = item;
 				closestSlot.amount = amount;
 				Debug.Log(closestSlot.name);
 				Debug.Log("Slot: " + closestSlot.name);
 				Debug.Log("Amount: " + closestSlot.gameObject.GetComponentInChildren<Text>().text);
-				Debug.Break();
+//				Debug.Break();
 			}
 			
 			Destroy(gameObject);
