@@ -2053,6 +2053,7 @@ MonoBehaviour:
   initHunger: 90
   starvationDamage: 6
   recoverySpeed: 3
+  recoveryThreshold: 0.9
   dropSpeed: 0.7
 --- !u!114 &500106273
 MonoBehaviour:
