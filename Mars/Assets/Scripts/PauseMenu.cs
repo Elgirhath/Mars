@@ -1,6 +1,8 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class PauseMenu : MonoBehaviour
 {
@@ -34,13 +36,17 @@ public class PauseMenu : MonoBehaviour
         panel = transform.GetChild(0);
         panel.gameObject.SetActive(false);
         tooltip = TooltipController.instance;
-        block = false;
         
+        block = false;
         opened = false;
+
+        panel.Find("Resume Button").gameObject.GetComponent<Button>().onClick.AddListener(delegate { Close(); });
+        panel.Find("Exit Game Button").gameObject.GetComponent<Button>().onClick.AddListener(delegate { QuitGame(); });
+        
     }
 
     // Update is called once per frame
-    void Update()
+    void LateUpdate()
     {
         if (!block && Input.GetButtonDown("Cancel"))
         {
@@ -75,5 +81,14 @@ public class PauseMenu : MonoBehaviour
         crosshair.active = true;
         tooltip.gameObject.SetActive(true);
         opened = false;
+    }
+    
+    private void QuitGame()
+    {
+        #if UNITY_EDITOR
+            UnityEditor.EditorApplication.isPlaying = false;
+        #else
+            Application.Quit();
+        #endif
     }
 }
