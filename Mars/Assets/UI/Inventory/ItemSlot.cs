@@ -1,57 +1,38 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq.Expressions;
 using UnityEngine;
 using UnityEngine.UI;
 
 public class ItemSlot : MonoBehaviour {
 	public GameObject buttonPrefab;
 	
-	private Item _item = null;
-	public Item item {
-		get => _item;
-		set {
-			if (!value) {
-				if (_item) {
-					UnsubscribeEvents();
-					foreach (Transform child in transform)
-						Destroy(child.gameObject);
-					button = null;
-					clickHandler = null;
-					amountText = null;
-				}
-				_item = null;
-			}
-			else
-				AddItem(value);
-		}
-	}
 	private Text amountText;
 	private Button button;
 	private ClickHandler clickHandler;
-
+	
+	private Item _item = null;
+	public Item item {
+		get => _item;
+		set => SetItem(value);
+	}
+	
 	private uint _amount = 0;
 
 	public uint amount {
 		get => _amount;
-		set {
-			_amount = value;
-			if (_amount < 1) {
-				item = null;
-			}
-			else {
-				string amountString = _amount < 2 ? "" : _amount.ToString();
-				amountText.text = amountString;
-			}
-		}
+		set => SetAmount(value);
 	}
-
-	public void AddItem(Item item) {
-		if (item == this.item) {
-			AddItemUnit();
-
+	
+	private void SetItem(Item item) {
+		if (item == null) {
+			RemoveItem();
 			return;
 		}
+		
+		if (this.item)
+			RemoveItem();
 
 		button = Instantiate(buttonPrefab, transform).GetComponent<Button>();
 		amountText = GetComponentInChildren<Text>();
@@ -63,7 +44,32 @@ public class ItemSlot : MonoBehaviour {
 		_item = item;
 		amount = 1;
 
-		SubscribeEvents();
+		SubscribeEvents();	
+	}
+
+	private void SetAmount(uint amount) {
+		if (amount > item.stackLimit)
+			throw new Exception("No space on stack");
+		_amount = amount;
+		if (_amount < 1) {
+			item = null;
+		}
+		else {
+			string amountString = _amount < 2 ? "" : _amount.ToString();
+			amountText.text = amountString;
+		}
+	}
+
+	private void RemoveItem() {
+		if (_item) {
+			UnsubscribeEvents();
+			foreach (Transform child in transform)
+				Destroy(child.gameObject);
+		}
+		button = null;
+		clickHandler = null;
+		amountText = null;
+		_item = null;
 	}
 
 	public void SubscribeEvents() {
@@ -82,16 +88,8 @@ public class ItemSlot : MonoBehaviour {
 		}
 		catch {}
 	}
-	
-	public void AddItemUnit() {
-		if (amount >= item.stackLimit)
-			throw new Exception();
-		amount++;
-	}
 
 	public void RemoveItemUnit() {
 		amount--;
-		if (amount < 1)
-			item = null;
 	}
 }

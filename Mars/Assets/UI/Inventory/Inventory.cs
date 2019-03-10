@@ -38,7 +38,7 @@ public class Inventory : MonoBehaviour
             if (slot.item != item)
                 continue;
             try {
-                slot.AddItem(item);
+                slot.amount++;
                 isStacked = true;
             }
             catch{}
@@ -53,7 +53,7 @@ public class Inventory : MonoBehaviour
                 }
 
                 try {
-                    slot.AddItem(item); //if item can be added to the slot, add it. Else try to add to next slot
+                    slot.item = item; //if item can be added to the slot, add it. Else try to add to next slot
                     break;
                 }
                 catch {
