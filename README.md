@@ -28,6 +28,6 @@
 - Nie importowane materiały
 - Dodatkowy plik, który swoje waży
 
-#### Wymagania:
+#### Wymagania (wszystkie te z sekcji .blend oraz dodatkowo poniższe) :
 1. Tu do rozwiązania problemu skali można wykorzystać "!Experimental! Apply Transform" z menu eksportu. Nie działa dla hierarchii wielostopniowej.
 2. Dodatkowo w menu eksportu jest suwak i przycisk pomagające przy ustawianiu skali.
