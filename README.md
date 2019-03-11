@@ -31,3 +31,5 @@
 #### Wymagania (wszystkie te z sekcji .blend oraz dodatkowo poniższe) :
 1. Tu do rozwiązania problemu skali można wykorzystać "!Experimental! Apply Transform" z menu eksportu. Nie działa dla hierarchii wielostopniowej.
 2. Dodatkowo w menu eksportu jest suwak i przycisk pomagające przy ustawianiu skali.
+
+#### Plik wrzucamy do wybranego folderu w /Assets. Taki plik nie jest jednak prefabem! Aby stworzyć prefab na podstawie modelu, należy najpierw dodać go do sceny, a potem z hierarchii przeciągnąć go do Assetów.
