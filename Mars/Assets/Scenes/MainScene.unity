@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 170076734}
-  m_IndirectSpecularColor: {r: 0.44657898, g: 0.4964133, b: 0.5748178, a: 1}
+  m_IndirectSpecularColor: {r: 0.44657844, g: 0.49641222, b: 0.57481694, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -1162,11 +1162,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: HealthBar
       objectReference: {fileID: 0}
-    - target: {fileID: 5779954360829624911, guid: 7503c52f300fa0643950d5ce19b3e27f,
-        type: 3}
-      propertyPath: m_Value
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 5779954361431374922, guid: 7503c52f300fa0643950d5ce19b3e27f,
         type: 3}
       propertyPath: m_FontData.m_Font
@@ -1312,6 +1307,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Color.b
       value: 0.10040553
+      objectReference: {fileID: 0}
+    - target: {fileID: 5779954360829624911, guid: 7503c52f300fa0643950d5ce19b3e27f,
+        type: 3}
+      propertyPath: m_Value
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 5779954361914424273, guid: 7503c52f300fa0643950d5ce19b3e27f, type: 3}
@@ -2017,10 +2017,7 @@ MonoBehaviour:
   maxCollectDistance: 1.75
   weight: 0.52
   maxAngle: 35
-  firstOutlineColor: {r: 0.2784314, g: 0.47843137, b: 0.6745098, a: 1}
-  secondOutlineColor: {r: 0.2784314, g: 0.5686275, b: 0.6745098, a: 1}
-  firstOutlineWidth: 0.015
-  secondOutlineWidth: 0.007
+  selectedMaterial: {fileID: 2100000, guid: 7e93c70a5bffbf94faff50ffd00c9523, type: 2}
 --- !u!114 &500106271
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5350,6 +5347,24 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1333229194}
   m_CullTransparentMesh: 0
+--- !u!1 &1369229811 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 7156972132037723723, guid: 923ec57b96cecf34780b6a40e5468827,
+    type: 3}
+  m_PrefabInstance: {fileID: 247546020580546121}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1369229815
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1369229811}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6791966641bf55e45a20788b7f9c9eac, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &1386981365
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -8071,6 +8086,21 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 7156972132035467401, guid: 923ec57b96cecf34780b6a40e5468827,
+        type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 3b38f2a300e815145be85597feeb079a, type: 2}
+    - target: {fileID: 7156972132035467405, guid: 923ec57b96cecf34780b6a40e5468827,
+        type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 3b38f2a300e815145be85597feeb079a, type: 2}
+    - target: {fileID: 7156972132035467407, guid: 923ec57b96cecf34780b6a40e5468827,
+        type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 3b38f2a300e815145be85597feeb079a, type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 923ec57b96cecf34780b6a40e5468827, type: 3}
 --- !u!1001 &2944860709211950721
@@ -8145,6 +8175,11 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2944860708868975693, guid: 16c068abf7edd954da103b0b513b6531,
+        type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 3b38f2a300e815145be85597feeb079a, type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 16c068abf7edd954da103b0b513b6531, type: 3}
 --- !u!1001 &3618980403207450329
@@ -8395,11 +8430,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: ThirstBar
       objectReference: {fileID: 0}
-    - target: {fileID: 5779954360829624911, guid: 7503c52f300fa0643950d5ce19b3e27f,
-        type: 3}
-      propertyPath: m_Value
-      value: 0.795
-      objectReference: {fileID: 0}
     - target: {fileID: 5779954361431374922, guid: 7503c52f300fa0643950d5ce19b3e27f,
         type: 3}
       propertyPath: m_FontData.m_Font
@@ -8525,6 +8555,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_AnchorMax.y
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5779954360829624911, guid: 7503c52f300fa0643950d5ce19b3e27f,
+        type: 3}
+      propertyPath: m_Value
+      value: 0.795
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 7503c52f300fa0643950d5ce19b3e27f, type: 3}
