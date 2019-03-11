@@ -185,7 +185,7 @@ public class InteractController : MonoBehaviour {
 			catch {}
 
 			foreach (Transform child in obj.transform) {
-				Apply(child.gameObject, material);
+				ApplyOutline(child.gameObject, material);
 			}
 		}
 	}
