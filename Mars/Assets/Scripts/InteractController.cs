@@ -21,28 +21,20 @@ public class InteractController : MonoBehaviour {
 	private bool allowInteract;
 	private Collider[] nearItems;
 	private GameObject target;
-	private Material targetMaterial;
 
 	private Tooltip tooltip;
-
-	private Shader standardShader;
-	private Shader outline;
 			
 	private Collider closestItem;
 	private float closestItemFactor;
-	
-	//Shader settings
-	public Color firstOutlineColor = Color.white;
-	public Color secondOutlineColor = Color.white;
-	public float firstOutlineWidth;
-	public float secondOutlineWidth;
+
+	private MaterialTree originMaterialTree;
+
+	public Material selectedMaterial;
 
 	void Start() {
 		cam = GetComponentInChildren<Camera>();
 		camTransform = cam.transform;
 		target = null;
-		standardShader = Shader.Find("Standard");
-		outline = Shader.Find("Outlined/UltimateOutline");
 		
 		tooltip = Tooltip.instance;
 		
@@ -121,22 +113,80 @@ public class InteractController : MonoBehaviour {
 		}
 	}
 	
-	void Select()
-	{
-		targetMaterial = target.GetComponent<Renderer>().material;
-		
-		targetMaterial.shader = outline;
-		targetMaterial.SetColor("_FirstOutlineColor", firstOutlineColor);
-		targetMaterial.SetColor("_SecondOutlineColor", secondOutlineColor);
-		targetMaterial.SetFloat("_FirstOutlineWidth", firstOutlineWidth);
-		targetMaterial.SetFloat("_SecondOutlineWidth", secondOutlineWidth);
+	void Select() {
+		originMaterialTree = new MaterialTree(target.gameObject);
+		MaterialTree.ApplyOutline(target.gameObject, selectedMaterial);
 		
 		tooltip.OpenTooltip(target.transform, target.GetComponent<Interactable>().tooltipText);
 	}
 
 	void Deselect()
 	{
-		targetMaterial.shader = standardShader;
+		originMaterialTree.Apply(target.gameObject);
+		
 		tooltip.Disable();
+	}
+	
+	private class MaterialTree { // Keeps ObjectState for every object in the subtree
+		private Material parentMaterial;
+		private Dictionary<Transform, MaterialTree> childTrees = new Dictionary<Transform, MaterialTree>();
+	
+		public MaterialTree() {}
+	
+		public MaterialTree(GameObject obj) : this() {
+			GetFromObject(obj);
+		}
+		public void GetFromObject(GameObject obj) {
+			try {
+				parentMaterial = obj.GetComponent<Renderer>().material;
+			}
+			catch {}
+			
+			foreach (Transform child in obj.transform) {
+				MaterialTree subtree = new MaterialTree(child.gameObject);
+				childTrees.Add(child, subtree);
+			}
+		}
+	
+		public void Apply(GameObject obj) {
+			try {
+				obj.GetComponent<Renderer>().material = parentMaterial;
+			}
+			catch {}
+
+			foreach (Transform child in obj.transform) {
+				try {
+					childTrees[child].Apply(child.gameObject);
+				}
+				catch {}
+			}
+		}
+	
+		public static void Apply(GameObject obj, Material material) {
+			try {
+				obj.GetComponent<Renderer>().material = material;
+			}
+			catch {}
+
+			foreach (Transform child in obj.transform) {
+				Apply(child.gameObject, material);
+			}
+		}
+		
+		public static void ApplyOutline(GameObject obj, Material material) {
+			try {
+				Renderer renderer = obj.GetComponent<Renderer>();
+				Material oldMat = renderer.material;
+				Material newMat = material;
+				newMat.SetColor("_Color", oldMat.color);
+				newMat.SetTexture("_MainTex", oldMat.mainTexture);
+				renderer.material = newMat;
+			}
+			catch {}
+
+			foreach (Transform child in obj.transform) {
+				Apply(child.gameObject, material);
+			}
+		}
 	}
 }

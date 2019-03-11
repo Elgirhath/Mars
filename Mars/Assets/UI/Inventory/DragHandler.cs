@@ -50,34 +50,24 @@ public class DragHandler : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndD
 		}
 
 		if (closestSlot.item) {
-			if (closestSlot.item == item) {
-				uint leftAmount = amount;
+			if (closestSlot.item == item) { //merge 2 stacks
 				uint newAmount = closestSlot.amount + amount;
-				Debug.Log("New amount: " + newAmount);
 				closestSlot.amount = newAmount > item.stackLimit ? item.stackLimit : newAmount;
-				leftAmount = newAmount - closestSlot.amount;
+				uint leftAmount = newAmount - closestSlot.amount;
 				origin.item = item;
 				origin.amount = leftAmount;
 			}
 			else { //swap
-				Debug.Log("Original amount: " + amount);
-				Debug.Log("Dest amount: " + closestSlot.amount);
 				origin.item = closestSlot.item;
 				origin.amount = closestSlot.amount;
-				closestSlot.item = null;
-				
 				closestSlot.item = item;
 				closestSlot.amount = amount;
-				Debug.Log(closestSlot.name);
-				Debug.Log("Slot: " + closestSlot.name);
-				Debug.Log("Amount: " + closestSlot.gameObject.GetComponentInChildren<Text>().text);
-//				Debug.Break();
 			}
 			
 			Destroy(gameObject);
 			
 		}
-		else {
+		else { //move
 			Destroy(gameObject);
 
 			closestSlot.item = item;
