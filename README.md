@@ -1,10 +1,10 @@
 # Mars
 
-#### Kanban: https://elgirhath.kanbantool.com/b/498847#
+### Kanban: https://elgirhath.kanbantool.com/b/498847#
 
-#### MindMap: https://coggle.it/diagram/XGbqbnV4-hvJL5IA/t/gra
+### MindMap: https://coggle.it/diagram/XGbqbnV4-hvJL5IA/t/gra
 
-## Ważne rzeczy przy importowaniu obiektów z Blendera:
+## Importowanie modeli z Blendera:
 
 ### .blend:
 + Importowane są materiały
@@ -33,9 +33,11 @@
 2. Dodatkowo w menu eksportu jest suwak i przycisk pomagające przy ustawianiu skali.
 
 #### Plik wrzucamy do wybranego folderu w /Assets. Taki plik nie jest jednak prefabem! Aby stworzyć prefab na podstawie modelu, należy najpierw dodać go do sceny, a potem z hierarchii przeciągnąć go do Assetów.
-#### Projekt trzymamy w dedykowanym folderze zapisanym w .gitignore. Do projektu wrzucamy plik .blend, folder Textures, zawierający tylko konieczne tekstury oraz ewentualny plik .fbx
 
-### Ważne informacje o materiałach w Unity:
-#### Dokumentacja: https://docs.unity3d.com/Manual/StandardShaderMaterialParameters.html
+## Pliki lokalne:
+Pliki trzymamy w folderach lokalnych - gdziekolwiek w projekcie można utworzyć folder **\_local**, który jest wpisany w **.gitignore**. Do projektu wrzucamy plik **.blend**, folder **Textures**, zawierający tylko konieczne tekstury oraz ewentualny plik **.fbx** (np. w folderze Models/LogBench można utworzyć folder **\_local**, w nim umieścić cały projekt Blendera, Gimpa, tekstury itp., a do Models/LogBench wrzucamy tylko tekstury i gotowy model).
+
+## Materiały w Unity:
+### Dokumentacja: https://docs.unity3d.com/Manual/StandardShaderMaterialParameters.html
 
 Warto tu zwrócić uwagę na sekcję **Metallic** i **Smoothness**. Jedna tekstura steruje tam oboma zjawiskami jednocześnie (np. **RGB** oznaczają **Smoothness** a **Alpha** oznacza **Metallic**). Takie zjawisko można osiągnąć np. w Substance Painter, ale także przy zwykłym użyciu Photoshopa/Gimpa. Po prostu dodajemy dwie tekstury oraz wybieramy, by **Metallic** sterował kanałem **Alpha**, a **Smoothness** kanałami **RGB**.
