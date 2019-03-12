@@ -35,7 +35,7 @@
 #### Plik wrzucamy do wybranego folderu w /Assets. Taki plik nie jest jednak prefabem! Aby stworzyć prefab na podstawie modelu, należy najpierw dodać go do sceny, a potem z hierarchii przeciągnąć go do Assetów.
 
 ## Pliki lokalne:
-Pliki trzymamy w folderach lokalnych - gdziekolwiek w projekcie można utworzyć folder **\_local**, który jest wpisany w **.gitignore**. Do projektu wrzucamy plik **.blend**, folder **Textures**, zawierający tylko konieczne tekstury oraz ewentualny plik **.fbx** (np. w folderze Models/LogBench można utworzyć folder **\_local**, w nim umieścić cały projekt Blendera, Gimpa, tekstury itp., a do Models/LogBench wrzucamy tylko tekstury i gotowy model).
+Pliki trzymamy w folderach lokalnych - gdziekolwiek w projekcie można utworzyć folder `_local`, który jest wpisany w **.gitignore**. Do projektu wrzucamy plik **.blend**, folder **Textures**, zawierający tylko konieczne tekstury oraz ewentualny plik **.fbx** (np. w folderze Models/LogBench można utworzyć folder `_local`, w nim umieścić cały projekt Blendera, Gimpa, tekstury itp., a do Models/LogBench wrzucamy tylko tekstury i gotowy model).
 
 #### Walidacja:
 Pracując nad projektem możemy korzystać z plików lokalnych, jednak może to doprowadzić do sytuacji, gdy zcommitujemy projekt z referencjami do naszych lokalnych plików. Wtedy pozostali współpracownicy otrzymają błędy, które naprawione zostaną dopiero przy następnym commicie. W folderze **Extensions** znajduje się więc skrypt, który pozwala na sprawdzenie obecności referencji do plików lokalnych, poprzez menu **`Assets/Find Local References`**. Po kliknięciu na warning podświetli się obiekt, w którym znajduje się referencja. Można też znaleźć dany plik lokalny i z menu kontekstowego wybrać **`Find references in scene`**.
