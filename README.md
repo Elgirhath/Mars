@@ -21,7 +21,7 @@
 6. Jeżeli hierarchia obiektów w Blenderze będzie miała więcej niż jeden poziom - może się źle zaimportować do Unity. W takiej sytuacji konieczna będzie ręczna naprawa skali i/lub eksportowanie do .fbx.
 7. Jeżeli to możliwe, dla wszystkich składowych obiektów zastosować jeden materiał. Konieczne do tego może być skorzystanie z darmowej wtyczki do Blendera "Texture Atlas" (swoją drogą polecam).
 8. W przypadku gdy obiekty mają różne tekstury należy wypalić ("Bake") tekstury w Blenderze.
-9. Włączyć opcję "Pack all into .blend", by Unity pobrało tekstury, lub dodać je ręcznie.
+9. ~~Włączyć opcję "Pack all into .blend", by Unity pobrało tekstury, lub dodać je ręcznie.~~ Dodać tekstury ręcznie.
 
 ### .fbx:
 + Poprawny import
