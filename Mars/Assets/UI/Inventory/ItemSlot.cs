@@ -64,7 +64,7 @@ public class ItemSlot : MonoBehaviour {
 		if (_item) {
 			UnsubscribeEvents();
 			foreach (Transform child in transform) {
-				child.parent = null;
+				child.SetParent(null);
 				Destroy(child.gameObject);
 			}
 		}
