@@ -7,8 +7,8 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Outlined
-  m_Shader: {fileID: 4800000, guid: fd15da2573c706349b1d2e19546e667c, type: 3}
+  m_Name: DoorMaterial
+  m_Shader: {fileID: 46, guid: 0000000000000000f000000000000000, type: 0}
   m_ShaderKeywords: 
   m_LightmapFlags: 4
   m_EnableInstancingVariants: 0
@@ -56,27 +56,22 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     m_Floats:
-    - _Angle: 89
     - _BumpScale: 1
     - _Cutoff: 0.5
     - _DetailNormalMapScale: 1
     - _DstBlend: 0
-    - _FirstOutlineWidth: 0
     - _GlossMapScale: 1
-    - _Glossiness: 0.5
+    - _Glossiness: 1
     - _GlossyReflections: 1
-    - _Metallic: 0
+    - _Metallic: 1
     - _Mode: 0
     - _OcclusionStrength: 1
     - _Parallax: 0.02
-    - _SecondOutlineWidth: 0.02
     - _SmoothnessTextureChannel: 0
     - _SpecularHighlights: 1
     - _SrcBlend: 1
     - _UVSec: 0
     - _ZWrite: 1
     m_Colors:
-    - _Color: {r: 1, g: 0.6687182, b: 0, a: 1}
-    - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
-    - _FirstOutlineColor: {r: 0.2784314, g: 0.47843137, b: 0.6745098, a: 0}
-    - _SecondOutlineColor: {r: 0.2784314, g: 0.5686275, b: 0.6745098, a: 1}
+    - _Color: {r: 0.24528301, g: 0.24528301, b: 0.24528301, a: 1}
+    - _EmissionColor: {r: 0, g: 0, b: 0, a: 0}
