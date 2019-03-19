@@ -213,7 +213,7 @@ GameObject:
   - component: {fileID: 5779954361914424272}
   - component: {fileID: 5779954361914424273}
   m_Layer: 5
-  m_Name: ThirstBar
+  m_Name: ConditionBar
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -461,7 +461,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 0.72156864}
+  m_Color: {r: 0.2784314, g: 0.5686275, b: 0.6745098, a: 1}
   m_RaycastTarget: 1
   m_OnCullStateChanged:
     m_PersistentCalls:

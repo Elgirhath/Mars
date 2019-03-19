@@ -5,7 +5,7 @@ using UnityEngine;
 public class ThirstController : MonoBehaviour {
 	public int maxThirst;
 	public int initThirst;
-	public float dehydrationDamage;
+	//public float dehydrationDamage;
 
 	private float _thirst;
 	public float thirst {
@@ -18,7 +18,7 @@ public class ThirstController : MonoBehaviour {
 
 	public static ThirstController instance;
 	
-	private HealthController healthController;
+	//private HealthController healthController;
 
 	private void Awake() {
 		if (!instance)
@@ -29,15 +29,15 @@ public class ThirstController : MonoBehaviour {
 
 	private void Start() {
 		_thirst = initThirst;
-		healthController = HealthController.instance;
+		//healthController = HealthController.instance;
 	}
 
 	private void Update() {
 		if(_thirst > 0.0f)
 			_thirst -= dropSpeed * Time.deltaTime;
 		else {
-			Debug.Log("You are dying out of thirst!");
-			healthController.ChangeHealth(-dehydrationDamage * Time.deltaTime);
+			Debug.Log("You died out of thirst!");
+			//healthController.ChangeHealth(-dehydrationDamage * Time.deltaTime);
 		}
 	}
 }
