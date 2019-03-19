@@ -8,13 +8,23 @@ public class ThirstBar : MonoBehaviour {
     public int value;
 
     private Text conditionText;
-    private Slider slider;
-
+    private Image slider;
+    private Image emptyBar;
+    
     private ThirstController thirstController;
+
+    public Color criticalValueColor;
+    public Color emptyBarCriticalValueColor;
+    public Color defaultColor;
+    public Color emptyBarDefaultColor;
+    //Critical Values
+    [Range(0.0f, 1.0f)]
+    public float criticalValue;
 
     private void Awake() {
         conditionText = GetComponentInChildren<Text>();
-        slider = GetComponentInChildren<Slider>();
+        slider = transform.Find("Fill").GetComponent<Image>();
+        emptyBar = transform.Find("Empty").GetComponent<Image>();
     }
 
     private void Start() {
@@ -26,7 +36,18 @@ public class ThirstBar : MonoBehaviour {
 
     private void Update() {
         value = (int) thirstController.thirst;
+        float percentageValue = (float) value / maxValue;
         conditionText.text = value + "/" + maxValue;
-        slider.value = (float)value / maxValue;
+        slider.fillAmount = percentageValue;
+        if (percentageValue < criticalValue)
+        {
+            slider.color = criticalValueColor;
+            emptyBar.color = emptyBarCriticalValueColor;
+        }
+        else
+        {
+            slider.color = defaultColor;
+            emptyBar.color = emptyBarDefaultColor;
+        }
     }
 }

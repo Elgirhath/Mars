@@ -5,7 +5,7 @@ using UnityEngine;
 public class OxygenController : MonoBehaviour {
     public int maxOxygen;
     public int initOxygen;
-    public float chokingDamage;
+    //public float chokingDamage;
     [Tooltip("Points per second")]
     public float dropSpeed;
     
@@ -25,7 +25,7 @@ public class OxygenController : MonoBehaviour {
 
     public static OxygenController instance;
     
-    private HealthController healthController;
+    //private HealthController healthController;
     private OxygenBar oxygenBar;
 
     private void Awake() {
@@ -37,7 +37,7 @@ public class OxygenController : MonoBehaviour {
 
     private void Start() {
         _oxygen = initOxygen;
-        healthController = HealthController.instance;
+        //healthController = HealthController.instance;
         oxygenBar = OxygenBar.instance;
         insideCapsule = false;
 
@@ -50,8 +50,8 @@ public class OxygenController : MonoBehaviour {
         if (!insideCapsule)
         {
             if (_oxygen <= 0.0f) {
-                Debug.Log("You are choking to death!");
-                healthController.ChangeHealth(-chokingDamage * Time.deltaTime);
+                Debug.Log("You are dead!");
+                //healthController.ChangeHealth(-chokingDamage * Time.deltaTime);
             }
             else
             {
