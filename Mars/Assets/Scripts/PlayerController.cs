@@ -12,8 +12,10 @@ public class PlayerController : MonoBehaviour {
 	private Transform tr;
 	public float walkSpeed;
 	private bool locked;
+	public bool jumped;
 
 	public static PlayerController instance;
+	
 
 // Start is called before the first frame update
 	private void Start() {
@@ -24,6 +26,7 @@ public class PlayerController : MonoBehaviour {
 
 		Cursor.visible = false;
 		Cursor.lockState = CursorLockMode.Locked;
+		jumped = false;
 	}
 
 	private void Awake() {
@@ -33,7 +36,9 @@ public class PlayerController : MonoBehaviour {
 			Destroy(gameObject);
 	}
 
-	private void Update() {
+	private void Update()
+	{
+		jumped = false;
 		CamLook();
 		Jump();
 	}
@@ -77,14 +82,17 @@ public class PlayerController : MonoBehaviour {
 
 	private void Jump() {
 		if (Input.GetButtonDown("Jump") && IsGrounded())
+		{
+			jumped = true;
 			rb.velocity += Vector3.up * jumpHeight;
+		}
 	}
 
-	private bool IsRunning() {
+	public bool IsRunning() {
 		return Input.GetButton("Run");
 	}
 
-	private bool IsGrounded() {
+	public bool IsGrounded() {
 		return Physics.Raycast(tr.TransformPoint(col.center), -Vector3.up, col.height / 2 + 0.1f);
 	}
 
