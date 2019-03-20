@@ -1342,20 +1342,20 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   air:
-    volume: 10000
+    volume: 300
     _gases:
       array:
       - gas: {fileID: 11400000, guid: 00e419d01be4ace4187e053c97f049d1, type: 2}
-        ratio: 0.21
+        ratio: 0.1
       - gas: {fileID: 11400000, guid: 736d38b6d7fa2e945a944c9ed14ab15d, type: 2}
-        ratio: 0.79
+        ratio: 0.9
       - gas: {fileID: 11400000, guid: a8c3cecff9ad7d746bf8ab891d7a39e1, type: 2}
         ratio: 0
     pressure: 100000
     temperature: 10
     heatCapacity: 1012
   targetAir:
-    volume: 10000
+    volume: 300
     _gases:
       array:
       - gas: {fileID: 11400000, guid: 00e419d01be4ace4187e053c97f049d1, type: 2}
@@ -1861,7 +1861,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxThirst: 100
   initThirst: 70
-  dropSpeed: 2
+  dropSpeed: 1.2
 --- !u!114 &500106272
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1875,7 +1875,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxHunger: 100
-  initHunger: 30
+  initHunger: 60
   dropSpeed: 0.7
 --- !u!114 &500106273
 MonoBehaviour:
@@ -1904,7 +1904,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxOxygen: 100
-  initOxygen: 30
+  initOxygen: 70
   dropSpeed: 0.6
 --- !u!114 &500106275
 MonoBehaviour:
@@ -5004,6 +5004,7 @@ GameObject:
   - component: {fileID: 1282971538}
   - component: {fileID: 1282971537}
   - component: {fileID: 1282971536}
+  - component: {fileID: 1282971539}
   m_Layer: 0
   m_Name: O2 Pump
   m_TagString: Untagged
@@ -5084,6 +5085,21 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1282971534}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!114 &1282971539
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1282971534}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cbb47ce76f56b884f9a427a389930128, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  kgPerSec: 3
+  activateThreshold: 0
+  o2: {fileID: 11400000, guid: 00e419d01be4ace4187e053c97f049d1, type: 2}
 --- !u!1 &1321892746
 GameObject:
   m_ObjectHideFlags: 0
@@ -5349,7 +5365,7 @@ GameObject:
   - component: {fileID: 1407687665}
   - component: {fileID: 1407687664}
   m_Layer: 0
-  m_Name: O2 Tank
+  m_Name: Tank
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -5381,8 +5397,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8a5b306a305d30e49af10c09f4ee386d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxGasWeight: 100
-  _gasWeight: 100
+  maxGasWeight: 50
+  _gasWeight: 30
 --- !u!65 &1407687665
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -7072,6 +7088,7 @@ GameObject:
   - component: {fileID: 1923808740}
   - component: {fileID: 1923808739}
   - component: {fileID: 1923808738}
+  - component: {fileID: 1923808741}
   m_Layer: 0
   m_Name: N Pump
   m_TagString: Untagged
@@ -7152,6 +7169,21 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1923808736}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!114 &1923808741
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1923808736}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9c90f15dc781d784c8a41cee39cc0716, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  kgPerSec: 3
+  activateThreshold: 0.2
+  n2: {fileID: 11400000, guid: 736d38b6d7fa2e945a944c9ed14ab15d, type: 2}
 --- !u!1 &1943943831
 GameObject:
   m_ObjectHideFlags: 0
@@ -7166,7 +7198,7 @@ GameObject:
   - component: {fileID: 1943943833}
   - component: {fileID: 1943943836}
   m_Layer: 0
-  m_Name: N Tank
+  m_Name: Tank
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -7256,8 +7288,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8a5b306a305d30e49af10c09f4ee386d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxGasWeight: 100
-  _gasWeight: 100
+  maxGasWeight: 50
+  _gasWeight: 30
 --- !u!1 &1966149867
 GameObject:
   m_ObjectHideFlags: 0

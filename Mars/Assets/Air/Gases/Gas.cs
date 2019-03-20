@@ -44,6 +44,12 @@ public class Gas : ScriptableObject{
 		air.pressure = pressure;
 	}
 
+	public float GetPartialPressure(Air air) {
+		float moles = GetMoles(air);
+		float totalMoles = air.GetTotalMoles();
+		return moles / totalMoles * air.pressure;
+	}
+
 	public float GetMoles(Air air) {
 		return GetMass(air) / molarMass;
 	}
@@ -51,11 +57,16 @@ public class Gas : ScriptableObject{
 	public float GetMoles(float mass) {
 		return mass / molarMass;
 	}
+	
+	public float GetVolumeRatio(Air air) {
+		float moles = GetMoles(air);
+		float volumePct = moles / air.GetTotalMoles();
+		return volumePct;
+	}
 
 	public float GetVolume(Air air) {
-		float moles = GetMass(air) / molarMass;
-		float volumePct = moles / air.GetTotalMoles();
-		return volumePct * air.volume;
+		float ratio = GetVolumeRatio(air);
+		return ratio * air.volume;
 	}
 	
 	public float GetVolume(Air air, float mass) {
