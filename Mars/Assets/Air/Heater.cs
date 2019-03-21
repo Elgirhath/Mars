@@ -7,6 +7,15 @@ public class Heater : MonoBehaviour {
     public float area;
     
     private CapsuleAirController airController;
+    private PowerSocket powerSocket;
+
+    private bool active {
+        get {
+            bool isPowered = !powerSocket.powerReceived.Equals(0f);
+            bool isTriggered = airController.air.temperature < airController.targetAir.temperature;
+            return isPowered && isTriggered;
+        }
+    }
 
     private float emmisivity = 0.5f;
     private float boltzmanConstant = 5.670367e-8f;
@@ -14,11 +23,12 @@ public class Heater : MonoBehaviour {
     
     void Start() {
         airController = GetComponentInParent<CapsuleAirController>();
+        powerSocket = GetComponent<PowerSocket>();
     }
 
     // Update is called once per frame
     void Update() {
-        if (airController.air.temperature < airController.targetAir.temperature) {
+        if (active) {
             float airTemp = airController.air.temperature;
             float diff = Mathf.Pow(temperature, 4) - Mathf.Pow(airTemp, 4);
             float radiativeHeat = area * boltzmanConstant * emmisivity * diff;
