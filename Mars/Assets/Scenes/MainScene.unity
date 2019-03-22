@@ -1381,6 +1381,7 @@ GameObject:
   - component: {fileID: 315722238}
   - component: {fileID: 315722237}
   - component: {fileID: 315722240}
+  - component: {fileID: 315722241}
   m_Layer: 0
   m_Name: CO2 Pump
   m_TagString: Untagged
@@ -1475,6 +1476,20 @@ MonoBehaviour:
   kgPerSec: 1
   activateThreshold: 0
   co2: {fileID: 11400000, guid: a8c3cecff9ad7d746bf8ab891d7a39e1, type: 2}
+--- !u!114 &315722241
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 315722235}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a0653a4e345e9e1479224e1e097641e1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  powerConsumption: 1000
+  priority: 1
 --- !u!1001 &381636767
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -4672,7 +4687,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   generators:
   - {fileID: 1190157236}
-  receivers: []
+  _receivers: []
 --- !u!1 &1156427044 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 3955618937812496954, guid: a56985b676801e946a8c8e337e563bbd,
@@ -4820,7 +4835,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fd4d020f42df4554393e0ea7f2265a1c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxPower: 5000
+  maxPower: 10000
 --- !u!65 &1190157237
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -5218,6 +5233,7 @@ GameObject:
   - component: {fileID: 1282971537}
   - component: {fileID: 1282971536}
   - component: {fileID: 1282971539}
+  - component: {fileID: 1282971540}
   m_Layer: 0
   m_Name: O2 Pump
   m_TagString: Untagged
@@ -5313,6 +5329,20 @@ MonoBehaviour:
   kgPerSec: 3
   activateThreshold: 0
   o2: {fileID: 11400000, guid: 00e419d01be4ace4187e053c97f049d1, type: 2}
+--- !u!114 &1282971540
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1282971534}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a0653a4e345e9e1479224e1e097641e1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  powerConsumption: 2000
+  priority: 0
 --- !u!1 &1321892746
 GameObject:
   m_ObjectHideFlags: 0
@@ -5610,8 +5640,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8a5b306a305d30e49af10c09f4ee386d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxGasWeight: 50
-  _gasWeight: 30
+  maxGasWeight: 100
+  _gasWeight: 60
 --- !u!65 &1407687665
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -7197,7 +7227,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a0653a4e345e9e1479224e1e097641e1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  powerConsumption: 2500
+  powerConsumption: 1001
+  priority: 2
 --- !u!1 &1904246022
 GameObject:
   m_ObjectHideFlags: 0
@@ -7316,8 +7347,9 @@ GameObject:
   - component: {fileID: 1923808739}
   - component: {fileID: 1923808738}
   - component: {fileID: 1923808741}
+  - component: {fileID: 1923808742}
   m_Layer: 0
-  m_Name: N Pump
+  m_Name: N2 Pump
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -7411,6 +7443,20 @@ MonoBehaviour:
   kgPerSec: 3
   activateThreshold: 0.2
   n2: {fileID: 11400000, guid: 736d38b6d7fa2e945a944c9ed14ab15d, type: 2}
+--- !u!114 &1923808742
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1923808736}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a0653a4e345e9e1479224e1e097641e1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  powerConsumption: 1000
+  priority: 1
 --- !u!1 &1943943831
 GameObject:
   m_ObjectHideFlags: 0
