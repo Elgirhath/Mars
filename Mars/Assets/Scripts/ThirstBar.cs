@@ -35,19 +35,28 @@ public class ThirstBar : MonoBehaviour {
     }
 
     private void Update() {
+        UpdateBar();
+    }
+
+    public void UpdateBar() {
         value = (int) thirstController.thirst;
         float percentageValue = (float) value / maxValue;
         conditionText.text = value + "/" + maxValue;
         slider.fillAmount = percentageValue;
+        
         if (percentageValue < criticalValue)
-        {
-            slider.color = criticalValueColor;
-            emptyBar.color = emptyBarCriticalValueColor;
-        }
+            SetCriticalState();
         else
-        {
-            slider.color = defaultColor;
-            emptyBar.color = emptyBarDefaultColor;
-        }
+            SetDefaultState();
+    }
+
+    private void SetCriticalState() {
+        slider.color = criticalValueColor;
+        emptyBar.color = emptyBarCriticalValueColor;
+    }
+
+    private void SetDefaultState() {
+        slider.color = defaultColor;
+        emptyBar.color = emptyBarDefaultColor;
     }
 }

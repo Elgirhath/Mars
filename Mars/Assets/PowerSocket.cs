@@ -5,17 +5,14 @@ using UnityEngine;
 public class PowerSocket : MonoBehaviour {
     private PowerSupply powerSupply;
     public float powerConsumption;
-
-    public float powerReceived {
-        get => GetPower();
-    }
+    public uint priority;
     
-    public float GetPower() {
-        return powerSupply.GetPower(this);
+    public bool IsPowered() {
+        return powerSupply.IsPowered(this);
     }
 
     private void Start() {
         powerSupply = transform.parent.GetComponentInChildren<PowerSupply>();
-        powerSupply.receivers.Add(this);
+        powerSupply.AddReceiver(this);
     }
 }
