@@ -10,20 +10,28 @@ public class CO2Pump : MonoBehaviour {
     public Gas co2;
 
     private CapsuleAirController airController;
-    // Start is called before the first frame update
+    private PowerSocket powerSocket;
+    
     void Start() {
         airController = GetComponentInParent<CapsuleAirController>();
+        powerSocket = GetComponent<PowerSocket>();
     }
 
     // Update is called once per frame
     void Update() {
-        if (Mathf.Abs(co2.GetMass(airController.air) - co2.GetMass(airController.targetAir)) > activateThreshold) {
-            float maxAmount = co2.GetMass(airController.targetAir) - co2.GetMass(airController.air);
-            float amount = Mathf.Sign(maxAmount) * kgPerSec * Time.deltaTime;
-            float amountClamped = Mathf.Clamp(amount, -Mathf.Abs(maxAmount), Mathf.Abs(maxAmount));
-            float currentMass = co2.GetMass(airController.air);
-            float newMass = currentMass + amountClamped;
-            co2.SetMass(airController.air, newMass);
-        }
+        if (!powerSocket.IsPowered())
+            return;
+        
+        float currentMass = co2.GetMass(airController.air);
+        float targetMass = co2.GetMass(airController.targetAir);
+        
+        if (Mathf.Abs(currentMass - targetMass) < activateThreshold)
+            return;
+        
+        float maxAmount = targetMass - currentMass;
+        float amount = Mathf.Sign(maxAmount) * kgPerSec * Time.deltaTime;
+        float amountClamped = Mathf.Clamp(amount, -Mathf.Abs(maxAmount), Mathf.Abs(maxAmount));
+        float newMass = currentMass + amountClamped;
+        co2.SetMass(airController.air, newMass);
     }
 }
