@@ -5,7 +5,7 @@ public class PowerSupply : MonoBehaviour {
 	public List<PowerGenerator> generators;
 	
 	[SerializeField]
-	private List<PowerSocket> _receivers;
+	private List<PowerSocket> _receivers = null;
 	public List<PowerSocket> receivers {
 		get => _receivers;
 	}
