@@ -4,7 +4,7 @@
 
 ### [MindMap](https://coggle.it/diagram/XGbqbnV4-hvJL5IA/t/gra)
 
-### [Galeria Tumblr](https://www.tumblr.com/settings/blog/brain0verfl0w),    hasło: brainoverflow
+### [Galeria Tumblr](https://www.tumblr.com/blog/brain0verfl0w),    hasło: brainoverflow
 
 ## Importowanie modeli z Blendera:
 
