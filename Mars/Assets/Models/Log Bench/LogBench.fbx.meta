@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 976e29158a62896419b716c9bdee31f0
+guid: 7d04013bc043dd347ab7d5130555d632
 ModelImporter:
   serializedVersion: 23
   fileIDToRecycleName:
@@ -11,7 +11,7 @@ ModelImporter:
     400002: Foot2
     400004: //RootNode
     400006: Main
-    2100000: BenchMaterial__BenchAtlas
+    2100000: BenchMaterial
     2300000: Foot1
     2300002: Foot2
     2300004: Main
@@ -21,15 +21,7 @@ ModelImporter:
     4300000: Foot2
     4300002: Main
     4300004: Foot1
-    7400000: Default Take
-    9500000: //RootNode
-    2186277476908879412: ImportLogs
-  externalObjects:
-  - first:
-      type: UnityEngine:Material
-      assembly: UnityEngine.CoreModule
-      name: BenchMaterial__BenchAtlas
-    second: {fileID: 2100000, guid: 5b0f4494ec9ab414e95259aa380cd847, type: 2}
+  externalObjects: {}
   materials:
     importMaterials: 1
     materialName: 0
@@ -82,7 +74,7 @@ ModelImporter:
     secondaryUVPackMargin: 4
     useFileScale: 1
     previousCalculatedGlobalScale: 1
-    hasPreviousCalculatedGlobalScale: 1
+    hasPreviousCalculatedGlobalScale: 0
   tangentSpace:
     normalSmoothAngle: 60
     normalImportMode: 0
@@ -109,7 +101,7 @@ ModelImporter:
     hasExtraRoot: 0
     skeletonHasParents: 1
   lastHumanDescriptionAvatarSource: {instanceID: 0}
-  animationType: 2
+  animationType: 0
   humanoidOversampling: 1
   additionalBone: 0
   userData: 
