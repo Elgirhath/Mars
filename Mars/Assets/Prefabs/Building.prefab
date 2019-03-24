@@ -60,10 +60,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 03bc88edeed16264183aaede0de4ef90, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  availableCapacityRatio: 0.5
-  maxLitresPerSecond: 0.1
-  tankVolume: 100
-  tankFill: 3
+  availableCapacityRatio: 0.1
+  optimalAmount: 10
+  maxLitresPerSecond: 0.005
+  tankVolume: 5
+  tankFill: 0
 --- !u!136 &8337546396088404300
 CapsuleCollider:
   m_ObjectHideFlags: 0
