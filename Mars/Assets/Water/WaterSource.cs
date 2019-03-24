@@ -4,8 +4,9 @@ using System.Collections.Generic;
 using UnityEditor.Experimental.UIElements;
 using UnityEngine;
 
-public class WaterDeposit : MonoBehaviour {
+public class WaterSource : MonoBehaviour {
 	private Vector3 position;
+	public float capacity;
 	public float amount;
 	public float maxDistance;
 	[HideInInspector]
@@ -31,16 +32,13 @@ public class WaterDeposit : MonoBehaviour {
 		return factor;
 	}
 
-	public float Collect(Vector3 collectorPosition) {
+	public float GetWaterAmount(Vector3 collectorPosition) {
 		float intensity = GetIntensityInPoint(collectorPosition);
 
 		return amount * intensity;
 	}
-	
 
-	private void Update() {
-		Debug.Log("Distance: " + Vector3.Distance(transform.position, player.transform.position));
-		Debug.Log("Intensity: " + GetIntensityInPoint(player.transform.position));
-		Debug.Log("Collection: " + Collect(player.transform.position));
+	public float GetUsedAmount() {
+		return capacity - amount;
 	}
 }
