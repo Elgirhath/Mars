@@ -32,7 +32,7 @@ public class WaterSource : MonoBehaviour {
 		return factor;
 	}
 
-	public float GetWaterAmount(Vector3 collectorPosition) {
+	public float GetTotalAmount(Vector3 collectorPosition) {
 		float intensity = GetIntensityInPoint(collectorPosition);
 
 		return amount * intensity;
