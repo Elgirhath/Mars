@@ -2,22 +2,32 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class EnergyController : MonoBehaviour {
-    public int maxEnergy;
-    public int initEnergy;
+public class EnergyController : MonoBehaviour
+{
+    public float maxEnergyLimit;
+    public float initEnergy;
     public float regenerationSpeed;
     public float sprintDropSpeed;
     public float jumpDropValue;
     public float secondsToUnlock;
+    public float energyLossInterval;
+    public float maxEnergyLossMultiplier;
 
     private PlayerController playerController;
 
     private bool lockedTimer;
     private float _energy;
+    private float _maxEnergy;
     private bool _lockState;
     public float energy {
         get => _energy;
         set => _energy = value;
+    }
+
+    public float maxEnergy
+    {
+        get => _maxEnergy;
+        set => _maxEnergy = value;
     }
 
     public bool LockState
@@ -38,14 +48,17 @@ public class EnergyController : MonoBehaviour {
 
     private void Start() {
         _energy = initEnergy;
+        _maxEnergy = maxEnergyLimit;
         energyBar = EnergyBar.instance;
         _lockState = false;
         lockedTimer = false;
         
         playerController = PlayerController.instance;
+        
+        InvokeRepeating(nameof(EnergyLoss),energyLossInterval, energyLossInterval);
     }
 
-    public void ChangeEnergy(float diff)
+    private void ChangeEnergy(float diff)
     {
         if (_energy + diff <= 0)
         {
@@ -59,8 +72,37 @@ public class EnergyController : MonoBehaviour {
         {
             energy += diff;
         }
+        energyBar.ChangeEnergyBar(energy/maxEnergy);
+        ChangeMaxEnergy(diff*maxEnergyLossMultiplier);
+    }
+
+    private void ChangeMaxEnergy(float diff)
+    {
+        if (maxEnergy + diff < 0)
+        {
+            maxEnergy = 0;
+        }
+        else if (maxEnergy + diff > maxEnergyLimit)
+        {
+            maxEnergy = maxEnergyLimit;
+        }
+        else
+        {
+            maxEnergy += diff;
+        }
+        energyBar.ChangeMaxEnergyBar(maxEnergy/maxEnergyLimit);
         
-        energyBar.ChangeEnergyBar();
+        if (maxEnergy < energy)
+        {
+            energy = maxEnergy;
+            energyBar.ChangeEnergyBar(energy/maxEnergy);
+        }
+    }
+
+    private void EnergyLoss()
+    {
+        ChangeMaxEnergy(-0.01f);
+        Debug.Log(maxEnergy);
     }
 
     private void Update()
