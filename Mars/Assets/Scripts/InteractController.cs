@@ -182,7 +182,7 @@ public class InteractController : MonoBehaviour {
 				newMat.SetTexture("_MainTex", oldMat.mainTexture);
 				newMat.SetTexture("_Normal", oldMat.GetTexture("_NormalMap"));
 				newMat.SetTexture("_Metallic", oldMat.GetTexture("_Metallic"));
-				newMat.SetTexture("_Metallic", oldMat.GetTexture("_NormalScale"));
+				newMat.SetFloat("_NormalScale", oldMat.GetFloat("_NormalScale"));
 				renderer.material = newMat;
 			}
 			catch {}
