@@ -38,13 +38,13 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 170076734}
-  m_IndirectSpecularColor: {r: 0.06744319, g: 0.08891004, b: 0.13196816, a: 1}
+  m_IndirectSpecularColor: {r: 0.06744362, g: 0.0889105, b: 0.13196887, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 11
-  m_GIWorkflowMode: 0
+  m_GIWorkflowMode: 1
   m_GISettings:
     serializedVersion: 2
     m_BounceScale: 1
@@ -2552,8 +2552,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxThirst: 100
-  initThirst: 70
-  dropSpeed: 1.2
+  initThirst: 100
+  dropSpeed: 0.03
 --- !u!114 &500106272
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2567,8 +2567,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxHunger: 100
-  initHunger: 60
-  dropSpeed: 0.7
+  initHunger: 100
+  dropSpeed: 0.03
 --- !u!114 &500106273
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2596,8 +2596,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxOxygen: 100
-  initOxygen: 70
-  dropSpeed: 0.6
+  initOxygen: 100
+  dropSpeed: 0.03
 --- !u!114 &500106275
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2610,12 +2610,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4971446c4ff729944af5218a5dab1f97, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxEnergy: 100
+  maxEnergyLimit: 100
   initEnergy: 80
-  regenerationSpeed: 1
-  sprintDropSpeed: 1.5
+  regenerationSpeed: 0.35
+  sprintDropSpeed: 0.2
   jumpDropValue: 25
   secondsToUnlock: 3
+  energyLossInterval: 2.5
+  maxEnergyLossMultiplier: 0.1
 --- !u!1 &513230569
 GameObject:
   m_ObjectHideFlags: 0
@@ -11151,11 +11153,11 @@ RectTransform:
   m_Father: {fileID: 6446742103585339556}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 1, y: 0.5}
-  m_AnchorMax: {x: 1, y: 0.5}
-  m_AnchoredPosition: {x: 2, y: 0}
+  m_AnchorMin: {x: 0, y: 0.5}
+  m_AnchorMax: {x: 0, y: 0.5}
+  m_AnchoredPosition: {x: 12, y: 0}
   m_SizeDelta: {x: 378, y: 6}
-  m_Pivot: {x: 1, y: 0.5}
+  m_Pivot: {x: 0, y: 0.5}
 --- !u!114 &6446742102441080412
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -11217,11 +11219,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 90ea9ac2eed9c1d49b04512e747ca9e0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxValue: 100
-  value: 100
   criticalValueColor: {r: 0.83137256, g: 0, b: 0, a: 1}
+  semiCriticalValueColor: {r: 1, g: 0.95045245, b: 0, a: 1}
   defaultColor: {r: 0.8, g: 1, b: 0, a: 1}
-  criticalValue: 0.2
+  criticalValue: 0.14
+  semiCriticalValue: 0.28
 --- !u!1 &6446742102459407147
 GameObject:
   m_ObjectHideFlags: 0
@@ -11239,7 +11241,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &6446742102459407148
 RectTransform:
   m_ObjectHideFlags: 0
@@ -11272,7 +11274,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0, g: 0, b: 0, a: 0.32941177}
+  m_Color: {r: 0, g: 0.4811321, b: 0.035652928, a: 1}
   m_RaycastTarget: 1
   m_OnCullStateChanged:
     m_PersistentCalls:

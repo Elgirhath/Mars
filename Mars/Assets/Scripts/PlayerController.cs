@@ -15,6 +15,8 @@ public class PlayerController : MonoBehaviour {
 	public bool jumped;
 
 	public static PlayerController instance;
+	private float moveSpeed;
+	private bool jumpedWhileSprinting;
 	
 
 // Start is called before the first frame update
@@ -27,6 +29,7 @@ public class PlayerController : MonoBehaviour {
 		Cursor.visible = false;
 		Cursor.lockState = CursorLockMode.Locked;
 		jumped = false;
+		jumpedWhileSprinting = false;
 	}
 
 	private void Awake() {
@@ -73,7 +76,16 @@ public class PlayerController : MonoBehaviour {
 
 		Vector3 moveDirection = Vector3.Normalize(moveX * tr.right + moveY * tr.forward);
 
-		float moveSpeed = IsRunning() ? runSpeed : walkSpeed; //check whether player is running and set his speed
+		//check whether player is running and set his speed
+		if (!IsGrounded())
+		{
+			moveSpeed = jumpedWhileSprinting ? runSpeed : walkSpeed;
+		}
+		else
+		{
+			moveSpeed = IsRunning() ? runSpeed : walkSpeed;
+		}
+		
 
 		Vector3 moveVector = moveDirection * moveSpeed;
 
@@ -85,6 +97,7 @@ public class PlayerController : MonoBehaviour {
 		{
 			jumped = true;
 			rb.velocity += Vector3.up * jumpHeight;
+			jumpedWhileSprinting = IsRunning();
 		}
 	}
 
