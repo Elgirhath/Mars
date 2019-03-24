@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 170076734}
-  m_IndirectSpecularColor: {r: 0.06744319, g: 0.08891004, b: 0.13196816, a: 1}
+  m_IndirectSpecularColor: {r: 0.051430337, g: 0.06701759, b: 0.087394394, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -2619,7 +2619,7 @@ MonoBehaviour:
   initEnergy: 80
   regenerationSpeed: 0.35
   sprintDropSpeed: 0.2
-  jumpDropValue: 25
+  jumpDropValue: 10
   secondsToUnlock: 3
   energyLossInterval: 2.5
   maxEnergyLossMultiplier: 0.1
@@ -12260,6 +12260,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6446742103710562760}
+  - component: {fileID: 6446742103710562744}
   m_Layer: 5
   m_Name: HUD
   m_TagString: Untagged
@@ -12267,6 +12268,18 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!114 &6446742103710562744
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6446742103710562743}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1162524fca4575d48889faf42fa47fa2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!224 &6446742103710562760
 RectTransform:
   m_ObjectHideFlags: 0
