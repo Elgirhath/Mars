@@ -1363,8 +1363,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8a6b0ad6a0761934b80133dc098dd06b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  capacity: 100
-  amount: 100
+  capacity: 10
+  amount: 10
   maxDistance: 5
   falloff:
     serializedVersion: 2
@@ -2619,7 +2619,7 @@ MonoBehaviour:
   initEnergy: 80
   regenerationSpeed: 0.35
   sprintDropSpeed: 0.2
-  jumpDropValue: 25
+  jumpDropValue: 10
   secondsToUnlock: 3
   energyLossInterval: 2.5
   maxEnergyLossMultiplier: 0.1
@@ -8151,16 +8151,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 7678638717901037636, guid: a5ed0fe10cc54ba46b174968369de34d,
-        type: 3}
-      propertyPath: maxLitresPerSecond
-      value: 0.005
-      objectReference: {fileID: 0}
-    - target: {fileID: 7678638717901037636, guid: a5ed0fe10cc54ba46b174968369de34d,
-        type: 3}
-      propertyPath: tankVolume
-      value: 2
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: a5ed0fe10cc54ba46b174968369de34d, type: 3}
 --- !u!1 &1807446526
@@ -8303,8 +8293,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f3a0e29280e549c4083e772c01d4777d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  minWaterAmount: 30
-  maxWaterAmount: 60
+  minWaterAmount: 0
+  maxWaterAmount: 0
 --- !u!1 &1890804479 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 5779954361914424275, guid: 7503c52f300fa0643950d5ce19b3e27f,
@@ -9062,7 +9052,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1992130223}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -6.88, y: 0, z: 12.34}
+  m_LocalPosition: {x: -3.82, y: 0, z: 1.88}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1853392303}
@@ -12260,6 +12250,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6446742103710562760}
+  - component: {fileID: 6446742103710562744}
   m_Layer: 5
   m_Name: HUD
   m_TagString: Untagged
@@ -12267,6 +12258,18 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!114 &6446742103710562744
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6446742103710562743}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1162524fca4575d48889faf42fa47fa2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!224 &6446742103710562760
 RectTransform:
   m_ObjectHideFlags: 0

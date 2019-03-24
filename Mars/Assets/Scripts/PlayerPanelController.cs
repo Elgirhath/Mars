@@ -5,6 +5,7 @@ using UnityEngine;
 public class PlayerPanelController : MonoBehaviour
 {
     private PlayerController playerController;
+    private HUD hud;
     private bool _opened;
     private Inventory inventory;
     private ConditionPanel condition;
@@ -28,6 +29,7 @@ public class PlayerPanelController : MonoBehaviour
         condition = ConditionPanel.instance;
         _crosshair = Crosshair.instance;
         _pauseMenu = PauseMenu.instance;
+        hud = HUD.instance;
         
         Close();
     }
@@ -60,6 +62,7 @@ public class PlayerPanelController : MonoBehaviour
         _pauseMenu.block = true;
 
         _opened = true;
+        hud.active = false;
     }
 
     public void Close() {
@@ -76,5 +79,6 @@ public class PlayerPanelController : MonoBehaviour
         _pauseMenu.block = false;
 
         _opened = false;
+        hud.active = true;
     }
 }
