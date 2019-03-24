@@ -11,6 +11,7 @@ public class BuildMenu : MonoBehaviour {
 	private GameObject gameController;
 	private BuildController buildController;
 	private PlayerController playerController;
+	private HUD hud;
 	private Crosshair crosshair;
 	private PauseMenu _pauseMenu;
 	
@@ -25,6 +26,7 @@ public class BuildMenu : MonoBehaviour {
 		playerController = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerController>();
 		crosshair = Crosshair.instance;
 		_pauseMenu = PauseMenu.instance;
+		hud = HUD.instance;
 		
 		RemoveItems();
 		AddItems();
@@ -83,6 +85,7 @@ public class BuildMenu : MonoBehaviour {
 		crosshair.active = false;
 		_pauseMenu.block = true;
 		_opened = true;
+		hud.active = false;
 	}
 
 	public void Close() {
@@ -100,5 +103,6 @@ public class BuildMenu : MonoBehaviour {
 		crosshair.active = true;
 		_pauseMenu.block = false;
 		_opened = false;
+		hud.active = true;
 	}
 }
