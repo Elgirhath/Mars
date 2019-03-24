@@ -2,21 +2,23 @@
 using UnityEngine.UI;
 
 public class EnergyBar : MonoBehaviour {
-    public int maxValue;
-    public int value;
+    private float maxEnergyBarLengthLimit;
+    private float currentMaxEnergyBarLength;
+    private RectTransform maxEnergyBar;
     
     private Slider slider;
     private Image fillImage;
-
-    private EnergyController energyController;
     
     public static EnergyBar instance;
     
     public Color criticalValueColor;
+    public Color semiCriticalValueColor;
     public Color defaultColor;
     //Critical Values
     [Range(0.0f, 1.0f)]
     public float criticalValue;
+    [Range(0.0f, 1.0f)]
+    public float semiCriticalValue;
 
     private void Awake() {
         if (!instance)
@@ -27,18 +29,26 @@ public class EnergyBar : MonoBehaviour {
     }
 
     private void Start() {
-        energyController = EnergyController.instance;
-
-        maxValue = energyController.maxEnergy;
-        value = (int) energyController.energy;
         fillImage = transform.Find("Fill Area").Find("Fill").GetComponent<Image>();
+        maxEnergyBar = gameObject.GetComponent<RectTransform>();
+        maxEnergyBarLengthLimit = maxEnergyBar.rect.width;
     }
 
-    public void ChangeEnergyBar()
+    public void ChangeEnergyBar(float percentageValue)
     {
-        value = (int) energyController.energy;
-        float percentageValue = (float)value / maxValue;
         slider.value = percentageValue;
-        fillImage.color = percentageValue < criticalValue ? criticalValueColor : defaultColor;
+        if (percentageValue < semiCriticalValue)
+        {
+            fillImage.color = percentageValue < criticalValue ? criticalValueColor : semiCriticalValueColor;
+        }
+        else
+        {
+            fillImage.color = defaultColor;
+        }
+    }
+
+    public void ChangeMaxEnergyBar(float percentageValue)
+    {
+        maxEnergyBar.SetSizeWithCurrentAnchors(RectTransform.Axis.Horizontal, percentageValue * maxEnergyBarLengthLimit);
     }
 }
