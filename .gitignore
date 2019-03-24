@@ -5,6 +5,10 @@
 [Bb]uilds/
 Assets/AssetStoreTools*
 
+# Packages
+Packages/
+[Pp]ackages.meta
+
 # Plugins
 Plugins/
 [Pp]lugins.meta
