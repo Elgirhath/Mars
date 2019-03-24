@@ -29,7 +29,14 @@ public class WaterCollector : MonoBehaviour, Interactable {
 	}
 
 	private void Update() {
-		tankFill += sourceCtrl.PullWater(this); //TODO: max fill
+		PullWater();
+	}
+
+	private void PullWater() {
+		float pullAmount = sourceCtrl.GetPullAmount(this);
+		pullAmount = Mathf.Clamp(pullAmount, 0f, tankVolume - tankFill);
+		sourceCtrl.PullWater(transform.position, pullAmount);
+		tankFill += pullAmount;
 	}
 
 	public float GetAvailableCapacity(float capacity) {

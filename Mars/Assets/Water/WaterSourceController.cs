@@ -20,7 +20,16 @@ public class WaterSourceController : MonoBehaviour {
 		
 	}
 
-	public float GetAvailableAmount(WaterCollector collector) {
+	public float GetMultiSourceAmount(Vector3 position) {
+		float sum = 0f;
+		foreach (var source in sources) {
+			sum += source.GetTotalAmount(position);
+		}
+
+		return sum;
+	}
+
+	public float GetMultiSourceAvailableAmount(WaterCollector collector) {
 		float sum = 0f;
 		foreach (var source in sources) {
 			sum += collector.GetAvailableAmount(source);
@@ -29,20 +38,24 @@ public class WaterSourceController : MonoBehaviour {
 		return sum;
 	}
 
-	public float PullWater(WaterCollector collector) {
-		float totalAvailableAmount = GetAvailableAmount(collector);
+	public void PullWater(Vector3 position, float pulledAmount) {
+		float totalAvailableAmount = GetMultiSourceAmount(position);
+
+		foreach (var source in sources) {
+			float amount = source.GetTotalAmount(position);
+			float ratio = amount / totalAvailableAmount;
+			float newAmount = source.amount - pulledAmount * ratio;
+			source.amount = Mathf.Clamp(newAmount, 0f, source.capacity);
+		}
+	}
+
+	public float GetPullAmount(WaterCollector collector) {
+		float totalAvailableAmount = GetMultiSourceAvailableAmount(collector);
 		if (totalAvailableAmount <= 0f)
 			return 0f;
 
 		float pullOptimizationRatio = totalAvailableAmount / collector.optimalAmount;
 		float pulledAmount = collector.maxLitresPerSecond * Time.deltaTime * pullOptimizationRatio; //TODO: Add every X frames
-
-		foreach (var source in sources) {
-			float amount = collector.GetAvailableAmount(source);
-			Debug.Log("amount: " + amount);
-			float ratio = amount / totalAvailableAmount;
-			source.amount -= pulledAmount * ratio;
-		}
 
 		return pulledAmount;
 	}
