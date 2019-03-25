@@ -19,7 +19,7 @@ public class CO2Pump : MonoBehaviour {
 
     // Update is called once per frame
     void Update() {
-        if (!powerSocket.IsPowered())
+        if (!powerSocket.isPowered)
             return;
         
         float currentMass = co2.GetMass(airController.air);
