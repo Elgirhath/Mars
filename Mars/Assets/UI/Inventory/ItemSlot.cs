@@ -74,24 +74,26 @@ public class ItemSlot : MonoBehaviour {
 		_item = null;
 	}
 
+	public void Use() {
+		item.Use(this);
+	}
+
 	public void SubscribeEvents() {
-		clickHandler.onLeftClick += item.Use;
-		clickHandler.onLeftClick += RemoveItemUnit;
+		clickHandler.onLeftClick += Use;
 		clickHandler.onRightClick += item.Drop;
-		clickHandler.onRightClick += RemoveItemUnit;
+		clickHandler.onRightClick += SubtractItem;
 	}
 
 	public void UnsubscribeEvents() {
 		try {
-			clickHandler.onLeftClick -= item.Use;
-			clickHandler.onLeftClick -= RemoveItemUnit;
+			clickHandler.onLeftClick -= Use;
 			clickHandler.onRightClick -= item.Drop;
-			clickHandler.onRightClick -= RemoveItemUnit;
+			clickHandler.onRightClick -= SubtractItem;
 		}
 		catch {}
 	}
 
-	public void RemoveItemUnit() {
+	public void SubtractItem() {
 		amount--;
 	}
 }

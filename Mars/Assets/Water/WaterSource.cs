@@ -6,8 +6,8 @@ using UnityEngine;
 
 public class WaterSource : MonoBehaviour {
 	private Vector3 position;
-	public float capacity;
-	public float amount;
+	[ReadOnly] public float capacity;
+	[ReadOnly] public float amount;
 	public float maxDistance;
 	[HideInInspector]
 	public AnimationCurve falloff = AnimationCurve.EaseInOut(0f, 1f, 1f, 0f);
