@@ -17,6 +17,7 @@ public class PlayerController : MonoBehaviour {
 	public static PlayerController instance;
 	private float moveSpeed;
 	private bool jumpedWhileSprinting;
+	private EnergyController energyController;
 	
 
 // Start is called before the first frame update
@@ -30,6 +31,7 @@ public class PlayerController : MonoBehaviour {
 		Cursor.lockState = CursorLockMode.Locked;
 		jumped = false;
 		jumpedWhileSprinting = false;
+		energyController = EnergyController.instance;
 	}
 
 	private void Awake() {
@@ -101,7 +103,9 @@ public class PlayerController : MonoBehaviour {
 		}
 	}
 
-	public bool IsRunning() {
+	public bool IsRunning()
+	{
+		if (energyController.LockState) return false;
 		return Input.GetButton("Run");
 	}
 
