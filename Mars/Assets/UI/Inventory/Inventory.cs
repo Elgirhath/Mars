@@ -32,7 +32,7 @@ public class Inventory : MonoBehaviour
 
     public void AddItem(Item item) {
         bool isStacked = false;
-        foreach (var slot in slots) { //check if can be stacked
+        foreach (var slot in slots) { //check if can be stacked on existing pile
             if (slot.item != item)
                 continue;
             try {
@@ -72,6 +72,9 @@ public class Inventory : MonoBehaviour
             }
         }
 
+        if (items.Count == 0)
+            return null;
+        
         return items.ToArray();
     }
     

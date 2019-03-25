@@ -4,7 +4,7 @@ using UnityEngine;
 public abstract class Item : ScriptableObject {
 	[Space(10)]
 	[Header("Item properties")]
-	public bool collectible;
+	public bool createInstances = false;
 	public string itemName;
 	public Sprite sprite;
 	public GameObject prefab;
@@ -20,7 +20,7 @@ public abstract class Item : ScriptableObject {
 	}
 
 	public void Set(Item other) {
-		collectible = other.collectible;
+		createInstances = other.createInstances;
 		itemName = other.itemName;
 		sprite = other.sprite;
 		prefab = other.prefab;
