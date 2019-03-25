@@ -62,6 +62,7 @@ public class BuildController : MonoBehaviour {
 
 			if (Input.GetButtonDown("Fire1")) { //Accept scheme
 				savedState.apply(scheme);
+				scheme.GetComponent<BuildMenuItem>().isInBuildMode = false;
 				
 				scheme = null;
 				isPlacing = false;
@@ -79,6 +80,7 @@ public class BuildController : MonoBehaviour {
 		
 		isPlacing = true;
 		scheme = Instantiate(obj, placePosition, Quaternion.identity, buildingParent);
+		scheme.GetComponent<BuildMenuItem>().isInBuildMode = true;
 		scheme.transform.up = wasHit && isInRange ? hitInfo.normal : scheme.transform.up;
 
 		savedState = SavePrefabState(scheme);

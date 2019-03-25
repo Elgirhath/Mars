@@ -4,4 +4,6 @@ using UnityEngine;
 
 public class BuildMenuItem : MonoBehaviour {
 	public Sprite sprite;
+
+	public bool isInBuildMode;
 }

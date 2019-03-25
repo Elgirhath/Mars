@@ -12,11 +12,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bb9b678f8a7c4424cb13f441bf9d19e9, type: 3}
   m_Name: Canteen
   m_EditorClassIdentifier: 
-  collectible: 1
+  createInstances: 1
   itemName: Canteen
   sprite: {fileID: 21300000, guid: 4c8923ae1ac7f5f49b0c9d09f5eb063c, type: 3}
   prefab: {fileID: 6294568854407882488, guid: 983be0d545ee631418d3f314e8a684b4, type: 3}
   stackLimit: 1
   capacity: 1
-  _currentAmount: 0
   onDrinkAmount: 0.3
