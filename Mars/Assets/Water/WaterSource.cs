@@ -41,4 +41,8 @@ public class WaterSource : MonoBehaviour {
 	public float GetUsedAmount() {
 		return capacity - amount;
 	}
+
+	private void OnDrawGizmos() {
+		Gizmos.DrawWireSphere(transform.position, 0.3f);
+	}
 }
