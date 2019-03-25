@@ -1,0 +1,22 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bb9b678f8a7c4424cb13f441bf9d19e9, type: 3}
+  m_Name: Canteen
+  m_EditorClassIdentifier: 
+  collectible: 1
+  itemName: Canteen
+  sprite: {fileID: 21300000, guid: 4c8923ae1ac7f5f49b0c9d09f5eb063c, type: 3}
+  prefab: {fileID: 6294568854407882488, guid: 983be0d545ee631418d3f314e8a684b4, type: 3}
+  stackLimit: 1
+  capacity: 1
+  _currentAmount: 0
+  onDrinkAmount: 0.3
