@@ -18,7 +18,7 @@ public class PowerSocket : MonoBehaviour {
 
     private void OnDrawGizmos() {
         Color color = isPowered ? Color.green : Color.red;
-        color.a = 100;
+        color.a = 0.6f;
         Gizmos.color = color;
         Gizmos.DrawSphere(transform.position + Vector3.up * 2f, 0.4f);
     }
