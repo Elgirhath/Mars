@@ -177,7 +177,7 @@ public class InteractController : MonoBehaviour {
 			try {
 				Renderer renderer = obj.GetComponent<Renderer>();
 				Material oldMat = renderer.material;
-				Material newMat = material;
+				Material newMat = new Material(material);
 				newMat.SetColor("_BaseColor", oldMat.color);
 				newMat.SetTexture("_MainTex", oldMat.mainTexture);
 				newMat.SetTexture("_Normal", oldMat.GetTexture("_NormalMap"));
