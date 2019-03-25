@@ -6,9 +6,9 @@ public class PowerSocket : MonoBehaviour {
     private PowerSupply powerSupply;
     public float powerConsumption;
     public uint priority;
-    
-    public bool IsPowered() {
-        return powerSupply.IsPowered(this);
+
+    public bool isPowered {
+        get => powerSupply.IsPowered(this);
     }
 
     private void Start() {

@@ -12,6 +12,7 @@ public class WaterSource : MonoBehaviour {
 	[HideInInspector]
 	public AnimationCurve falloff = AnimationCurve.EaseInOut(0f, 1f, 1f, 0f);
 
+
 	private PlayerController player;
 	private void Start() {
 		position = transform.position;
@@ -43,6 +44,8 @@ public class WaterSource : MonoBehaviour {
 	}
 
 	private void OnDrawGizmos() {
-		Gizmos.DrawWireSphere(transform.position, 0.3f);
+		Gizmos.color = new Color32(30, 30, 255, 100);
+		Gizmos.DrawWireSphere(transform.position, 0.1f);
+		Gizmos.DrawWireSphere(transform.position, maxDistance);
 	}
 }

@@ -15,9 +15,11 @@ public class WaterCollector : MonoBehaviour, Interactable {
 	public float tankFill;
 	
 	private WaterSourceController sourceCtrl;
+	private PowerSocket powerSocket;
 
 	private void Start() {
 		sourceCtrl = WaterSourceController.instance;
+		powerSocket = GetComponent<PowerSocket>();
 	}
 
 	public string tooltipText {
@@ -29,7 +31,8 @@ public class WaterCollector : MonoBehaviour, Interactable {
 	}
 
 	private void Update() {
-		PullWater();
+		if (powerSocket.isPowered)
+			PullWater();
 	}
 
 	private void PullWater() {
