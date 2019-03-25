@@ -29,7 +29,16 @@ public class WaterCollector : MonoBehaviour, Interactable {
 	}
 
 	public void Interact() {
-		Canteen canteen = inventory.FindItemsOfType<Canteen>()[0];
+		FillCanteen();
+	}
+
+	private void FillCanteen() {
+		Canteen canteen = inventory.FindItemsOfType<Canteen>()?[0];
+		if (canteen == null) { // no canteen in inventory
+			Debug.Log("No canteen in the inventory"); //TODO: display message
+			return;
+		}
+
 		float collectedAmount = canteen.onDrinkAmount;
 		float limit = Mathf.Min(tankFill, canteen.capacity - canteen.currentAmount);
 		collectedAmount = Mathf.Clamp(collectedAmount, 0f, limit);
@@ -38,6 +47,8 @@ public class WaterCollector : MonoBehaviour, Interactable {
 	}
 
 	private void Update() {
+		if (GetComponent<BuildMenuItem>().isInBuildMode)
+			return;
 		if (powerSocket.isPowered)
 			PullWater();
 	}
