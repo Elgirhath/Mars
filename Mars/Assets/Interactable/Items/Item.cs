@@ -27,7 +27,7 @@ public abstract class Item : ScriptableObject {
 		stackLimit = other.stackLimit;
 	}
 
-	public abstract void Use();
+	public abstract void Use(ItemSlot slot);
 
 	public GameObject Instantiate(Vector3 pos) {
 		GameObject obj = Instantiate(prefab, pos, Quaternion.identity);

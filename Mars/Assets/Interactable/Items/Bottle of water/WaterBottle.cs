@@ -20,7 +20,8 @@ public class WaterBottle : Item {
         thirstController.thirst += pointsOnDrink;
     }
 
-    public override void Use() {
+    public override void Use(ItemSlot slot) {
         Drink();
+        slot.amount--;
     }
 }

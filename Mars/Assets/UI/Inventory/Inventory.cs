@@ -1,8 +1,6 @@
 ﻿using System;
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UI;
 
 public class Inventory : MonoBehaviour
 {
@@ -64,6 +62,17 @@ public class Inventory : MonoBehaviour
         }
         
         scrollingInfoController.AddText(item.itemName, isItem: true);
+    }
+
+    public T[] FindItemsOfType<T>() {
+        List<T> items = new List<T>();
+        foreach (var slot in slots) {
+            if (slot.item is T item) {
+                items.Add(item);
+            }
+        }
+
+        return items.ToArray();
     }
     
     public void Open() {

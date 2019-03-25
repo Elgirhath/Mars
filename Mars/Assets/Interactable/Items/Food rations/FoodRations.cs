@@ -20,7 +20,8 @@ public class FoodRations : Item {
         hungerController.hunger += pointsOnEat;
     }
 
-    public override void Use() {
+    public override void Use(ItemSlot slot) {
         Eat();
+        slot.amount--;
     }
 }

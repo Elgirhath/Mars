@@ -16,10 +16,12 @@ public class WaterCollector : MonoBehaviour, Interactable {
 	
 	private WaterSourceController sourceCtrl;
 	private PowerSocket powerSocket;
+	private Inventory inventory;
 
 	private void Start() {
 		sourceCtrl = WaterSourceController.instance;
 		powerSocket = GetComponent<PowerSocket>();
+		inventory = Inventory.instance;
 	}
 
 	public string tooltipText {
@@ -27,7 +29,12 @@ public class WaterCollector : MonoBehaviour, Interactable {
 	}
 
 	public void Interact() {
-		Debug.Log("Current fill: " + tankFill);
+		Canteen canteen = inventory.FindItemsOfType<Canteen>()[0];
+		float collectedAmount = canteen.onDrinkAmount;
+		float limit = Mathf.Min(tankFill, canteen.capacity - canteen.currentAmount);
+		collectedAmount = Mathf.Clamp(collectedAmount, 0f, limit);
+		canteen.currentAmount += collectedAmount;
+		tankFill -= collectedAmount;
 	}
 
 	private void Update() {
