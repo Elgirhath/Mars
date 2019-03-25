@@ -20,6 +20,25 @@ public class WaterSourceController : MonoBehaviour {
 		
 	}
 
+	private void Start() {
+		GenerateSources();
+	}
+
+	private void GenerateSources() {
+		float total = Random.Range(minWaterAmount, maxWaterAmount);
+		
+		float sum = 0f;
+		foreach (var source in sources) {
+			source.amount = Random.Range(0f, 1f);
+			sum += source.amount;
+		}
+
+		foreach (var source in sources) {
+			source.amount *= sum.Equals(0f) ? 0f : (total / sum);
+			source.capacity = source.amount;
+		}
+	}
+	
 	public float GetMultiSourceAmount(Vector3 position) {
 		float sum = 0f;
 		foreach (var source in sources) {
@@ -43,7 +62,7 @@ public class WaterSourceController : MonoBehaviour {
 
 		foreach (var source in sources) {
 			float amount = source.GetTotalAmount(position);
-			float ratio = amount / totalAvailableAmount;
+			float ratio = totalAvailableAmount <= 0f ? 0f : amount / totalAvailableAmount;
 			float newAmount = source.amount - pulledAmount * ratio;
 			source.amount = Mathf.Clamp(newAmount, 0f, source.capacity);
 		}
