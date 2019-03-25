@@ -127,7 +127,7 @@ public class EnergyController : MonoBehaviour
             else
                 ChangeEnergy(-sprintDropSpeed);
         }
-        Debug.Log(LockState);
+        //Debug.Log(LockState);
     }
 
     private IEnumerator LockRegeneration()
