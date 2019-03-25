@@ -21,7 +21,7 @@ public class NPump : MonoBehaviour
 
     // Update is called once per frame
     void Update() {
-        if (!powerSocket.IsPowered())
+        if (!powerSocket.isPowered)
             return;
         
         Air currentAir = airController.air;

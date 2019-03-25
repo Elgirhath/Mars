@@ -11,7 +11,7 @@ public class Heater : MonoBehaviour {
 
     private bool active {
         get {
-            bool isPowered = powerSocket.IsPowered();
+            bool isPowered = powerSocket.isPowered;
             bool isTriggered = airController.air.temperature < airController.targetAir.temperature;
             return isPowered && isTriggered;
         }
@@ -28,7 +28,7 @@ public class Heater : MonoBehaviour {
 
     // Update is called once per frame
     void Update() {
-        if (!powerSocket.IsPowered())
+        if (!powerSocket.isPowered)
             return;
 
         float currentTemp = airController.air.temperature;

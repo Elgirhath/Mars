@@ -22,7 +22,7 @@ public class O2Pump : MonoBehaviour
 
     // Update is called once per frame
     void Update() {
-        if (!powerSocket.IsPowered())
+        if (!powerSocket.isPowered)
             return;
         
         float currentPartialPressure = o2.GetPartialPressure(airController.air);
