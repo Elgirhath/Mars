@@ -10,6 +10,7 @@ public class BuildController : MonoBehaviour {
 	public float maxDistance;
 	public float rotLerpSpeed;
 	public float rotationSpeed;
+	public Transform buildingParent = null;
 	
 	public Material schemeMaterial;
 
@@ -77,7 +78,7 @@ public class BuildController : MonoBehaviour {
 		placePosition = wasHit && isInRange ? hitInfo.point : placePosition;
 		
 		isPlacing = true;
-		scheme = Instantiate(obj, placePosition, Quaternion.identity);
+		scheme = Instantiate(obj, placePosition, Quaternion.identity, buildingParent);
 		scheme.transform.up = wasHit && isInRange ? hitInfo.normal : scheme.transform.up;
 
 		savedState = SavePrefabState(scheme);
