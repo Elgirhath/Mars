@@ -73,7 +73,8 @@ public class EnergyController : MonoBehaviour
             energy += diff;
         }
         energyBar.ChangeEnergyBar(energy/maxEnergy);
-        ChangeMaxEnergy(diff*maxEnergyLossMultiplier);
+        if(diff < 0)
+            ChangeMaxEnergy(diff*maxEnergyLossMultiplier);
     }
 
     private void ChangeMaxEnergy(float diff)
@@ -126,6 +127,7 @@ public class EnergyController : MonoBehaviour
             else
                 ChangeEnergy(-sprintDropSpeed);
         }
+        //Debug.Log(LockState);
     }
 
     private IEnumerator LockRegeneration()
