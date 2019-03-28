@@ -62,6 +62,7 @@ public class EnergyController : MonoBehaviour
     {
         if (_energy + diff <= 0)
         {
+            _energy = 0;
             _lockState = true;
         }
         else if (_energy + diff > maxEnergy)
@@ -103,7 +104,6 @@ public class EnergyController : MonoBehaviour
     private void EnergyLoss()
     {
         ChangeMaxEnergy(-0.01f);
-        Debug.Log(maxEnergy);
     }
 
     private void Update()
@@ -119,13 +119,15 @@ public class EnergyController : MonoBehaviour
             {
                 ChangeEnergy(-jumpDropValue);
             }
-            else if (!playerController.IsRunning())
+            else if (playerController.IsGrounded()) 
             {
-                if(playerController.IsGrounded())
+                if(playerController.IsRunning())
+                    ChangeEnergy(-sprintDropSpeed);
+                else
+                {
                     ChangeEnergy(regenerationSpeed);
+                }
             }
-            else
-                ChangeEnergy(-sprintDropSpeed);
         }
         //Debug.Log(LockState);
     }
@@ -134,6 +136,7 @@ public class EnergyController : MonoBehaviour
     {
         lockedTimer = true;
         yield return new WaitForSeconds(secondsToUnlock);
+        lockedTimer = false;
         LockState = false;
     }
 }
