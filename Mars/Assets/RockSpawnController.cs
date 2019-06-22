@@ -5,10 +5,13 @@ using UnityEngine;
 public class RockSpawnController : MonoBehaviour {
     public float distance;
     public int density;
+    
+    [Tooltip("FOV at which rocks can be spawned")]
+    public float spawnFOV = 120f;
+    
     public GameObject prefab;
     
     private List<GameObject> rocks = new List<GameObject>();
-    private float spawnFOV = 180f; // Items will be spawned in front of the player and will disappear behind
     private PlayerController player;
     private Vector3 lastPlayerPos;
 
@@ -37,6 +40,10 @@ public class RockSpawnController : MonoBehaviour {
     }
 
     void SpawnRock() {
+        /*
+         * Spawns a rock in a distance, in front of a player (in terms of movement and not camera view)
+         */
+        
         float angle = Random.Range(0f, spawnFOV);
         angle -= spawnFOV / 2f;
         Vector3 moveVector = player.transform.position - lastPlayerPos;
@@ -49,6 +56,10 @@ public class RockSpawnController : MonoBehaviour {
     }
 
     void Validate() {
+        /*
+         * Checks if any of the rocks were destroyed (eg. by collecting it) and removes from the list
+         */
+        
         List<GameObject> rocksCopy = rocks.ToList();
         foreach (var rock in rocksCopy) {
             if (rock == null) {
