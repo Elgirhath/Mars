@@ -3,13 +3,13 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class Utilities {
-	public static bool ArchRaycast(Vector3 origin, float radius, Vector3 startDir, Vector3 endDir, out RaycastHit hit, float anglePrecision) {
+	public static bool ArchRaycast(Vector3 origin, float radius, Vector3 startDir, Vector3 endDir, out RaycastHit hit, float angleStep) {
 		Vector3 axis = Vector3.Cross(startDir, endDir);
 		float angle = Vector3.Angle(startDir, endDir);
 		float currentAngle = 0.0f;
 		Vector3 or = startDir.normalized * radius;
 		while (currentAngle < angle) {
-			Vector3 end = Quaternion.AngleAxis(anglePrecision, axis) * or;
+			Vector3 end = Quaternion.AngleAxis(angleStep, axis) * or;
 			Ray ray = new Ray(or + origin, end - or);
 			Debug.DrawRay(origin, startDir, Color.yellow);
 			Debug.DrawRay(ray.origin, ray.direction, Color.red);
@@ -23,7 +23,7 @@ public class Utilities {
 			}
 
 			or = end;
-			currentAngle += anglePrecision;
+			currentAngle += angleStep;
 		}
 
 		hit = new RaycastHit();
