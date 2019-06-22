@@ -4743,8 +4743,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a08b1b11477acbf488f392f200b4eee7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  distance: 10
-  density: 5
+  distance: 15
+  density: 10
   prefab: {fileID: 5555670816743982961, guid: 128ccaef1a1490844850248d840b0872, type: 3}
 --- !u!4 &828452087
 Transform:
