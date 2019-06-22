@@ -1,22 +1,30 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class OxygenController : MonoBehaviour {
     public int maxOxygen;
+
     public int initOxygen;
+
     //public float chokingDamage;
-    [Tooltip("Points per second")]
-    public float dropSpeed;
-    
+    [Tooltip("Points per second")] public float dropSpeed;
+
     private float _oxygen;
     public float oxygen {
         get => _oxygen;
-        set => _oxygen = value;
+        set {
+            _oxygen = value;
+            oxygenBar.ChangeOxygenBar((int) oxygen);
+        }
+
     }
 
-    private bool _insideCapsule;
+    [NonSerialized]
+    public Air air;
 
+    private bool _insideCapsule;
     public bool insideCapsule
     {
         get => _insideCapsule;
@@ -36,28 +44,26 @@ public class OxygenController : MonoBehaviour {
     }
 
     private void Start() {
+        air = null;
         _oxygen = initOxygen;
         //healthController = HealthController.instance;
         oxygenBar = OxygenBar.instance;
         insideCapsule = false;
 
         oxygenBar.maxValue = maxOxygen;
-        oxygenBar.value = (int)oxygen;
+        oxygenBar.value = (int) oxygen;
     }
 
-    private void Update()
-    {
-        if (!insideCapsule)
-        {
-            if (_oxygen <= 0.0f) {
-                Debug.Log("You are dead!");
-                //healthController.ChangeHealth(-chokingDamage * Time.deltaTime);
-            }
-            else
-            {
-                _oxygen -= dropSpeed * Time.deltaTime;
-            }
-            oxygenBar.ChangeOxygenBar((int) oxygen);
+    private void Update() {
+        if (air != null)
+            return;
+        
+        if (_oxygen <= 0.0f) {
+            Debug.Log("You are dead!");
+            //healthController.ChangeHealth(-chokingDamage * Time.deltaTime);
+        }
+        else {
+            oxygen -= dropSpeed * Time.deltaTime;
         }
     }
 }

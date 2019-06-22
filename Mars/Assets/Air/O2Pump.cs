@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class O2Pump : MonoBehaviour
 {
@@ -19,8 +16,7 @@ public class O2Pump : MonoBehaviour
         tank = GetComponentInChildren<GasTank>();
         powerSocket = GetComponent<PowerSocket>();
     }
-
-    // Update is called once per frame
+    
     void Update() {
         if (!powerSocket.isPowered)
             return;
@@ -31,11 +27,11 @@ public class O2Pump : MonoBehaviour
         if (!(Mathf.Abs(targetPartialPressure - currentPartialPressure) > activateThreshold))
             return;
         
-        float amount = Mathf.Sign(targetPartialPressure - currentPartialPressure) * kgPerSec * Time.deltaTime;
-        amount = amount > tank.gasWeight ? tank.gasWeight : amount;
+        float amountToPump = Mathf.Sign(targetPartialPressure - currentPartialPressure) * kgPerSec * Time.deltaTime;
+        amountToPump = amountToPump > tank.gasWeight ? tank.gasWeight : amountToPump; //clamp to the mass in tank
         float currentMass = o2.GetMass(airController.air);
-        float newMass = currentMass + amount;
+        float newMass = currentMass + amountToPump;
         o2.SetMass(airController.air, newMass);
-        tank.gasWeight -= amount;
+        tank.gasWeight -= amountToPump; //clamped by gasWeight property
     }
 }
