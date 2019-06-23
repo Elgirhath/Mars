@@ -72,9 +72,8 @@ public class BuildController : MonoBehaviour {
 		 * Accept the position of the scheme
 		 */
 		
-		Scheme sch = scheme.AddComponent<Scheme>();
-		sch.origin = prefab;
-		sch.matsNeeded = scheme.GetComponent<BuildMenuItem>().materials;
+		BuildMenuItem bmi = scheme.GetComponent<BuildMenuItem>();
+		bmi.AcceptScheme(prefab);
 		
 		prefab = null;
 		scheme = null;

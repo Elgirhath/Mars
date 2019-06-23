@@ -241,9 +241,9 @@ GameObject:
   m_Component:
   - component: {fileID: 1697360516}
   - component: {fileID: 1697360514}
-  - component: {fileID: 1697360515}
   - component: {fileID: 3643240176099442978}
   - component: {fileID: 9197104536271896927}
+  - component: {fileID: 6005179187201521184}
   m_Layer: 0
   m_Name: LogBench
   m_TagString: Untagged
@@ -280,20 +280,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6791966641bf55e45a20788b7f9c9eac, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &1697360515
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1697360513}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0608a69cf48ea574a82f60b31b0d9a38, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  sprite: {fileID: 0}
-  isInBuildMode: 0
 --- !u!65 &3643240176099442978
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -337,3 +323,17 @@ MonoBehaviour:
         m_CallState: 2
     m_TypeName: InteractEvent, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
       PublicKeyToken=null
+--- !u!114 &6005179187201521184
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1697360513}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c23d28cb89154fd49bc21adf078f5996, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  sprite: {fileID: 0}
+  matsNeeded: []
