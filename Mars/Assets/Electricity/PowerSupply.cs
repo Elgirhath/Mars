@@ -10,6 +10,15 @@ public class PowerSupply : MonoBehaviour {
 		get => _receivers;
 	}
 
+	public static PowerSupply instance;
+
+	private void Awake() {
+		if (instance == null)
+			instance = this;
+		else if (instance != this)
+			Destroy(this);
+	}
+
 	public float generatedPower {
 		get {
 			float sum = 0f;

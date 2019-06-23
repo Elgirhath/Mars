@@ -243,8 +243,9 @@ GameObject:
   - component: {fileID: 1697360514}
   - component: {fileID: 1697360515}
   - component: {fileID: 3643240176099442978}
+  - component: {fileID: 9197104536271896927}
   m_Layer: 0
-  m_Name: LogBench (1)
+  m_Name: LogBench
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -292,6 +293,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   sprite: {fileID: 0}
+  isInBuildMode: 0
 --- !u!65 &3643240176099442978
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -305,3 +307,33 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 1.811279, y: 0.4246676, z: 0.45207238}
   m_Center: {x: 0, y: 0.20105708, z: 0}
+--- !u!114 &9197104536271896927
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1697360513}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 76f9ab1babac5e8468561857add27c51, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  tooltipText: U dabadaba
+  applyOutline: 1
+  onInteract:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 1697360514}
+        m_MethodName: Interact
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_TypeName: InteractEvent, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
+      PublicKeyToken=null
