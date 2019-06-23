@@ -77,6 +77,30 @@ public class Inventory : MonoBehaviour
         
         return items.ToArray();
     }
+
+    public bool Contains<T>() {
+        foreach (var slot in slots) {
+            if (slot.item is T item)
+                return true;
+        }
+
+        return false;
+    }
+
+    public bool Pull(Item item) {
+        /*
+         * Remove first item of type T from the inventory. Returns true on success and false on failure
+         */
+        
+        foreach (var slot in slots) {
+            if (slot.item == item) {
+                --slot.amount;
+                return true;
+            }
+        }
+
+        return false;
+    }
     
     public void Open() {
         foreach (Transform child in transform) { //enable all children
