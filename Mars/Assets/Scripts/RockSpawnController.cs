@@ -49,7 +49,7 @@ public class RockSpawnController : MonoBehaviour {
         angle -= spawnFOV / 2f;
         Vector3 moveVector = player.transform.position - lastPlayerPos;
         moveVector.y = 0f;
-        if (moveVector.magnitude > 1e-8)
+        if (moveVector.magnitude > 1e-6) 
             playerMovement = moveVector.normalized;
         else if (playerMovement.magnitude < 1e-8) {
             playerMovement = new Vector3(Random.value, 0f, Random.value).normalized;
