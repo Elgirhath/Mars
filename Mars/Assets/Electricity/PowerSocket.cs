@@ -12,7 +12,7 @@ public class PowerSocket : MonoBehaviour {
     }
 
     private void Start() {
-        powerSupply = transform.parent.GetComponentInChildren<PowerSupply>();
+        powerSupply = PowerSupply.instance;
         powerSupply.AddReceiver(this);
     }
 

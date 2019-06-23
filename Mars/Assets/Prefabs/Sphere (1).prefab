@@ -119,6 +119,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   tooltipText: Press E to pick up
+  applyOutline: 1
   onInteract:
     m_PersistentCalls:
       m_Calls:
