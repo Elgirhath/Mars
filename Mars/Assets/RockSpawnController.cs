@@ -14,6 +14,7 @@ public class RockSpawnController : MonoBehaviour {
     private List<GameObject> rocks = new List<GameObject>();
     private PlayerController player;
     private Vector3 lastPlayerPos;
+    private Vector3 playerMovement = Vector3.zero;
 
     private void Start() {
         player = PlayerController.instance;
@@ -47,7 +48,13 @@ public class RockSpawnController : MonoBehaviour {
         float angle = Random.Range(0f, spawnFOV);
         angle -= spawnFOV / 2f;
         Vector3 moveVector = player.transform.position - lastPlayerPos;
-        Vector3 dir = Quaternion.AngleAxis(angle, Vector3.up) * moveVector;
+        moveVector.y = 0f;
+        if (moveVector.magnitude > 1e-8)
+            playerMovement = moveVector.normalized;
+        else if (playerMovement.magnitude < 1e-8) {
+            playerMovement = new Vector3(Random.value, 0f, Random.value).normalized;
+        }
+        Vector3 dir = Quaternion.AngleAxis(angle, Vector3.up) * playerMovement;
         Vector3 pos3d = dir.normalized * distance + player.transform.position;
         pos3d.y = Terrain.activeTerrain.SampleHeight(pos3d);
         

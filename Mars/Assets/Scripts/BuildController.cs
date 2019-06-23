@@ -68,7 +68,13 @@ public class BuildController : MonoBehaviour {
 	}
 
 	private void Place() {
-		scheme.AddComponent<Scheme>().origin = prefab;
+		/*
+		 * Accept the position of the scheme
+		 */
+		
+		Scheme sch = scheme.AddComponent<Scheme>();
+		sch.origin = prefab;
+		sch.matsNeeded = scheme.GetComponent<BuildMenuItem>().materials;
 		
 		prefab = null;
 		scheme = null;
@@ -77,6 +83,10 @@ public class BuildController : MonoBehaviour {
 	}
 
 	public void StartPlacing(GameObject obj) {
+		/*
+		 * Start placing activity, can be called within Build Menu etc.
+		 */
+		
 		bool wasHit = Physics.Raycast(cam.position, cam.forward, out RaycastHit hitInfo);
 
 		bool isInRange = Vector3.Distance(hitInfo.point, cam.position) < maxDistance;
@@ -86,12 +96,15 @@ public class BuildController : MonoBehaviour {
 		isPlacing = true;
 		prefab = obj;
 		scheme = Instantiate(obj, placePosition, Quaternion.identity, buildingParent);
-		scheme.GetComponent<BuildMenuItem>().isInBuildMode = true;
 		scheme.transform.up = wasHit && isInRange ? hitInfo.normal : scheme.transform.up;
 		ApplySchemeState(scheme);
 	}
 
 	private void ApplySchemeState(GameObject obj) {
+		/*
+		 * Apply scheme material, remove unnecessary components from the object and its children
+		 */
+		
 		RemoveComponents(obj);
 
 		try {
@@ -110,6 +123,10 @@ public class BuildController : MonoBehaviour {
 	}
 
 	private void RemoveComponents(GameObject obj) {
+		/*
+		 * Remove all scripts from the object for the time we are placing it
+		 */
+		
 		Component[] components = obj.GetComponents<Component>();
 		foreach (var component in components) {
 			if (component is MeshFilter)
@@ -123,6 +140,9 @@ public class BuildController : MonoBehaviour {
 				((Collider) component).enabled = false;
 				continue;
 			}
+
+			if (component is BuildMenuItem)
+				continue;
 			
 			Destroy(component);
 		}

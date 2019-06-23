@@ -43,8 +43,6 @@ public class WaterCollector : MonoBehaviour {
 	}
 
 	private void Update() {
-		if (GetComponent<BuildMenuItem>().isInBuildMode)
-			return;
 		if (powerSocket.isPowered)
 			PullWater();
 	}
