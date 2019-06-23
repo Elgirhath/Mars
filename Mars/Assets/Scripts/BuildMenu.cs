@@ -54,6 +54,7 @@ public class BuildMenu : MonoBehaviour {
 			Button newButton = newObj.GetComponent<Button>();
 			newButton.GetComponentInChildren<Text>().text = item.name;
 			newButton.onClick.AddListener(delegate { StartPlacing(item); } );
+			Input.ResetInputAxes();
 		}
 	}
 	

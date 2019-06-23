@@ -61,6 +61,7 @@ public class BuildController : MonoBehaviour {
 			scheme.transform.Rotate(scheme.transform.up, schemeYRotation, Space.World);
 
 			if (Input.GetButtonDown("Fire1")) { //Accept scheme
+				//TODO: stop it from invoking when menu is clicked
 				Place();
 			}
 		}
@@ -68,7 +69,6 @@ public class BuildController : MonoBehaviour {
 
 	private void Place() {
 		scheme.AddComponent<Scheme>().origin = prefab;
-		scheme.GetComponent<Collider>().enabled = true;
 		
 		prefab = null;
 		scheme = null;
@@ -119,6 +119,7 @@ public class BuildController : MonoBehaviour {
 			if (component is Transform)
 				continue;
 			if (component is Collider) {
+				((Collider) component).isTrigger = true;
 				((Collider) component).enabled = false;
 				continue;
 			}

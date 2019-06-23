@@ -27,9 +27,16 @@ public class InteractController : MonoBehaviour {
 	private Collider closestItem;
 	private float closestItemFactor;
 
-	private MaterialTree originMaterialTree;
-
 	public Material selectedMaterial;
+
+	public static InteractController instance;
+
+	private void Awake() {
+		if (instance == null)
+			instance = this;
+		else if (instance != this)
+			Destroy(gameObject);
+	}
 
 	void Start() {
 		cam = GetComponentInChildren<Camera>();
@@ -114,88 +121,11 @@ public class InteractController : MonoBehaviour {
 	}
 	
 	void Select() {
-		originMaterialTree = new MaterialTree(target.gameObject);
-		MaterialTree.ApplyOutline(target.gameObject, selectedMaterial);
-		
-		tooltip.OpenTooltip(target.transform, target.GetComponent<Interactable>().tooltipText);
+		target.GetComponent<Interactable>().Select();
 	}
 
-	void Deselect()
-	{
-		originMaterialTree.Apply(target.gameObject);
-		
-		tooltip.Disable();
+	void Deselect() {
+		target.GetComponent<Interactable>().Deselect();
 	}
 	
-	private class MaterialTree { // Keeps ObjectState for every object in the subtree
-		private Material parentMaterial;
-		private Dictionary<Transform, MaterialTree> childTrees = new Dictionary<Transform, MaterialTree>();
-	
-		public MaterialTree() {}
-	
-		public MaterialTree(GameObject obj) : this() {
-			GetFromObject(obj);
-		}
-		public void GetFromObject(GameObject obj) {
-			try {
-				parentMaterial = obj.GetComponent<Renderer>().material;
-			}
-			catch {}
-			
-			foreach (Transform child in obj.transform) {
-				MaterialTree subtree = new MaterialTree(child.gameObject);
-				childTrees.Add(child, subtree);
-			}
-		}
-	
-		public void Apply(GameObject obj) {
-			try {
-				obj.GetComponent<Renderer>().material = parentMaterial;
-			}
-			catch {}
-
-			foreach (Transform child in obj.transform) {
-				try {
-					childTrees[child].Apply(child.gameObject);
-				}
-				catch {}
-			}
-		}
-	
-		public static void Apply(GameObject obj, Material material) {
-			try {
-				obj.GetComponent<Renderer>().material = material;
-			}
-			catch {}
-
-			foreach (Transform child in obj.transform) {
-				Apply(child.gameObject, material);
-			}
-		}
-		
-		public static void ApplyOutline(GameObject obj, Material material) {
-			try {
-				Renderer renderer = obj.GetComponent<Renderer>();
-				Material oldMat = renderer.material;
-				Material newMat = new Material(material);
-				if (oldMat.HasProperty("_Color")) {
-					newMat.SetColor("_BaseColor", oldMat.color);
-				}
-
-				newMat.SetTexture("_MainTex", oldMat.mainTexture);
-				newMat.SetTexture("_Normal", oldMat.GetTexture("_NormalMap"));
-//				newMat.SetTexture("_Metallic", oldMat.GetTexture("_Metallic"));
-				if (oldMat.HasProperty("_NormalScale")) {
-					newMat.SetFloat("_NormalScale", oldMat.GetFloat("_NormalScale"));
-				}
-
-				renderer.material = newMat;
-			}
-			catch {}
-
-			foreach (Transform child in obj.transform) {
-				ApplyOutline(child.gameObject, material);
-			}
-		}
-	}
 }

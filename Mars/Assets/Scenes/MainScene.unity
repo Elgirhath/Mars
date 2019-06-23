@@ -1674,53 +1674,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 88e86168bff892446af31e707def991c, type: 3}
---- !u!1 &302199627 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 1697360513, guid: 88e86168bff892446af31e707def991c,
-    type: 3}
-  m_PrefabInstance: {fileID: 302199626}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &302199628
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 302199627}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 76f9ab1babac5e8468561857add27c51, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  tooltipText: U dabadaba
-  onInteract:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 302199629}
-        m_MethodName: Interact
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-    m_TypeName: InteractEvent, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
-      PublicKeyToken=null
---- !u!114 &302199629 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 1697360514, guid: 88e86168bff892446af31e707def991c,
-    type: 3}
-  m_PrefabInstance: {fileID: 302199626}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 302199627}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6791966641bf55e45a20788b7f9c9eac, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &309716844
 GameObject:
   m_ObjectHideFlags: 0
@@ -7704,6 +7657,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   tooltipText: Press E to open
+  applyOutline: 1
   onInteract:
     m_PersistentCalls:
       m_Calls:
