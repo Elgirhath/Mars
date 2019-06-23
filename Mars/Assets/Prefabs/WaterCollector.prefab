@@ -13,8 +13,9 @@ GameObject:
   - component: {fileID: 7678638717901037636}
   - component: {fileID: 8337546396088404300}
   - component: {fileID: 3851483351827798493}
+  - component: {fileID: 7132500855313023953}
   m_Layer: 0
-  m_Name: Building
+  m_Name: WaterCollector
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -49,6 +50,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   sprite: {fileID: 0}
+  isInBuildMode: 0
 --- !u!114 &7678638717901037636
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -92,8 +94,37 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a0653a4e345e9e1479224e1e097641e1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  powerConsumption: 1000
+  powerConsumption: 500
   priority: 10
+--- !u!114 &7132500855313023953
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5309060762522423145}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 76f9ab1babac5e8468561857add27c51, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  tooltipText: Press E to collect water
+  onInteract:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 7678638717901037636}
+        m_MethodName: Interact
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_TypeName: InteractEvent, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
+      PublicKeyToken=null
 --- !u!1 &6766828051552510161
 GameObject:
   m_ObjectHideFlags: 0

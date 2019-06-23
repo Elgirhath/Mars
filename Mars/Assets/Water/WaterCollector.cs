@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class WaterCollector : MonoBehaviour, Interactable {
+public class WaterCollector : MonoBehaviour {
 	[Tooltip("The ratio of how much water can be collected from a source with specified amount." +
 	         "0 means no water can be collected, 1 means whole water from deposit can be collected.")]
 	public float availableCapacityRatio;
@@ -22,10 +22,6 @@ public class WaterCollector : MonoBehaviour, Interactable {
 		sourceCtrl = WaterSourceController.instance;
 		powerSocket = GetComponent<PowerSocket>();
 		inventory = Inventory.instance;
-	}
-
-	public string tooltipText {
-		get => "Press [E] to collect water";
 	}
 
 	public void Interact() {
