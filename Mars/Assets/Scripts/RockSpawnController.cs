@@ -18,6 +18,28 @@ public class RockSpawnController : MonoBehaviour {
 
     private void Start() {
         player = PlayerController.instance;
+        
+        InitialSpawn();
+    }
+
+    void InitialSpawn() {
+        for (int i = 0; i < density; i++) {
+            float angle = Random.Range(0f, 360f);
+            float dist = Random.value * distance;
+            Vector3 moveVector = player.transform.position - lastPlayerPos;
+            moveVector.y = 0f;
+            if (moveVector.magnitude > 1e-6) 
+                playerMovement = moveVector.normalized;
+            else if (playerMovement.magnitude < 1e-8) {
+                playerMovement = new Vector3(Random.value, 0f, Random.value).normalized;
+            }
+            Vector3 dir = Quaternion.AngleAxis(angle, Vector3.up) * playerMovement;
+            Vector3 pos3d = dir.normalized * dist + player.transform.position;
+            pos3d.y = Terrain.activeTerrain.SampleHeight(pos3d);
+        
+            GameObject rock = Instantiate(prefab, pos3d, Quaternion.identity, transform);
+            rocks.Add(rock);
+        }
     }
 
     // Update is called once per frame
