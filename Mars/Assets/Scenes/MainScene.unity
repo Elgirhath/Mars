@@ -4573,7 +4573,7 @@ MonoBehaviour:
   distance: 15
   density: 10
   spawnFOV: 120
-  prefab: {fileID: 5555670816743982961, guid: 128ccaef1a1490844850248d840b0872, type: 3}
+  prefab: {fileID: 5771797529913580718, guid: c6ad51dc9b245064f88ea7762d1574a1, type: 3}
 --- !u!4 &828452087
 Transform:
   m_ObjectHideFlags: 0
