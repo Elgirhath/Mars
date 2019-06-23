@@ -41,7 +41,7 @@ public class RockSpawnController : MonoBehaviour {
 
     void SpawnRock() {
         /*
-         * Spawns a rock in a distance, in front of a player (in terms of movement and not camera view)
+         * Spawns a rock in a distance, in front of a player (in terms of movement, not camera view)
          */
         
         float angle = Random.Range(0f, spawnFOV);

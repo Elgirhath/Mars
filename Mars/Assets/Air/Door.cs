@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Xml.Linq;
 using UnityEngine;
 
-public class Door : MonoBehaviour, Interactable {
+public class Door : MonoBehaviour {
 	public enum axisEnum {
 		xPositive,
 		xNegative,
@@ -24,10 +24,6 @@ public class Door : MonoBehaviour, Interactable {
 
 	private bool rotating = false;
 	private bool opened = false;
-	
-	public string tooltipText {
-		get => "Press [E] to open door";
-	}
 
 	private void Start() {
 		player = PlayerController.instance;

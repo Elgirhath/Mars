@@ -178,11 +178,17 @@ public class InteractController : MonoBehaviour {
 				Renderer renderer = obj.GetComponent<Renderer>();
 				Material oldMat = renderer.material;
 				Material newMat = new Material(material);
-				newMat.SetColor("_BaseColor", oldMat.color);
+				if (oldMat.HasProperty("_Color")) {
+					newMat.SetColor("_BaseColor", oldMat.color);
+				}
+
 				newMat.SetTexture("_MainTex", oldMat.mainTexture);
 				newMat.SetTexture("_Normal", oldMat.GetTexture("_NormalMap"));
 //				newMat.SetTexture("_Metallic", oldMat.GetTexture("_Metallic"));
-				newMat.SetFloat("_NormalScale", oldMat.GetFloat("_NormalScale"));
+				if (oldMat.HasProperty("_NormalScale")) {
+					newMat.SetFloat("_NormalScale", oldMat.GetFloat("_NormalScale"));
+				}
+
 				renderer.material = newMat;
 			}
 			catch {}

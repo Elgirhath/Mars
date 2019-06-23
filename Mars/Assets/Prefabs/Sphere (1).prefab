@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 5555670816743982964}
   - component: {fileID: 5555670816743982963}
   - component: {fileID: 5555670816743982962}
+  - component: {fileID: 1291324693197845749}
   m_Layer: 0
   m_Name: Sphere (1)
   m_TagString: Collectible
@@ -105,3 +106,32 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   item: {fileID: 11400000, guid: db69ab34f05246d46a65dafb04bbecb3, type: 2}
+--- !u!114 &1291324693197845749
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5555670816743982961}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 76f9ab1babac5e8468561857add27c51, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  tooltipText: Press E to pick up
+  onInteract:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 5555670816743982962}
+        m_MethodName: Interact
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_TypeName: InteractEvent, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
+      PublicKeyToken=null
