@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using UnityEditor;
 using UnityEngine;
 
-public class ItemHandler : MonoBehaviour, Interactable {
+public class ItemHandler : MonoBehaviour {
     
     public Item item;
 
@@ -17,11 +17,6 @@ public class ItemHandler : MonoBehaviour, Interactable {
             item = copy;
         }
     }
-
-    public string tooltipText {
-        get => item.tooltip;
-    }
-
     public void Interact() {
         Inventory.instance.AddItem(item);
         Destroy(gameObject);
