@@ -79,7 +79,6 @@ public class InteractController : MonoBehaviour {
 		if (allowInteract) {
 			if (Input.GetButtonDown("Use")) {
 				target.GetComponent<Interactable>().Interact();
-				Deselect();
 			}
 		}
 	}

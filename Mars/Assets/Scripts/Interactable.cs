@@ -1,11 +1,22 @@
 ﻿using System;
 using System.Collections.Generic;
+using UnityEditor;
 using UnityEngine;
 using UnityEngine.Events;
 
 public class Interactable : MonoBehaviour {
-	public string tooltipText;
+	public string _tooltipText;
+
+	public string tooltipText {
+		get => _tooltipText;
+		set {
+			_tooltipText = value;
+			Tooltip.instance.SetText(_tooltipText);
+		}
+	}
+	
 	public bool applyOutline = true;
+	public bool deselectOnInteract;
 	
 	public InteractEvent onInteract;
 
@@ -19,6 +30,9 @@ public class Interactable : MonoBehaviour {
 	}
 
 	public void Interact() {
+		if (deselectOnInteract)
+			Deselect();
+		
 		onInteract.Invoke();
 	}
 	

@@ -7679,8 +7679,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 76f9ab1babac5e8468561857add27c51, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  tooltipText: Press E to open
+  _tooltipText: Press [E] to open
   applyOutline: 1
+  deselectOnInteract: 0
   onInteract:
     m_PersistentCalls:
       m_Calls:
