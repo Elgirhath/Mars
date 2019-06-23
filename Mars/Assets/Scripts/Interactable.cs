@@ -11,7 +11,8 @@ public class Interactable : MonoBehaviour {
 		get => _tooltipText;
 		set {
 			_tooltipText = value;
-			Tooltip.instance.SetText(_tooltipText);
+			if (isSelected)
+				Tooltip.instance.SetText(_tooltipText);
 		}
 	}
 	
@@ -23,6 +24,7 @@ public class Interactable : MonoBehaviour {
 	private MaterialTree originMaterialTree;
 	private Tooltip tooltip;
 	private Material selectedMaterial;
+	private bool isSelected = false;
 
 	private void Start() {
 		tooltip = Tooltip.instance;
@@ -42,6 +44,7 @@ public class Interactable : MonoBehaviour {
 			MaterialTree.ApplyOutline(gameObject, selectedMaterial);
 		}
 
+		isSelected = true;
 		tooltip.OpenTooltip(transform, GetComponent<Interactable>().tooltipText);
 	}
 
@@ -50,6 +53,7 @@ public class Interactable : MonoBehaviour {
 			originMaterialTree.Apply(gameObject);
 		}
 
+		isSelected = false;
 		tooltip.Disable();
 	}
 	
