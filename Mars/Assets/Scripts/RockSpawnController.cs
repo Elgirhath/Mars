@@ -25,7 +25,7 @@ public class RockSpawnController : MonoBehaviour {
     void InitialSpawn() {
         for (int i = 0; i < density; i++) {
             float angle = Random.Range(0f, 360f);
-            float dist = Random.value * distance;
+            float dist = Mathf.Sqrt(Random.value) * distance;
             Vector3 moveVector = player.transform.position - lastPlayerPos;
             moveVector.y = 0f;
             if (moveVector.magnitude > 1e-6) 
