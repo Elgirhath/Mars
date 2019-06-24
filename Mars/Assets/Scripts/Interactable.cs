@@ -57,7 +57,7 @@ public class Interactable : MonoBehaviour {
 		tooltip.Disable();
 	}
 	
-	private class MaterialTree { // Keeps MaterialTree for every object in the subtree
+	private class MaterialTree { // Keeps ObjectState for every object in the subtree
 		private Material parentMaterial;
 		private Dictionary<Transform, MaterialTree> childTrees = new Dictionary<Transform, MaterialTree>();
 	
