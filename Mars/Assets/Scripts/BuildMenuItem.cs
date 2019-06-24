@@ -112,7 +112,7 @@ public class BuildMenuItem : MonoBehaviour {
         
         Collider collider = GetComponent<Collider>();
         if (collider == null) {
-            collider = gameObject.AddComponent<Collider>();
+            collider = gameObject.AddComponent<BoxCollider>();
         }
 
         collider.isTrigger = true;

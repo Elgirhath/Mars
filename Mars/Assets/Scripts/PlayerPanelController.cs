@@ -2,19 +2,10 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerPanelController : MonoBehaviour
-{
-    private PlayerController playerController;
-    private HUD hud;
-    private bool _opened;
-    private Inventory inventory;
-    private ConditionPanel condition;
+public class PlayerPanelController : MonoBehaviour {
+    private bool opened;
     
     public static PlayerPanelController instance;
-    private Crosshair _crosshair;
-    private PauseMenu _pauseMenu;
-    
-    public bool opened => _opened;
 
     private void Awake() {
         if (!instance)
@@ -24,13 +15,6 @@ public class PlayerPanelController : MonoBehaviour
     }
 
     void Start() {
-        playerController = PlayerController.instance;
-        inventory = Inventory.instance;
-        condition = ConditionPanel.instance;
-        _crosshair = Crosshair.instance;
-        _pauseMenu = PauseMenu.instance;
-        hud = HUD.instance;
-        
         Close();
     }
 
@@ -52,33 +36,37 @@ public class PlayerPanelController : MonoBehaviour
         Cursor.visible = true;
         Cursor.lockState = CursorLockMode.None;
 
-        Time.timeScale = 0.0f; //pause game
+//        Time.timeScale = 0.0f; //pause game
 		
-        playerController.camLockState = true;
+        PlayerController.instance.camLockState = true;
 
-        inventory.Open();
-        condition.Open();
-        _crosshair.active = false;
-        _pauseMenu.block = true;
+        Inventory.instance.Open();
+        ConditionPanel.instance.Open();
+        Crosshair.instance.active = false;
+        PauseMenu.instance.block = true;
 
-        _opened = true;
-        hud.active = false;
+        InteractController.instance.enabled = false;
+
+        opened = true;
+        HUD.instance.active = false;
     }
 
     public void Close() {
         Cursor.visible = false;
         Cursor.lockState = CursorLockMode.Locked;
 
-        Time.timeScale = 1.0f; //resume game
+//        Time.timeScale = 1.0f; //resume game
 
-        playerController.camLockState = false;
+        PlayerController.instance.camLockState = false;
 
-        inventory.Close();
-        condition.Close();
-        _crosshair.active = true;
-        _pauseMenu.block = false;
+        Inventory.instance.Close();
+        ConditionPanel.instance.Close();
+        Crosshair.instance.active = true;
+        PauseMenu.instance.block = false;
 
-        _opened = false;
-        hud.active = true;
+        InteractController.instance.enabled = true;
+
+        opened = false;
+        HUD.instance.active = true;
     }
 }
