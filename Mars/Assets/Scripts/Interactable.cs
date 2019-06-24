@@ -5,7 +5,7 @@ using UnityEngine;
 using UnityEngine.Events;
 
 public class Interactable : MonoBehaviour {
-	public string _tooltipText;
+	private string _tooltipText;
 
 	public string tooltipText {
 		get => _tooltipText;
@@ -25,10 +25,12 @@ public class Interactable : MonoBehaviour {
 	private Tooltip tooltip;
 	private Material selectedMaterial;
 	private bool isSelected = false;
+	private bool isInitialized = false;
 
 	private void Start() {
 		tooltip = Tooltip.instance;
 		selectedMaterial = InteractController.instance.selectedMaterial;
+		isInitialized = true;
 	}
 
 	public void Interact() {
@@ -39,6 +41,9 @@ public class Interactable : MonoBehaviour {
 	}
 	
 	public void Select() {
+		if (!isInitialized)
+			return;
+		
 		if (applyOutline) {
 			originMaterialTree = new MaterialTree(gameObject);
 			MaterialTree.ApplyOutline(gameObject, selectedMaterial);
