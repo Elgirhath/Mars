@@ -61,6 +61,7 @@ public class BuildController : MonoBehaviour {
 			scheme.transform.Rotate(scheme.transform.up, schemeYRotation, Space.World);
 
 			if (Input.GetButtonDown("Fire1")) { //Accept scheme
+				//TODO: stop it from invoking when menu is clicked
 				Place();
 			}
 		}
@@ -106,13 +107,6 @@ public class BuildController : MonoBehaviour {
 		RemoveComponents(obj);
 
 		try {
-			Collider collider = obj.GetComponent<Collider>();
-			collider.enabled = false;
-			collider.isTrigger = true;
-		}
-		catch{}
-
-		try {
 			obj.GetComponent<MeshRenderer>().material = schemeMaterial;
 		}
 		catch {}
@@ -140,8 +134,12 @@ public class BuildController : MonoBehaviour {
 				continue;
 			if (component is Transform)
 				continue;
-			if (component is Collider)
+			if (component is Collider) {
+				((Collider) component).isTrigger = true;
+				((Collider) component).enabled = false;
 				continue;
+			}
+
 			if (component is BuildMenuItem)
 				continue;
 			
