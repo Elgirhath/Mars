@@ -9,14 +9,11 @@ public class ItemDropdownController : MonoBehaviour {
 
     class Target {
         public Transform transform;
-//        public bool hadRigidbody;
         private Renderer renderer;
 
         public Bounds bounds {
             get => renderer.bounds;
         }
-        
-//        public Rigidbody savedRigidbody;
 
         public Vector3 pivot {
             get => bounds.center + Vector3.down * bounds.extents.y;
@@ -25,8 +22,6 @@ public class ItemDropdownController : MonoBehaviour {
 
         public void Set(GameObject obj) {
             transform = obj.transform;
-//            Rigidbody rb = obj.GetComponent<Rigidbody>();
-//            hadRigidbody = rb != null;
             renderer = obj.GetComponent<Renderer>();
         }
     }
