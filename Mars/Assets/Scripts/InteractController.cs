@@ -22,6 +22,7 @@ public class InteractController : MonoBehaviour {
 	private Collider[] nearItems;
 	private GameObject target;
 
+	private Tooltip tooltip;
 			
 	private Collider closestItem;
 	private float closestItemFactor;
@@ -41,6 +42,8 @@ public class InteractController : MonoBehaviour {
 		cam = GetComponentInChildren<Camera>();
 		camTransform = cam.transform;
 		target = null;
+		
+		tooltip = Tooltip.instance;
 		
 		closestItem = null;
 		closestItemFactor = 0;
