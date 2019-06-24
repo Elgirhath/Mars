@@ -31,6 +31,10 @@ public class Inventory : MonoBehaviour
     }
 
     public void AddItem(Item item) {
+        /*
+         * Adds the item to the inventory
+         */
+        
         bool isStacked = false;
         foreach (var slot in slots) { //check if can be stacked on existing pile
             if (slot.item != item)
@@ -65,6 +69,10 @@ public class Inventory : MonoBehaviour
     }
 
     public T[] FindItemsOfType<T>() {
+        /*
+         * Returns array of T items in the inventory. Empty array is returned when no item of this type is found.
+         */
+        
         List<T> items = new List<T>();
         foreach (var slot in slots) {
             if (slot.item is T item) {

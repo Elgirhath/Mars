@@ -6,6 +6,9 @@ using UnityEngine;
 using UnityEngine.UI;
 
 public class ItemSlot : MonoBehaviour {
+	/*
+	 * Slot in the inventory, responsible for actions on the items
+	 */
 	public GameObject buttonPrefab;
 	
 	private Text amountText;
@@ -26,12 +29,16 @@ public class ItemSlot : MonoBehaviour {
 	}
 	
 	private void SetItem(Item item) {
-		if (item == null) {
+		/*
+		 * Sets item in this slot and the amount to 1
+		 */
+		
+		if (item == null) { // If null is passed - remove item from this slot
 			RemoveItem();
 			return;
 		}
 		
-		if (this.item)
+		if (this.item) // If the slot already contains an item - remove it
 			RemoveItem();
 
 		button = Instantiate(buttonPrefab, transform).GetComponent<Button>();
@@ -48,6 +55,10 @@ public class ItemSlot : MonoBehaviour {
 	}
 
 	private void SetAmount(uint amount) {
+		/*
+		 * Sets the item amount on this slot and updates the button text. Throws exception if the amount cannot be set
+		 */
+		
 		if (amount > item.stackLimit)
 			throw new Exception("No space on stack");
 		_amount = amount;
@@ -61,6 +72,10 @@ public class ItemSlot : MonoBehaviour {
 	}
 
 	private void RemoveItem() {
+		/*
+		 * Remove the item from this slot completely
+		 */
+		
 		if (_item) {
 			UnsubscribeEvents();
 			foreach (Transform child in transform) {
@@ -78,13 +93,13 @@ public class ItemSlot : MonoBehaviour {
 		item.Use(this);
 	}
 
-	public void SubscribeEvents() {
+	private void SubscribeEvents() {
 		clickHandler.onLeftClick += Use;
 		clickHandler.onRightClick += item.Drop;
 		clickHandler.onRightClick += SubtractItem;
 	}
 
-	public void UnsubscribeEvents() {
+	private void UnsubscribeEvents() {
 		try {
 			clickHandler.onLeftClick -= Use;
 			clickHandler.onRightClick -= item.Drop;
@@ -93,7 +108,7 @@ public class ItemSlot : MonoBehaviour {
 		catch {}
 	}
 
-	public void SubtractItem() {
+	private void SubtractItem() {
 		amount--;
 	}
 }

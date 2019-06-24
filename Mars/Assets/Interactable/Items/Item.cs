@@ -2,6 +2,9 @@
 using UnityEngine;
 
 public abstract class Item : ScriptableObject {
+	/*
+	 * Scriptable object defining Item type, which can be added to the item handler
+	 */
 	[Space(10)]
 	[Header("Item properties")]
 	public bool createInstances = false;
@@ -30,9 +33,13 @@ public abstract class Item : ScriptableObject {
 	public abstract void Use(ItemSlot slot);
 
 	public GameObject Instantiate(Vector3 pos) {
+		/*
+		 * Instantiate object of the Item type at the position
+		 */
+		
 		GameObject obj = Instantiate(prefab, pos, Quaternion.identity);
 		ItemHandler itemHandler = obj.GetComponent<ItemHandler>();
-		if (itemHandler == null) {
+		if (itemHandler == null) { // Make sure the instantiated prefab contains ItemHandler (so that it could be added to inventory)
 			itemHandler = obj.AddComponent<ItemHandler>();
 			itemHandler.item = this;
 		} else if (itemHandler.item == null)
@@ -42,6 +49,10 @@ public abstract class Item : ScriptableObject {
 	}
 
 	public void Drop() {
+		/*
+		 * Drop from the inventory
+		 */
+		
 		ItemDropdownController.instance.Drop(this);
 	}
 }
