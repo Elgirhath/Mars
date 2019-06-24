@@ -3,6 +3,10 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class PlayerPanelController : MonoBehaviour {
+    /*
+     * Player panel composed of Inventory and the ConditionPanel
+     */
+    
     private bool opened;
     
     public static PlayerPanelController instance;
@@ -33,6 +37,10 @@ public class PlayerPanelController : MonoBehaviour {
     }
     
     public void Open() {
+        /*
+         * Open the panels and handle cursor, HUD and other settings
+         */
+        
         Cursor.visible = true;
         Cursor.lockState = CursorLockMode.None;
 
@@ -42,6 +50,7 @@ public class PlayerPanelController : MonoBehaviour {
 
         Inventory.instance.Open();
         ConditionPanel.instance.Open();
+        
         Crosshair.instance.active = false;
         PauseMenu.instance.block = true;
 
@@ -52,6 +61,10 @@ public class PlayerPanelController : MonoBehaviour {
     }
 
     public void Close() {
+        /*
+         * Close the panels
+         */
+        
         Cursor.visible = false;
         Cursor.lockState = CursorLockMode.Locked;
 

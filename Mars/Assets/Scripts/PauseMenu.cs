@@ -48,8 +48,7 @@ public class PauseMenu : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (!block && Input.GetButtonDown("Cancel"))
-        {
+        if (!block && Input.GetButtonDown("Cancel")) {
             if (opened)
                 Close();
             else
