@@ -1683,6 +1683,33 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 6005179187201521184, guid: 88e86168bff892446af31e707def991c,
+        type: 3}
+      propertyPath: matsNeeded.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 6005179187201521184, guid: 88e86168bff892446af31e707def991c,
+        type: 3}
+      propertyPath: matsNeeded.Array.data[0].item
+      value: 
+      objectReference: {fileID: 11400000, guid: db69ab34f05246d46a65dafb04bbecb3,
+        type: 2}
+    - target: {fileID: 6005179187201521184, guid: 88e86168bff892446af31e707def991c,
+        type: 3}
+      propertyPath: matsNeeded.Array.data[0].count
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6005179187201521184, guid: 88e86168bff892446af31e707def991c,
+        type: 3}
+      propertyPath: matsNeeded.Array.data[1].item
+      value: 
+      objectReference: {fileID: 11400000, guid: fd9d439e58ca71845a18f54ca018f3d6,
+        type: 2}
+    - target: {fileID: 6005179187201521184, guid: 88e86168bff892446af31e707def991c,
+        type: 3}
+      propertyPath: matsNeeded.Array.data[1].count
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 9197104536271896927, guid: 88e86168bff892446af31e707def991c,
         type: 3}
       propertyPath: _tooltipText

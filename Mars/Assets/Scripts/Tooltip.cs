@@ -46,9 +46,6 @@ public class Tooltip : MonoBehaviour {
 	public void SetText(string text)
     {
         textField.text = text;
-
-
-        Debug.Log(text);
     }
 
     public void OpenTooltip(Transform target, string text) {
