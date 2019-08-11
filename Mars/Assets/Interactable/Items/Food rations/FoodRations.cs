@@ -9,7 +9,7 @@ public class FoodRations : Item {
     [Header("Food rations properties")]
     public int pointsOnEat;
     
-    private PlayerController playerController;
+    private Player player;
     private HungerController hungerController;
 
     private void Eat()

@@ -10,7 +10,7 @@ public class BuildMenu : MonoBehaviour {
 	private Transform panel;
 	private GameObject gameController;
 	private BuildController buildController;
-	private PlayerController playerController;
+	private Player player;
 	private HUD hud;
 	private Crosshair crosshair;
 	private PauseMenu _pauseMenu;
@@ -24,7 +24,7 @@ public class BuildMenu : MonoBehaviour {
 		gameController = GameObject.FindGameObjectWithTag("GameController");
 		buildController = gameController.GetComponent<BuildController>();
 		panel = transform.GetChild(0);
-		playerController = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerController>();
+		player = GameObject.FindGameObjectWithTag("Player").GetComponent<Player>();
 		crosshair = Crosshair.instance;
 		_pauseMenu = PauseMenu.instance;
 		hud = HUD.instance;
@@ -78,7 +78,7 @@ public class BuildMenu : MonoBehaviour {
 
 		Time.timeScale = 0.0f; //pause game
 		
-		playerController.camLockState = true;
+		player.camLockState = true;
 		
 		foreach (Transform child in transform) { //enable all children
 			child.gameObject.SetActive(true);
@@ -96,7 +96,7 @@ public class BuildMenu : MonoBehaviour {
 
 		Time.timeScale = 1.0f; //resume game
 
-		playerController.camLockState = false;
+		player.camLockState = false;
 
 		foreach (Transform child in transform) { //disable all children
 			child.gameObject.SetActive(false);

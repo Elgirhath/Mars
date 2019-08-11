@@ -13,7 +13,7 @@ public class EnergyController : MonoBehaviour
     public float energyLossInterval;
     public float maxEnergyLossMultiplier;
 
-    private PlayerController playerController;
+    private Player player;
 
     private bool lockedTimer;
     private float _energy;
@@ -53,7 +53,7 @@ public class EnergyController : MonoBehaviour
         _lockState = false;
         lockedTimer = false;
         
-        playerController = PlayerController.instance;
+        player = Player.instance;
         
         InvokeRepeating(nameof(EnergyLoss),energyLossInterval, energyLossInterval);
     }
@@ -115,13 +115,13 @@ public class EnergyController : MonoBehaviour
         }
         else
         {
-            if (playerController.jumped)
+            if (player.jumped)
             {
                 ChangeEnergy(-jumpDropValue);
             }
-            else if (playerController.IsGrounded()) 
+            else if (player.IsGrounded()) 
             {
-                if(playerController.IsRunning())
+                if(player.IsRunning())
                     ChangeEnergy(-sprintDropSpeed);
                 else
                 {
