@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class PlayerController : MonoBehaviour {
+public class Player : MonoBehaviour {
 	public float angleLimit;
 
 	private Camera cam;
@@ -14,7 +14,7 @@ public class PlayerController : MonoBehaviour {
 	private bool locked;
 	public bool jumped;
 
-	public static PlayerController instance;
+	public static Player instance;
 	private float moveSpeed;
 	private bool jumpedWhileSprinting;
 	private EnergyController energyController;

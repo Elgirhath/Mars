@@ -7,7 +7,7 @@ using UnityEngine.UI;
 public class PauseMenu : MonoBehaviour
 {
     private Transform panel;
-    private PlayerController playerController;
+    private Player player;
     private Crosshair crosshair;
     private bool opened;
     private Tooltip tooltip;
@@ -31,7 +31,7 @@ public class PauseMenu : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        playerController = PlayerController.instance;
+        player = Player.instance;
         crosshair = Crosshair.instance;
         panel = transform.GetChild(0);
         panel.gameObject.SetActive(false);
@@ -62,7 +62,7 @@ public class PauseMenu : MonoBehaviour
 
         Time.timeScale = 0.0f; //pause game
 		
-        playerController.camLockState = true;
+        player.camLockState = true;
         panel.gameObject.SetActive(true);
         crosshair.active = false;
         tooltip.gameObject.SetActive(false);
@@ -75,7 +75,7 @@ public class PauseMenu : MonoBehaviour
 
         Time.timeScale = 1.0f; //resume game
 
-        playerController.camLockState = false;
+        player.camLockState = false;
         panel.gameObject.SetActive(false);
         crosshair.active = true;
         tooltip.gameObject.SetActive(true);

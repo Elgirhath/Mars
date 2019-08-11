@@ -16,7 +16,7 @@ public class Door : MonoBehaviour {
 	public float openingTime;
 	public float closeTriggerDistance;
 
-	private PlayerController player;
+	private Player player;
 	private float timer;
 
 	private Quaternion startRot;
@@ -26,7 +26,7 @@ public class Door : MonoBehaviour {
 	private bool opened = false;
 
 	private void Start() {
-		player = PlayerController.instance;
+		player = Player.instance;
 		
 		startRot = transform.rotation;
 	}

@@ -6,16 +6,16 @@ public class DoorTrigger : MonoBehaviour {
 	private Air capsAir;
 	private Air outdoorAir = null;
 
-	private PlayerController player;
+	private Player player;
 	private Collider playerCollider;
 	private Vector3 oldPlayerPos;
 	private OxygenController o2Ctrl;
 	private Mesh mesh;
 
 	private void Start() {
-		player = PlayerController.instance;
+		player = Player.instance;
 		playerCollider = player.GetComponent<Collider>();
-		oldPlayerPos = PlayerController.instance.transform.position;
+		oldPlayerPos = Player.instance.transform.position;
 		o2Ctrl = player.GetComponent<OxygenController>();
 		capsAir = CapsuleAirController.instance.air;
 		mesh = GetComponent<MeshFilter>().mesh;

@@ -9,7 +9,7 @@ public class WaterBottle : Item {
     [Header("Water bottle properties")]
     public int pointsOnDrink;
     
-    private PlayerController playerController;
+    private Player player;
     private ThirstController thirstController;
 
     private void Drink() 

@@ -46,7 +46,7 @@ public class PlayerPanelController : MonoBehaviour {
 
 //        Time.timeScale = 0.0f; //pause game
 		
-        PlayerController.instance.camLockState = true;
+        Player.instance.camLockState = true;
 
         Inventory.instance.Open();
         ConditionPanel.instance.Open();
@@ -70,7 +70,7 @@ public class PlayerPanelController : MonoBehaviour {
 
 //        Time.timeScale = 1.0f; //resume game
 
-        PlayerController.instance.camLockState = false;
+        Player.instance.camLockState = false;
 
         Inventory.instance.Close();
         ConditionPanel.instance.Close();
