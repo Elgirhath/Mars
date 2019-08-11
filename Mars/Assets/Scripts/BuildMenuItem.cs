@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 using UnityEngine;
 
@@ -22,8 +23,14 @@ public class BuildMenuItem : MonoBehaviour {
         /*
          * Accept the position of the scheme and start building
          */
-        
         origin = original;
+
+        if (matsNeeded.Count <= 0 || matsNeeded.Sum(mat => mat.count) <= 0) // No materials needed -> scheme should apply immediately
+        {
+            Finish();
+            return;
+        }
+
         interactable = gameObject.AddComponent<Interactable>();
 
         if (interactable.onInteract == null)
@@ -33,7 +40,7 @@ public class BuildMenuItem : MonoBehaviour {
         interactable.onInteract.AddListener(Interact);
         UpdateTooltip();
 
-        CreateCollider();
+        CreateBuildUICollider();
     }
 
     public void UpdateTooltip() {
@@ -53,7 +60,7 @@ public class BuildMenuItem : MonoBehaviour {
         interactable.tooltipText = sb.ToString();
     }
 
-    private bool PutPart() {
+    private bool TryPutPart() {
         /*
          * Tries to put a part taken from inventory into the building. Returns true on success and false on failure.
          */
@@ -84,7 +91,7 @@ public class BuildMenuItem : MonoBehaviour {
     }
 
     public void Interact() {
-        PutPart();
+        TryPutPart();
         UpdateTooltip();
 
         if (IsFinished())
@@ -105,7 +112,7 @@ public class BuildMenuItem : MonoBehaviour {
         return true;
     }
 
-    private void CreateCollider() {
+    private void CreateBuildUICollider() {
         /*
          * Creates the trigger collider used for raycast, to allow player to interact with the scheme
          */
