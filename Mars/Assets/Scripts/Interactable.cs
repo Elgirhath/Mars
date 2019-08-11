@@ -5,9 +5,10 @@ using UnityEngine;
 using UnityEngine.Events;
 
 public class Interactable : MonoBehaviour {
-	private string _tooltipText;
 
-	public string tooltipText {
+    [SerializeField]
+	private string _tooltipText;
+    public string tooltipText {
 		get => _tooltipText;
 		set {
 			_tooltipText = value;
