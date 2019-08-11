@@ -13,10 +13,10 @@ public class WaterSource : MonoBehaviour {
 	public AnimationCurve falloff = AnimationCurve.EaseInOut(0f, 1f, 1f, 0f);
 
 
-	private PlayerController player;
+	private Player player;
 	private void Start() {
 		position = transform.position;
-		player = PlayerController.instance;
+		player = Player.instance;
 	}
 
 	public float GetFalloffFactor(float distance) {
