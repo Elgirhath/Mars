@@ -1683,6 +1683,11 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 9197104536271896927, guid: 88e86168bff892446af31e707def991c,
+        type: 3}
+      propertyPath: _tooltipText
+      value: Press [E] to sit
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 88e86168bff892446af31e707def991c, type: 3}
 --- !u!1 &309716844
@@ -7679,7 +7684,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 76f9ab1babac5e8468561857add27c51, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _tooltipText: Press [E] to open
+  _tooltipText: 
   applyOutline: 1
   deselectOnInteract: 0
   onInteract:

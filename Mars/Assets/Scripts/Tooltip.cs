@@ -8,9 +8,9 @@ public class Tooltip : MonoBehaviour {
 	private Text textField;
 	private RectTransform textTransform;
 
-	public static Tooltip instance;
+    public static Tooltip instance { get; set; }
 
-	private Transform target;
+    private Transform target;
 
 	private Camera cam;
 
@@ -31,10 +31,11 @@ public class Tooltip : MonoBehaviour {
 		cam = GameObject.FindGameObjectWithTag("Player").GetComponentInChildren<Camera>();
 	}
 
-	private void Update() {
-		if (target)
-			MoveToTarget();
-	}
+	private void Update()
+    {
+        if (target)
+            MoveToTarget();
+    }
 
 	private void MoveToTarget() {
 		if (!target)
@@ -42,11 +43,15 @@ public class Tooltip : MonoBehaviour {
 		textTransform.anchoredPosition = cam.WorldToScreenPoint(target.position);
 	}
 
-	public void SetText(string text) {
-		textField.text = text;
-	}
+	public void SetText(string text)
+    {
+        textField.text = text;
 
-	public void OpenTooltip(Transform target, string text) {
+
+        Debug.Log(text);
+    }
+
+    public void OpenTooltip(Transform target, string text) {
 		this.target = target;
 		SetText(text);
 		MoveToTarget();
