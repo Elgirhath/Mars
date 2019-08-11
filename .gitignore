@@ -50,3 +50,6 @@ sysinfo.txt
 _local/
 _local.meta
 .gitconfig
+
+# blend files
+*.blend*
