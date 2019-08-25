@@ -1,96 +1,69 @@
-﻿using System.Collections.Generic;
-using System.Linq;
+﻿using System.Collections;
 using UnityEngine;
 
 public class RockSpawnController : MonoBehaviour {
-    public float distance;
-    public int density;
-    
-    [Tooltip("FOV at which rocks can be spawned")]
-    public float spawnFOV = 120f;
-    
+    public float radius;
+    public float density;
+    public float destroyCheckFrequency;
+
     public GameObject prefab;
     
-    private List<GameObject> rocks = new List<GameObject>();
     private Player player;
     private Vector3 lastPlayerPos;
-    private Vector3 playerMovement = Vector3.zero;
 
     private void Start() {
         player = Player.instance;
-        
-        InitialSpawn();
     }
 
-    void InitialSpawn() {
-        /*
-         * Initially spawns the rocks in a circle instead of the edges
-         */
-        
-        for (int i = 0; i < density; i++) {
-            float angle = Random.Range(0f, 360f);
-            float dist = Mathf.Sqrt(Random.value) * distance; // sqrt() for a uniform distribution
-            Vector3 dir = Quaternion.AngleAxis(angle, Vector3.up) * Vector3.forward;
-            Vector3 pos3d = dir.normalized * dist + player.transform.position;
-            pos3d.y = Terrain.activeTerrain.SampleHeight(pos3d);
-        
-            GameObject rock = Instantiate(prefab, pos3d, Quaternion.identity, transform);
-            rocks.Add(rock);
-        }
-    }
-
-    // Update is called once per frame
-    void Update() {
-        if (rocks.Count < density) {
-            SpawnRock();
-        }
-
-        Validate();
-        foreach (var rock in rocks.ToList()) {
-            Vector3 dist2dVec = player.transform.position - rock.transform.position;
-            dist2dVec.y = 0f;
-            float dist2d = dist2dVec.magnitude;
-            
-            if (dist2d > distance + 1e-7) {
-                Destroy(rock);
-            }
-        }
+    private void Update() {
+        SpawnRock();
 
         lastPlayerPos = player.transform.position;
     }
 
-    void SpawnRock() {
-        /*
-         * Spawns a rock in a distance, in front of a player (in terms of movement, not camera view)
-         */
-        
-        float angle = Random.Range(0f, spawnFOV);
-        angle -= spawnFOV / 2f;
+    // TODO:
+    // Check this wiki page for explanation
+    private void SpawnRock()
+    {
         Vector3 moveVector = player.transform.position - lastPlayerPos;
         moveVector.y = 0f;
-        if (moveVector.magnitude > 1e-6) 
-            playerMovement = moveVector.normalized;
-        else if (playerMovement.magnitude < 1e-8) {
-            playerMovement = new Vector3(Random.value, 0f, Random.value).normalized;
-        }
-        Vector3 dir = Quaternion.AngleAxis(angle, Vector3.up) * playerMovement;
-        Vector3 pos3d = dir.normalized * distance + player.transform.position;
+
+        float moveDistance = moveVector.magnitude;
+        float sinBeta = Mathf.Sqrt(1f - 0.25f * Mathf.Pow(moveDistance / radius, 2));
+        float alpha = Mathf.Asin(sinBeta) * 2f;
+        float commonArea = radius * radius * alpha - radius * radius * Mathf.Sin(alpha);
+        float newArea = Mathf.PI * radius * radius - commonArea;
+        float probability = Mathf.Clamp01(newArea * density);
+
+        if (Random.value > probability) return;
+
+        float angle = Random.Range(0f, alpha) - alpha / 2f;
+
+        Vector3 dir = Quaternion.AngleAxis(Mathf.Rad2Deg * angle, Vector3.up) * moveVector.normalized;
+        Vector3 pos3d = dir.normalized * radius + player.transform.position;
         pos3d.y = Terrain.activeTerrain.SampleHeight(pos3d);
-        
+
         GameObject rock = Instantiate(prefab, pos3d, Quaternion.identity, transform);
-        rocks.Add(rock);
+        StartCoroutine(CheckForDestroy(rock));
     }
 
-    void Validate() {
-        /*
-         * Checks if any of the rocks were destroyed (eg. by collecting it) and removes from the list
-         */
-        
-        List<GameObject> rocksCopy = rocks.ToList();
-        foreach (var rock in rocksCopy) {
-            if (rock == null) {
-                rocks.Remove(rock);
+    private IEnumerator CheckForDestroy(GameObject rock)
+    {
+        for (;;)
+        {
+            if (rock == null)
+                yield break;
+
+            Vector3 differenceVector3 = rock.transform.position - player.transform.position;
+            differenceVector3.y = 0f;
+            float distance2d = differenceVector3.magnitude;
+
+            if (distance2d > radius)
+            {
+                Destroy(rock);
+                yield break;
             }
+            yield return new WaitForSeconds(destroyCheckFrequency);
         }
     }
 }
