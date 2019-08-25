@@ -5026,9 +5026,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a08b1b11477acbf488f392f200b4eee7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  distance: 15
-  density: 10
-  spawnFOV: 120
+  radius: 10
+  density: 1
+  destroyCheckFrequency: 1
   prefab: {fileID: 5771797529913580718, guid: c6ad51dc9b245064f88ea7762d1574a1, type: 3}
 --- !u!4 &828452087
 Transform:
