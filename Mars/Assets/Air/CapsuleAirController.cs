@@ -1,11 +1,15 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 
 public class CapsuleAirController : MonoBehaviour {
-    [SerializeField]
-    public Air air;
+    public Air air
+    {
+        get => GetComponentInChildren<AirZone>().air;
+    }
+
     public Air targetAir;
 
     public static CapsuleAirController instance = null;
