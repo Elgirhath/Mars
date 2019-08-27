@@ -1,4 +1,5 @@
 ﻿using System.Collections;
+using System.Linq;
 using UnityEngine;
 
 public class RockSpawnController : MonoBehaviour {
@@ -21,8 +22,7 @@ public class RockSpawnController : MonoBehaviour {
         lastPlayerPos = player.transform.position;
     }
 
-    // TODO: 
-    // Check this wiki page for explanation
+    // Check this wiki page for explanation: https://github.com/Elgirhath/Mars/wiki/Random-spawn-objects
     private void SpawnRock()
     {
         Vector3 moveVector = player.transform.position - lastPlayerPos;
@@ -41,6 +41,10 @@ public class RockSpawnController : MonoBehaviour {
         Vector3 dir = Quaternion.AngleAxis(Mathf.Rad2Deg * angle, Vector3.up) * moveVector.normalized;
         Vector3 pos3d = dir.normalized * radius + player.transform.position;
         pos3d.y = Terrain.activeTerrain.SampleHeight(pos3d);
+
+        var zones = Zone.GetZonesInPoint<SpawnControlZone>(pos3d);
+        float multiplier = zones.Any() ? zones.Min(x => x.multiplier) : 1f;
+        if (Random.value > multiplier) return;
 
         GameObject rock = Instantiate(prefab, pos3d, Quaternion.identity, transform);
         StartCoroutine(CheckForDestroy(rock));

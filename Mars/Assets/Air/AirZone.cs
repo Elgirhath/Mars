@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class AirZone : MonoBehaviour
+public class AirZone : Zone
 {
     [SerializeField]
     public Air air;
