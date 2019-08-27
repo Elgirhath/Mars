@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 1591402064347857187}
   - component: {fileID: 6754382692780671322}
   m_Layer: 5
-  m_Name: Text
+  m_Name: ScrollingInfoText
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -95,7 +95,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_EffectColor: {r: 0, g: 0, b: 0, a: 0.5}
   m_EffectDistance: {x: 1, y: -1}
-  m_UseGraphicAlpha: 1
+  m_UseGraphicAlpha: 0
 --- !u!114 &6754382692780671322
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -105,7 +105,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 1696821716488034073}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2ea5ef0292c1c6a4d841c0db5e015c56, type: 3}
+  m_Script: {fileID: 11500000, guid: 8cbcdd49ef6220a4fbd979b30a3c3b66, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  collectTime: 0
+  stackTime: 2

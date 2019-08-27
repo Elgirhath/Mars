@@ -8,7 +8,6 @@ public class OxygenController : MonoBehaviour {
 
     public int initOxygen;
 
-    //public float chokingDamage;
     [Tooltip("Points per second")] public float dropSpeed;
 
     private float _oxygen;
@@ -24,16 +23,10 @@ public class OxygenController : MonoBehaviour {
     [NonSerialized]
     public Air air;
 
-    private bool _insideCapsule;
-    public bool insideCapsule
-    {
-        get => _insideCapsule;
-        set => _insideCapsule = value;
-    }
+    public bool insideCapsule { get; set; }
 
     public static OxygenController instance;
     
-    //private HealthController healthController;
     private OxygenBar oxygenBar;
 
     private void Awake() {
@@ -46,7 +39,6 @@ public class OxygenController : MonoBehaviour {
     private void Start() {
         air = null;
         _oxygen = initOxygen;
-        //healthController = HealthController.instance;
         oxygenBar = OxygenBar.instance;
         insideCapsule = false;
 
@@ -60,7 +52,6 @@ public class OxygenController : MonoBehaviour {
         
         if (_oxygen <= 0.0f) {
             Debug.Log("You are dead!");
-            //healthController.ChangeHealth(-chokingDamage * Time.deltaTime);
         }
         else {
             oxygen -= dropSpeed * Time.deltaTime;

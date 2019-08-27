@@ -21,7 +21,7 @@ public class RockSpawnController : MonoBehaviour {
         lastPlayerPos = player.transform.position;
     }
 
-    // TODO:
+    // TODO: 
     // Check this wiki page for explanation
     private void SpawnRock()
     {
@@ -31,8 +31,7 @@ public class RockSpawnController : MonoBehaviour {
         float moveDistance = moveVector.magnitude;
         float sinBeta = Mathf.Sqrt(1f - 0.25f * Mathf.Pow(moveDistance / radius, 2));
         float alpha = Mathf.Asin(sinBeta) * 2f;
-        float commonArea = radius * radius * alpha - radius * radius * Mathf.Sin(alpha);
-        float newArea = Mathf.PI * radius * radius - commonArea;
+        float newArea = radius * radius * (Mathf.PI - alpha + Mathf.Sin(alpha));
         float probability = Mathf.Clamp01(newArea * density);
 
         if (Random.value > probability) return;

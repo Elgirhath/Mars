@@ -8,7 +8,6 @@ public class ScrollingInfoController : MonoBehaviour
     public static ScrollingInfoController instance;
     
     private Transform panel;
-    private GameObject gameController;
     
     public GameObject textObject;
     private string defaultText;
@@ -24,7 +23,6 @@ public class ScrollingInfoController : MonoBehaviour
 
     private void Start()
     {
-        gameController = GameObject.FindGameObjectWithTag("GameController");
         panel = transform.GetChild(0);
         foreach (Transform item in panel) {
             Destroy(item.gameObject);
@@ -39,11 +37,11 @@ public class ScrollingInfoController : MonoBehaviour
             bool multipleItems = false;
             foreach (ScrollingInfoTextController line in panel.GetComponentsInChildren<ScrollingInfoTextController>())
             {
-                if (content == line.ItemName)
+                if (content == line.itemName)
                 {
                     // if there is a line with the same name, destroy it and add a new one with incremented quantity
                     multipleItems = true;
-                    AddNewItemLine(content, line.Quantity + 1);
+                    AddNewItemLine(content, line.quantity + 1);
                     Destroy(line.gameObject);
                 }
             }
@@ -63,7 +61,7 @@ public class ScrollingInfoController : MonoBehaviour
     private void AddNewLine(string content)
     {
         GameObject newObj = Instantiate(textObject, panel);
-        newObj.GetComponent<ScrollingInfoTextController>().collectTime = Time.time;
+        newObj.GetComponent<ScrollingInfoTextController>().stackTime = Time.time;
         newObj.GetComponent<Text>().text = content;
     }
     
@@ -92,19 +90,18 @@ public class ScrollingInfoController : MonoBehaviour
         for (var i = 0; i < panel.childCount; ++i)
         {
             info = panel.GetChild(i);
-            if (info.gameObject)
-            {
-                infoController =
-                    info.gameObject.GetComponent<ScrollingInfoTextController>();
-                if (!infoController.Fading)
-                {
-                    childrenExist = true;
-                    break;
-                }
-            }
+
+            if (!info.gameObject) continue;
+
+            infoController = info.gameObject.GetComponent<ScrollingInfoTextController>();
+
+            if (infoController.fading) continue;
+
+            childrenExist = true;
+            break;
         }
 
-        if (childrenExist && curTime - infoController.collectTime > lineDuration)
+        if (childrenExist && curTime - infoController.stackTime > lineDuration)
         {
             infoController.Diminish();
         }
