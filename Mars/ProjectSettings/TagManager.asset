@@ -11,6 +11,7 @@ TagManager:
   - Crosshair
   - BuildMenu
   - PlayerPanel
+  - Zone
   layers:
   - Default
   - TransparentFX
