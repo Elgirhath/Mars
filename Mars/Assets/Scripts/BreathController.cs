@@ -1,9 +1,10 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
-public class OxygenController : MonoBehaviour {
+public class BreathController : MonoBehaviour {
     public int maxOxygen;
 
     public int initOxygen;
@@ -20,12 +21,11 @@ public class OxygenController : MonoBehaviour {
 
     }
 
-    [NonSerialized]
-    public Air air;
+    private Air air;
 
     public bool insideCapsule { get; set; }
 
-    public static OxygenController instance;
+    public static BreathController instance;
     
     private OxygenBar oxygenBar;
 
@@ -46,7 +46,10 @@ public class OxygenController : MonoBehaviour {
         oxygenBar.value = (int) oxygen;
     }
 
-    private void Update() {
+    private void Update()
+    {
+        air = GetAirZone()?.air;
+
         if (air != null)
             return;
         
@@ -56,5 +59,10 @@ public class OxygenController : MonoBehaviour {
         else {
             oxygen -= dropSpeed * Time.deltaTime;
         }
+    }
+
+    private AirZone GetAirZone()
+    {
+        return Zone.GetZonesInPoint<AirZone>(transform.position).FirstOrDefault();
     }
 }

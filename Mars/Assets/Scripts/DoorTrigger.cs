@@ -9,14 +9,14 @@ public class DoorTrigger : MonoBehaviour {
 	private Player player;
 	private Collider playerCollider;
 	private Vector3 oldPlayerPos;
-	private OxygenController o2Ctrl;
+	private BreathController o2Ctrl;
 	private Mesh mesh;
 
 	private void Start() {
 		player = Player.instance;
 		playerCollider = player.GetComponent<Collider>();
 		oldPlayerPos = Player.instance.transform.position;
-		o2Ctrl = player.GetComponent<OxygenController>();
+		o2Ctrl = player.GetComponent<BreathController>();
 		capsAir = CapsuleAirController.instance.air;
 		mesh = GetComponent<MeshFilter>().mesh;
 	}
@@ -28,15 +28,15 @@ public class DoorTrigger : MonoBehaviour {
 		Ray ray = new Ray(oldPlayerPos, rayDir.normalized);
 
 		if (Raycast(ray, rayDir.magnitude)) {
-			SwitchAir();
+//			SwitchAir();
 		}
 
 		oldPlayerPos = playerPos;
 	}
 
-	private void SwitchAir() {
-		o2Ctrl.air = o2Ctrl.air == outdoorAir ? capsAir : outdoorAir;
-	}
+//	private void SwitchAir() {
+//		o2Ctrl.air = o2Ctrl.air == outdoorAir ? capsAir : outdoorAir;
+//	}
 
 	private bool Raycast(Ray ray, float maxDistance) {
 		Ray localRay = new Ray(transform.InverseTransformPoint(ray.origin), transform.InverseTransformDirection(ray.direction));
