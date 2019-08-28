@@ -5,5 +5,5 @@ using UnityEngine;
 public class SpawnControlZone : Zone
 {
     public RockSpawnController spawnController;
-    public float multiplier;
+    public float density;
 }

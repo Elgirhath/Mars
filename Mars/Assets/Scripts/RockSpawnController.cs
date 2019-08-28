@@ -1,69 +1,110 @@
 ﻿using System.Collections;
+using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 
-public class RockSpawnController : MonoBehaviour {
+public class RockSpawnController : MonoBehaviour
+{
     public float radius;
     public float density;
     public float destroyCheckFrequency;
 
     public GameObject prefab;
-    
-    private Player player;
-    private Vector3 lastPlayerPos;
 
-    private void Start() {
+    private Player player;
+    private Vector3 lastPlayerPosition;
+
+    private Vector3 moveVector
+    {
+        get
+        {
+            var vector = player.transform.position - lastPlayerPosition;
+            vector.y = 0f;
+            return vector;
+        }
+    }
+
+    private void Start()
+    {
         player = Player.instance;
     }
 
-    private void Update() {
-        SpawnRock();
+    private void Update()
+    {
+        var spawnObjectAmount = GetNumberOfObjectsToSpawn();
+        for (int i = 0; i < spawnObjectAmount; i++)
+        {
+            Spawn();
+        }
 
-        lastPlayerPos = player.transform.position;
+        lastPlayerPosition = player.transform.position;
     }
 
     // Check this wiki page for explanation: https://github.com/Elgirhath/Mars/wiki/Random-spawn-objects
-    private void SpawnRock()
+    private void Spawn()
     {
-        Vector3 moveVector = player.transform.position - lastPlayerPos;
-        moveVector.y = 0f;
+        float spawnFov = GetSpawnFov();
+        var spawnPosition = GenerateSpawnPosition(spawnFov);
 
-        float moveDistance = moveVector.magnitude;
-        float sinBeta = Mathf.Sqrt(1f - 0.25f * Mathf.Pow(moveDistance / radius, 2));
-        float alpha = Mathf.Asin(sinBeta) * 2f;
-        float newArea = radius * radius * (Mathf.PI - alpha + Mathf.Sin(alpha));
-        float probability = Mathf.Clamp01(newArea * density);
+        if (Random.value > GetSpawnProbabilityInPoint(spawnPosition, spawnFov)) return;
 
-        if (Random.value > probability) return;
-
-        float angle = Random.Range(0f, alpha) - alpha / 2f;
-
-        Vector3 dir = Quaternion.AngleAxis(Mathf.Rad2Deg * angle, Vector3.up) * moveVector.normalized;
-        Vector3 pos3d = dir.normalized * radius + player.transform.position;
-        pos3d.y = Terrain.activeTerrain.SampleHeight(pos3d);
-
-        var zones = Zone.GetZonesInPoint<SpawnControlZone>(pos3d);
-        float multiplier = zones.Any() ? zones.Min(x => x.multiplier) : 1f;
-        if (Random.value > multiplier) return;
-
-        GameObject rock = Instantiate(prefab, pos3d, Quaternion.identity, transform);
+        GameObject rock = Instantiate(prefab, spawnPosition, Quaternion.identity, transform);
         StartCoroutine(CheckForDestroy(rock));
     }
 
-    private IEnumerator CheckForDestroy(GameObject rock)
+    private int GetNumberOfObjectsToSpawn()
+    {
+        var spawnFov = GetSpawnFov();
+        var randomSample = GenerateSpawnPosition(spawnFov);
+        return Mathf.CeilToInt(GetSpawnProbabilityInPoint(randomSample, spawnFov));
+    }
+
+
+    private float GetSpawnFov()
+    {
+        float moveDistance = moveVector.magnitude;
+        float sinBeta = Mathf.Sqrt(1f - 0.25f * Mathf.Pow(moveDistance / radius, 2));
+        return Mathf.Asin(sinBeta) * 2f;
+    }
+
+    private Vector3 GenerateSpawnPosition(float spawnFov)
+    {
+        float angle = Random.Range(0f, spawnFov) - spawnFov / 2f;
+        Vector3 spawnDirection = Quaternion.AngleAxis(Mathf.Rad2Deg * angle, Vector3.up) * moveVector.normalized;
+        Vector3 spawnPosition = spawnDirection.normalized * radius + player.transform.position;
+        spawnPosition.y = Terrain.activeTerrain.SampleHeight(spawnPosition);
+
+        return spawnPosition;
+    }
+
+    private float GetDensityInPoint(Vector3 point)
+    {
+        var zones = Zone.GetZonesInPoint<SpawnControlZone>(point).Where(zone => zone.spawnController == this);
+        float densityInPoint = zones.Any() ? zones.Min(x => x.density) : density;
+        return densityInPoint;
+    }
+
+    private float GetSpawnProbabilityInPoint(Vector3 point, float spawnFov)
+    {
+        float densityInPoint = GetDensityInPoint(point);
+        float newArea = radius * radius * (Mathf.PI - spawnFov + Mathf.Sin(spawnFov));
+        return Mathf.Clamp(newArea * densityInPoint, 0f, Mathf.Infinity);
+    }
+
+    private IEnumerator CheckForDestroy(GameObject spawnObject)
     {
         for (;;)
         {
-            if (rock == null)
+            if (spawnObject == null)
                 yield break;
 
-            Vector3 differenceVector3 = rock.transform.position - player.transform.position;
+            Vector3 differenceVector3 = spawnObject.transform.position - player.transform.position;
             differenceVector3.y = 0f;
             float distance2d = differenceVector3.magnitude;
 
             if (distance2d > radius)
             {
-                Destroy(rock);
+                Destroy(spawnObject);
                 yield break;
             }
             yield return new WaitForSeconds(destroyCheckFrequency);
