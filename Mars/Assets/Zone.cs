@@ -5,13 +5,13 @@ using UnityEngine;
 
 public class Zone : MonoBehaviour
 {
-    public static T[] GetZonesInPoint<T>(Vector3 point) where T : Zone
+    public static IEnumerable<T> GetZonesInPoint<T>(Vector3 point) where T : Zone
     {
         var allZones = GameObject.FindGameObjectsWithTag("Zone");
-        var tZones = allZones.Select(x => x.GetComponent<T>()).Where(x => x != null).ToArray();
+        var tZones = allZones.Select(x => x.GetComponent<T>()).Where(x => x != null);
         var tZonesInPoint = tZones.Where(
             x => x.GetComponent<Collider>().bounds.Contains(point)
         );
-        return tZonesInPoint.ToArray();
+        return tZonesInPoint;
     }
 }
