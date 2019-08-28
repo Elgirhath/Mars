@@ -4385,7 +4385,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   spawnController: {fileID: 828452086}
-  multiplier: 0
+  density: 50
 --- !u!114 &647495305
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5070,7 +5070,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   radius: 10
-  density: 1
+  density: 0
   destroyCheckFrequency: 1
   prefab: {fileID: 5771797529913580718, guid: c6ad51dc9b245064f88ea7762d1574a1, type: 3}
 --- !u!4 &828452087
@@ -5080,12 +5080,12 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 828452085}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 69.39043, y: 10.602204, z: 23.078835}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
-  m_Father: {fileID: 0}
-  m_RootOrder: 13
+  m_Father: {fileID: 1241421585}
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &834055277
 PrefabInstance:
@@ -6750,6 +6750,37 @@ RectTransform:
     type: 3}
   m_PrefabInstance: {fileID: 1218131717}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &1241421584
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1241421585}
+  m_Layer: 0
+  m_Name: SpawnObjects
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1241421585
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1241421584}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 69.39043, y: 10.602204, z: 23.078835}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children:
+  - {fileID: 828452087}
+  m_Father: {fileID: 0}
+  m_RootOrder: 13
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1282971534
 GameObject:
   m_ObjectHideFlags: 0
@@ -6884,6 +6915,7 @@ GameObject:
   - component: {fileID: 1301356529}
   - component: {fileID: 1301356530}
   - component: {fileID: 1301356531}
+  - component: {fileID: 1301356532}
   m_Layer: 0
   m_Name: Zone
   m_TagString: Zone
@@ -6937,6 +6969,20 @@ MonoBehaviour:
     pressure: 0
     temperature: 0
     heatCapacity: 1012
+--- !u!114 &1301356532
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1301356528}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 75e22e17c76f54e4083ce7ee8ca5117e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  spawnController: {fileID: 828452086}
+  density: 0
 --- !u!1 &1321892746
 GameObject:
   m_ObjectHideFlags: 0
