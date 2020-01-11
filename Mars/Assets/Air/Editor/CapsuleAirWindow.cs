@@ -54,18 +54,18 @@ public class CapsuleAirWindow : EditorWindow {
 
 
 	private void ShowAirGUI(Air air) {
-		Dictionary<Gas, float> gases = air.gases;
+		Dictionary<Gas, float> gases = air.gasProportions;
 		
 		GUILayout.Label("Gases", EditorStyles.label);
 
-		foreach (var gas in air.gases.Keys) {
+		foreach (var gas in air.gasProportions.Keys) {
 			GUILayout.BeginHorizontal();
 			GUILayout.Label(gas.name, GUILayout.MinWidth(30f));
-			gases[gas] = EditorGUILayout.Slider(air.gases[gas], 0f, 1f);
+			gases[gas] = EditorGUILayout.Slider(air.gasProportions[gas], 0f, 1f);
 			GUILayout.EndHorizontal();
 		}
 
-		air.gases = gases;
+		air.gasProportions = gases;
 
 		GUILayout.Space(20f);
 

@@ -10,7 +10,7 @@ public class Gas : ScriptableObject{
 
 	public float GetMass(Air air) {
 		float totalAirMass = air.GetMassFromPressure();
-		float pseudoMass = air.gases[this] * molarMass;
+		float pseudoMass = air.gasProportions[this] * molarMass;
 		float airMolarMass = air.GetMolarMass();
 		return pseudoMass / airMolarMass * totalAirMass;
 	}
@@ -18,7 +18,7 @@ public class Gas : ScriptableObject{
 	public void SetMass(Air air, float mass) {
 		float totalMass = air.GetMass() - GetMass(air) + mass;
 		float totalMoles = GetMoles(mass);
-		foreach (var gas in air.gases.Keys) {
+		foreach (var gas in air.gasProportions.Keys) {
 			if (gas == this) 
 				continue;
 			
@@ -26,16 +26,16 @@ public class Gas : ScriptableObject{
 		}
 		
 		float volumeRatio = GetMoles(mass) / totalMoles;
-		Dictionary<Gas, float> newGases = new Dictionary<Gas, float>(air.gases);
+		Dictionary<Gas, float> newGases = new Dictionary<Gas, float>(air.gasProportions);
 		newGases[this] = volumeRatio;
-		foreach (var pair in air.gases) {
+		foreach (var pair in air.gasProportions) {
 			if (pair.Key == this) 
 				continue;
 			volumeRatio = pair.Key.GetMoles(air) / totalMoles;
 			newGases[pair.Key] = volumeRatio;
 		}
 
-		air.gases = newGases;
+		air.gasProportions = newGases;
 
 		float molarMass = air.GetMolarMass();
 		float density = totalMass / air.volume;
