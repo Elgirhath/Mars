@@ -91,7 +91,7 @@ public class Air : Object{
 
     public void Validate()
     {
-        if (gasProportions.Values.Sum() - 1.0f > 1e-6)
+        if (Mathf.Abs(gasProportions.Values.Sum() - 1.0f) > 1e-6)
         {
             throw new ArgumentException("Gases percentage must sum up to 1.0");
         }
