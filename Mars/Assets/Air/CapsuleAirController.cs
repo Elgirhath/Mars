@@ -1,13 +1,22 @@
 ﻿using System;
-using System.Collections;
-using System.Collections.Generic;
+using System.Linq;
+using UnityEditor;
 using UnityEngine;
 
 
 public class CapsuleAirController : MonoBehaviour {
+
+    private AirZone airZone;
     public Air air
     {
-        get => GetComponentInChildren<AirZone>().air;
+        get
+        {
+            if (airZone == null)
+            {
+                airZone = GetComponentInChildren<AirZone>();
+            }
+            return airZone.air;
+        }
     }
 
     public Air targetAir;
@@ -19,5 +28,11 @@ public class CapsuleAirController : MonoBehaviour {
             instance = this;
         else if (instance != this)
             Destroy(gameObject);
+    }
+
+    private void OnValidate()
+    {
+        air.Validate();
+        targetAir.Validate();
     }
 }
