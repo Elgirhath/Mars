@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using Object = System.Object;
 
@@ -9,11 +10,12 @@ public class Air : Object{
 	public float volume;
 
 	[SerializeField]
-	private GasDictionary _gases;
+    [Tooltip("Gas proportions volume-wise")]
+    private SerializableGasDictionary _gasProportions;
 
-	public Dictionary<Gas, float> gases {
-		get => _gases.ToDictionary();
-		set => _gases = (GasDictionary) value;
+	public Dictionary<Gas, float> gasProportions {
+		get => _gasProportions.ToDictionary();
+        set => _gasProportions = (SerializableGasDictionary)value;
 	}
 
 	[Tooltip("In kPa")] public float pressure;
@@ -51,8 +53,8 @@ public class Air : Object{
 	public float GetMolarMass() {
 		float sum = 0f;
 
-		foreach (var gas in gases.Keys) {
-			sum += gases[gas] * gas.molarMass;
+		foreach (var gas in gasProportions.Keys) {
+			sum += gasProportions[gas] * gas.molarMass;
 		}
 		return sum;
 	}
@@ -73,13 +75,10 @@ public class Air : Object{
 		return tempAbs;
 	}
 
-	public float GetMass() {
-		float sum = 0;
-		foreach (var gas in gases.Keys) {
-			sum += gas.GetMass(this);
-		}
-		return sum;
-	}
+	public float GetMass()
+    {
+        return gasProportions.Keys.Sum(gas => gas.GetMass(this));
+    }
 
 	public float GetMassFromPressure() {
 		float density = GetDensityFromPressure();
@@ -87,15 +86,19 @@ public class Air : Object{
 	}
 
 	public float GetTotalMoles() {
-		float sum = 0f;
-		foreach (var gas in gases.Keys) {
-			sum += gas.GetMoles(this);
-		}
-		return sum;
+        return gasProportions.Keys.Sum(gas => gas.GetMoles(this));
 	}
+
+    public void Validate()
+    {
+        if (gasProportions.Values.Sum() - 1.0f > 1e-6)
+        {
+            throw new ArgumentException("Gases percentage must sum up to 1.0");
+        }
+    }
 	
 	[Serializable]
-	public class GasDictionary{
+	public class SerializableGasDictionary{
 		[SerializeField]
 		public GasDictionaryPosition[] array;
 
@@ -108,9 +111,9 @@ public class Air : Object{
 			return dictionary;
 		}
 		
-		public static explicit operator GasDictionary(Dictionary<Gas, float> dictionary)
+		public static explicit operator SerializableGasDictionary(Dictionary<Gas, float> dictionary)
 		{
-			GasDictionary gasDictionary = new GasDictionary();
+            SerializableGasDictionary gasDictionary = new SerializableGasDictionary();
 			gasDictionary.array = new GasDictionaryPosition[dictionary.Count];
 			int i = 0;
 			foreach (var pair in dictionary) {
