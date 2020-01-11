@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class NPump : MonoBehaviour
+public class NPump : Pump
 {
     public float kgPerSec;
     public float activateThreshold;
@@ -11,26 +11,20 @@ public class NPump : MonoBehaviour
     private GasTank tank;
 
     private CapsuleAirController airController;
-    private PowerSocket powerSocket;
-    
-    void Start() {
+
+    protected override void OnPumpStart() {
         airController = GetComponentInParent<CapsuleAirController>();
         tank = GetComponentInChildren<GasTank>();
-        powerSocket = GetComponent<PowerSocket>();
     }
 
-    // Update is called once per frame
-    void Update() {
-        if (!powerSocket.isPowered)
-            return;
-        
+    protected override void Recalculate() {
         Air currentAir = airController.air;
         Air targetAir = airController.targetAir;
         
         if (!(Mathf.Abs(targetAir.pressure - currentAir.pressure) > activateThreshold))
             return;
         
-        float amount = Mathf.Sign(targetAir.pressure - currentAir.pressure) * kgPerSec * Time.deltaTime;
+        float amount = Mathf.Sign(targetAir.pressure - currentAir.pressure) * kgPerSec * deltaTime;
         amount = amount > tank.gasWeight ? tank.gasWeight : amount;
         float currentMass = n2.GetMass(airController.air);
         float newMass = currentMass + amount;

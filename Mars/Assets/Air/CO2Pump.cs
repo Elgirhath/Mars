@@ -3,25 +3,19 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class CO2Pump : MonoBehaviour {
+public class CO2Pump : Pump {
     public float kgPerSec;
     public float activateThreshold;
 
     public Gas co2;
 
     private CapsuleAirController airController;
-    private PowerSocket powerSocket;
     
-    void Start() {
+    protected override void OnPumpStart() {
         airController = GetComponentInParent<CapsuleAirController>();
-        powerSocket = GetComponent<PowerSocket>();
     }
 
-    // Update is called once per frame
-    void Update() {
-        if (!powerSocket.isPowered)
-            return;
-        
+    protected override void Recalculate() {
         float currentMass = co2.GetMass(airController.air);
         float targetMass = co2.GetMass(airController.targetAir);
         
@@ -29,7 +23,7 @@ public class CO2Pump : MonoBehaviour {
             return;
         
         float maxAmount = targetMass - currentMass;
-        float amount = Mathf.Sign(maxAmount) * kgPerSec * Time.deltaTime;
+        float amount = Mathf.Sign(maxAmount) * kgPerSec * deltaTime;
         float amountClamped = Mathf.Clamp(amount, -Mathf.Abs(maxAmount), Mathf.Abs(maxAmount));
         float newMass = currentMass + amountClamped;
         co2.SetMass(airController.air, newMass);

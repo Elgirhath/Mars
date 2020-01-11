@@ -5,17 +5,18 @@ using UnityEngine;
 
 public class SlidingDoor : MonoBehaviour
 {
-    private Player player;
     private Vector3 closedPosition;
 
     [SerializeField]
     private float slideSpeed = 1.0f;
 
     [SerializeField]
+    #pragma warning disable CS0649
     private Transform openedTransform;
 
     [SerializeField]
     private SlidingDoorTrigger trigger;
+    #pragma warning restore CS0649
 
     void Start()
     {

@@ -3,9 +3,6 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class DoorTrigger : MonoBehaviour {
-	private Air capsAir;
-	private Air outdoorAir = null;
-
 	private Player player;
 	private Collider playerCollider;
 	private Vector3 oldPlayerPos;
@@ -17,7 +14,6 @@ public class DoorTrigger : MonoBehaviour {
 		playerCollider = player.GetComponent<Collider>();
 		oldPlayerPos = Player.instance.transform.position;
 		o2Ctrl = player.GetComponent<BreathController>();
-		capsAir = CapsuleAirController.instance.air;
 		mesh = GetComponent<MeshFilter>().mesh;
 	}
 
