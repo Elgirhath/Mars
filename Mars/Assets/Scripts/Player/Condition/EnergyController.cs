@@ -1,145 +1,121 @@
 ﻿using System.Collections;
-using Assets.UI.ConditionBar;
 using UnityEngine;
 
 namespace Assets.Scripts.Player.Condition
 {
     public class EnergyController : MonoBehaviour
     {
-        public float maxEnergyLimit;
-        public float initEnergy;
+        public float maxEnergy;
         public float regenerationSpeed;
         public float sprintDropSpeed;
         public float jumpDropValue;
-        public float secondsToUnlock;
-        public float energyLossInterval;
-        public float maxEnergyLossMultiplier;
+        public float regenerationDelay;
+        public float longTermEnergyLossInterval;
+        public float longTermEnergyLossMultiplier;
 
-        private Player player;
+        private Player player { get; set; }
 
-        private bool lockedTimer;
+        private Coroutine _regenerationDelayCoroutine;
+
+        [SerializeField]
         private float _energy;
-        private float _maxEnergy;
-        private bool _lockState;
-        public float energy {
+        public float energy
+        {
             get => _energy;
-            set => _energy = value;
+            set
+            {
+                var difference = value - _energy;
+                _energy = Mathf.Clamp(value, 0f, longTermEnergy);
+
+                if (difference < 0)
+                {
+                    longTermEnergy += difference * longTermEnergyLossMultiplier;
+                }
+            }
         }
 
-        public float maxEnergy
+        [SerializeField]
+        private float _longTermEnergy;
+        public float longTermEnergy
         {
-            get => _maxEnergy;
-            set => _maxEnergy = value;
+            get => _longTermEnergy;
+            set
+            {
+                _longTermEnergy = Mathf.Clamp(value, 0f, maxEnergy);
+
+                if (_longTermEnergy < energy)
+                {
+                    energy = _longTermEnergy;
+                }
+            }
         }
 
-        public bool LockState
+        public bool canRun => energy > 1e-4;
+        public bool canJump => energy > jumpDropValue;
+
+        private bool isRegenerating { get; set; }
+
+        private bool _isResting;
+        private bool isResting
         {
-            get => _lockState;
-            set => _lockState = value;
-        }
+            set
+            {
+                if (value != _isResting && _regenerationDelayCoroutine != null)
+                {
+                    StopCoroutine(_regenerationDelayCoroutine);
+                    _regenerationDelayCoroutine = null;
+                }
 
-        public static EnergyController instance;
-        private EnergyBar energyBar;
+                if (!_isResting && value) //starts resting
+                {
+                    _regenerationDelayCoroutine = StartCoroutine(StartRegeneratingDelayed());
+                }
 
-        private void Awake() {
-            if (!instance)
-                instance = this;
-            else if (instance != this)
-                Destroy(gameObject);
+                if (!value)
+                {
+                    isRegenerating = false;
+                }
+
+                _isResting = value;
+            }
         }
 
         private void Start() {
-            _energy = initEnergy;
-            _maxEnergy = maxEnergyLimit;
-            energyBar = EnergyBar.instance;
-            _lockState = false;
-            lockedTimer = false;
-        
-            player = Player.instance;
-        
-            InvokeRepeating(nameof(EnergyLoss),energyLossInterval, energyLossInterval);
+            player = GetComponent<Player>();
+
+            InvokeRepeating(nameof(LongTermEnergyLoss),longTermEnergyLossInterval, longTermEnergyLossInterval);
         }
 
-        private void ChangeEnergy(float diff)
+        private void LongTermEnergyLoss()
         {
-            if (_energy + diff <= 0)
-            {
-                _energy = 0;
-                _lockState = true;
-            }
-            else if (_energy + diff > maxEnergy)
-            {
-                _energy = maxEnergy;
-            }
-            else
-            {
-                energy += diff;
-            }
-            energyBar.ChangeEnergyBar(energy/maxEnergy);
-            if(diff < 0)
-                ChangeMaxEnergy(diff*maxEnergyLossMultiplier);
+            longTermEnergy -= 0.01f;
         }
 
-        private void ChangeMaxEnergy(float diff)
+        public void ExecuteJumpLoss()
         {
-            if (maxEnergy + diff < 0)
-            {
-                maxEnergy = 0;
-            }
-            else if (maxEnergy + diff > maxEnergyLimit)
-            {
-                maxEnergy = maxEnergyLimit;
-            }
-            else
-            {
-                maxEnergy += diff;
-            }
-            energyBar.ChangeMaxEnergyBar(maxEnergy/maxEnergyLimit);
-        
-            if (maxEnergy < energy)
-            {
-                energy = maxEnergy;
-                energyBar.ChangeEnergyBar(energy/maxEnergy);
-            }
-        }
-
-        private void EnergyLoss()
-        {
-            ChangeMaxEnergy(-0.01f);
+            energy -= jumpDropValue;
         }
 
         private void Update()
         {
-            if (LockState)
+            isResting = player.IsResting();
+
+            if (player.IsRunning())
             {
-                if (!lockedTimer)
-                    StartCoroutine(LockRegeneration());
+                energy -= sprintDropSpeed;
             }
-            else
+
+            if (isRegenerating)
             {
-                if (player.jumped)
-                {
-                    ChangeEnergy(-jumpDropValue);
-                }
-                else if (player.IsGrounded()) 
-                {
-                    if(player.IsRunning())
-                        ChangeEnergy(-sprintDropSpeed);
-                    else
-                    {
-                        ChangeEnergy(regenerationSpeed);
-                    }
-                }
+                energy += regenerationSpeed;
             }
             //Debug.Log(LockState);
         }
 
-        private IEnumerator LockRegeneration()
+        private IEnumerator StartRegeneratingDelayed()
         {
-            lockedTimer = true;
-            yield return new WaitForSeconds(secondsToUnlock);
-            lockedTimer = false;
-            LockState = false;
+            yield return new WaitForSeconds(regenerationDelay);
+            isRegenerating = true;
         }
     }
 }

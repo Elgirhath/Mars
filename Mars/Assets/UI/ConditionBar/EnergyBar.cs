@@ -1,47 +1,57 @@
-﻿using UnityEngine;
+﻿using Assets.Scripts.Player;
+using Assets.Scripts.Player.Condition;
+using UnityEngine;
 using UnityEngine.UI;
 
 namespace Assets.UI.ConditionBar
 {
     public class EnergyBar : MonoBehaviour {
-        private float maxEnergyBarLengthLimit;
-        private float currentMaxEnergyBarLength;
-        private RectTransform maxEnergyBar;
+        private float longTermEnergyBarLengthLimit;
+        private float currentLongTermEnergyBarLength;
+        private RectTransform longTermEnergyBar;
     
         private Slider slider;
         private Image fillImage;
-    
-        public static EnergyBar instance;
-    
+
         public Color criticalValueColor;
         public Color semiCriticalValueColor;
         public Color defaultColor;
+
+        private EnergyController energyController;
+
         //Critical Values
         [Range(0.0f, 1.0f)]
         public float criticalValue;
         [Range(0.0f, 1.0f)]
         public float semiCriticalValue;
 
-        private void Awake() {
-            if (!instance)
-                instance = this;
-            else if (instance != this)
-                Destroy(gameObject);
+        private void Start()
+        {
             slider = GetComponentInChildren<Slider>();
-        }
-
-        private void Start() {
             fillImage = transform.Find("Fill Area").Find("Fill").GetComponent<Image>();
-            maxEnergyBar = gameObject.GetComponent<RectTransform>();
-            maxEnergyBarLengthLimit = maxEnergyBar.rect.width;
+            longTermEnergyBar = gameObject.GetComponent<RectTransform>();
+            longTermEnergyBarLengthLimit = longTermEnergyBar.rect.width;
+
+            energyController = Player.instance.GetComponent<EnergyController>();
         }
 
-        public void ChangeEnergyBar(float percentageValue)
+        private void Update()
+        {
+            SetEnergyBar(energyController.energy / energyController.maxEnergy);
+            SetLongTermEnergyBar(energyController.longTermEnergy / energyController.maxEnergy);
+        }
+
+        private void SetEnergyBar(float percentageValue)
         {
             slider.value = percentageValue;
-            if (percentageValue < semiCriticalValue)
+
+            if (percentageValue < criticalValue)
             {
-                fillImage.color = percentageValue < criticalValue ? criticalValueColor : semiCriticalValueColor;
+                fillImage.color = criticalValueColor;
+            }
+            else if (percentageValue < semiCriticalValue)
+            {
+                fillImage.color = semiCriticalValueColor;
             }
             else
             {
@@ -49,9 +59,9 @@ namespace Assets.UI.ConditionBar
             }
         }
 
-        public void ChangeMaxEnergyBar(float percentageValue)
+        private void SetLongTermEnergyBar(float percentageValue)
         {
-            maxEnergyBar.SetSizeWithCurrentAnchors(RectTransform.Axis.Horizontal, percentageValue * maxEnergyBarLengthLimit);
+            longTermEnergyBar.SetSizeWithCurrentAnchors(RectTransform.Axis.Horizontal, percentageValue * longTermEnergyBarLengthLimit);
         }
     }
 }
