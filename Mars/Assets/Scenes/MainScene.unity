@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 170076734}
-  m_IndirectSpecularColor: {r: 0.06744362, g: 0.0889105, b: 0.13196887, a: 1}
+  m_IndirectSpecularColor: {r: 0.06744319, g: 0.08891004, b: 0.13196816, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -1869,8 +1869,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 46f35b01b1919b04aad5934e5b3151ee, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  recalculateInterval: 1
   kgPerSec: 3
-  activateThreshold: 0
+  activateThreshold: 0.001
   co2: {fileID: 11400000, guid: a8c3cecff9ad7d746bf8ab891d7a39e1, type: 2}
 --- !u!114 &315722241
 MonoBehaviour:
@@ -2567,7 +2568,6 @@ MonoBehaviour:
   runSpeed: 5
   sensitivity: 5
   walkSpeed: 3
-  jumped: 0
 --- !u!54 &500106269
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -2671,14 +2671,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4971446c4ff729944af5218a5dab1f97, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxEnergyLimit: 100
-  initEnergy: 80
+  maxEnergy: 100
   regenerationSpeed: 0.35
-  sprintDropSpeed: 0.2
-  jumpDropValue: 10
-  secondsToUnlock: 3
-  energyLossInterval: 2.5
-  maxEnergyLossMultiplier: 0.04
+  sprintDropSpeed: 0.5
+  jumpDropValue: 5
+  regenerationDelay: 1
+  longTermEnergyLossInterval: 2.5
+  longTermEnergyLossMultiplier: 0.1
+  _energy: 80
+  _longTermEnergy: 100
 --- !u!1 &509127553
 GameObject:
   m_ObjectHideFlags: 0
@@ -4407,7 +4408,7 @@ MonoBehaviour:
       - gas: {fileID: 11400000, guid: a8c3cecff9ad7d746bf8ab891d7a39e1, type: 2}
         ratio: 0.3
       - gas: {fileID: 11400000, guid: 736d38b6d7fa2e945a944c9ed14ab15d, type: 2}
-        ratio: 0.5
+        ratio: 0.6
     pressure: 100000
     temperature: 10
     heatCapacity: 1012
@@ -5414,12 +5415,12 @@ MonoBehaviour:
   onPlayerEnter:
     m_PersistentCalls:
       m_Calls: []
-    m_TypeName: SlidingDoorTrigger+TriggerEvent, Assembly-CSharp, Version=0.0.0.0,
+    m_TypeName: Assets.Scripts.SlidingDoorTrigger+TriggerEvent, Assembly-CSharp, Version=0.0.0.0,
       Culture=neutral, PublicKeyToken=null
   onPlayerExit:
     m_PersistentCalls:
       m_Calls: []
-    m_TypeName: SlidingDoorTrigger+TriggerEvent, Assembly-CSharp, Version=0.0.0.0,
+    m_TypeName: Assets.Scripts.SlidingDoorTrigger+TriggerEvent, Assembly-CSharp, Version=0.0.0.0,
       Culture=neutral, PublicKeyToken=null
 --- !u!4 &953796782 stripped
 Transform:
@@ -6887,6 +6888,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cbb47ce76f56b884f9a427a389930128, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  recalculateInterval: 1
   kgPerSec: 3
   activateThreshold: 0.001
   o2: {fileID: 11400000, guid: 00e419d01be4ace4187e053c97f049d1, type: 2}
@@ -7212,12 +7214,12 @@ MonoBehaviour:
   onPlayerEnter:
     m_PersistentCalls:
       m_Calls: []
-    m_TypeName: SlidingDoorTrigger+TriggerEvent, Assembly-CSharp, Version=0.0.0.0,
+    m_TypeName: Assets.Scripts.SlidingDoorTrigger+TriggerEvent, Assembly-CSharp, Version=0.0.0.0,
       Culture=neutral, PublicKeyToken=null
   onPlayerExit:
     m_PersistentCalls:
       m_Calls: []
-    m_TypeName: SlidingDoorTrigger+TriggerEvent, Assembly-CSharp, Version=0.0.0.0,
+    m_TypeName: Assets.Scripts.SlidingDoorTrigger+TriggerEvent, Assembly-CSharp, Version=0.0.0.0,
       Culture=neutral, PublicKeyToken=null
 --- !u!65 &1334524865
 BoxCollider:
@@ -9281,6 +9283,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9c90f15dc781d784c8a41cee39cc0716, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  recalculateInterval: 1
   kgPerSec: 3
   activateThreshold: 0.2
   n2: {fileID: 11400000, guid: 736d38b6d7fa2e945a944c9ed14ab15d, type: 2}
