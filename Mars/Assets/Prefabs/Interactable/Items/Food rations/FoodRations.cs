@@ -1,27 +1,31 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using Assets.Scripts.Player;
+using Assets.Scripts.Player.Condition;
+using Assets.UI.Inventory;
+using Assets.UI.ScrollingInfo;
 using UnityEngine;
-using UnityEngine.Serialization;
 
-[CreateAssetMenu(fileName = "FoodRations", menuName="Item/Food rations")]
-public class FoodRations : Item {
-    [Space(10)]
-    [Header("Food rations properties")]
-    public int pointsOnEat;
+namespace Assets.Prefabs.Interactable.Items.Food_rations
+{
+    [CreateAssetMenu(fileName = "FoodRations", menuName="Item/Food rations")]
+    public class FoodRations : Item {
+        [Space(10)]
+        [Header("Food rations properties")]
+        public int pointsOnEat;
     
-    private Player player;
-    private HungerController hungerController;
+        private Player player;
+        private HungerController hungerController;
 
-    private void Eat()
-    {
-        string info = "You ate some food rations. (+" + pointsOnEat + ")";
-        ScrollingInfoController.instance.AddText(info, isItem: false);
-        hungerController = HungerController.instance;
-        hungerController.hunger += pointsOnEat;
-    }
+        private void Eat()
+        {
+            string info = "You ate some food rations. (+" + pointsOnEat + ")";
+            ScrollingInfoController.instance.AddText(info, isItem: false);
+            hungerController = HungerController.instance;
+            hungerController.hunger += pointsOnEat;
+        }
 
-    public override void Use(ItemSlot slot) {
-        Eat();
-        slot.amount--;
+        public override void Use(ItemSlot slot) {
+            Eat();
+            slot.amount--;
+        }
     }
 }

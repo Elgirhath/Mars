@@ -1,35 +1,38 @@
-﻿using System.Collections;
+﻿using Assets.Air.Gases;
 using UnityEngine;
 
-public class O2Pump : Pump
+namespace Assets.Air.Pump
 {
-    public float kgPerSec;
-    public float activateThreshold;
-
-    public Gas o2;
-    private GasTank tank;
-
-    private CapsuleAirController airController;
-
-    protected override void OnPumpStart()
+    public class O2Pump : Pump
     {
-        airController = GetComponentInParent<CapsuleAirController>();
-        tank = GetComponentInChildren<GasTank>();
-    }
+        public float kgPerSec;
+        public float activateThreshold;
 
-    protected override void Recalculate()
-    {
-        float currentPartialPressure = o2.GetPartialPressure(airController.air);
-        float targetPartialPressure = o2.GetPartialPressure(airController.targetAir);
+        public Gas o2;
+        private GasTank tank;
 
-        if (!(Mathf.Abs(targetPartialPressure - currentPartialPressure) > activateThreshold))
-            return;
+        private CapsuleAirController airController;
 
-        float amountToPump = Mathf.Sign(targetPartialPressure - currentPartialPressure) * kgPerSec * deltaTime;
-        amountToPump = amountToPump > tank.gasWeight ? tank.gasWeight : amountToPump; //clamp to the mass in tank
-        float currentMass = o2.GetMass(airController.air);
-        float newMass = currentMass + amountToPump;
-        o2.SetMass(airController.air, newMass);
-        tank.gasWeight -= amountToPump; //clamped by gasWeight property
+        protected override void OnPumpStart()
+        {
+            airController = GetComponentInParent<CapsuleAirController>();
+            tank = GetComponentInChildren<GasTank>();
+        }
+
+        protected override void Recalculate()
+        {
+            float currentPartialPressure = o2.GetPartialPressure(airController.air);
+            float targetPartialPressure = o2.GetPartialPressure(airController.targetAir);
+
+            if (!(Mathf.Abs(targetPartialPressure - currentPartialPressure) > activateThreshold))
+                return;
+
+            float amountToPump = Mathf.Sign(targetPartialPressure - currentPartialPressure) * kgPerSec * deltaTime;
+            amountToPump = amountToPump > tank.gasWeight ? tank.gasWeight : amountToPump; //clamp to the mass in tank
+            float currentMass = o2.GetMass(airController.air);
+            float newMass = currentMass + amountToPump;
+            o2.SetMass(airController.air, newMass);
+            tank.gasWeight -= amountToPump; //clamped by gasWeight property
+        }
     }
 }

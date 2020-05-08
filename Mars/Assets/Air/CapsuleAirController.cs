@@ -1,38 +1,37 @@
-﻿using System;
-using System.Linq;
-using UnityEditor;
-using UnityEngine;
+﻿using UnityEngine;
 
+namespace Assets.Air
+{
+    public class CapsuleAirController : MonoBehaviour {
 
-public class CapsuleAirController : MonoBehaviour {
-
-    private AirZone airZone;
-    public Air air
-    {
-        get
+        private AirZone airZone;
+        public Air air
         {
-            if (airZone == null)
+            get
             {
-                airZone = GetComponentInChildren<AirZone>();
+                if (airZone == null)
+                {
+                    airZone = GetComponentInChildren<AirZone>();
+                }
+                return airZone.air;
             }
-            return airZone.air;
         }
-    }
 
-    public Air targetAir;
+        public Air targetAir;
 
-    public static CapsuleAirController instance = null;
+        public static CapsuleAirController instance = null;
 
-    private void Awake() {
-        if (!instance)
-            instance = this;
-        else if (instance != this)
-            Destroy(gameObject);
-    }
+        private void Awake() {
+            if (!instance)
+                instance = this;
+            else if (instance != this)
+                Destroy(gameObject);
+        }
 
-    private void OnValidate()
-    {
-        air.Validate();
-        targetAir.Validate();
+        private void OnValidate()
+        {
+            air.Validate();
+            targetAir.Validate();
+        }
     }
 }

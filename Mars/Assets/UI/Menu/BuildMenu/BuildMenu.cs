@@ -1,109 +1,112 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using Assets.Scripts.Building;
+using Assets.Scripts.Player;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class BuildMenu : MonoBehaviour {
-	public BuildMenuItem[] items;
-	public GameObject button;
+namespace Assets.UI.Menu.BuildMenu
+{
+    public class BuildMenu : MonoBehaviour {
+        public BuildMenuItem[] items;
+        public GameObject button;
 
-	private Transform panel;
-	private GameObject gameController;
-	private BuildController buildController;
-	private Player player;
-	private HUD hud;
-	private Crosshair crosshair;
-	private PauseMenu _pauseMenu;
+        private Transform panel;
+        private GameObject gameController;
+        private BuildController buildController;
+        private Player player;
+        private HUD.HUD hud;
+        private Crosshair.Crosshair crosshair;
+        private PauseMenu.PauseMenu _pauseMenu;
 	
-	private bool _opened;
+        private bool _opened;
 
-	public bool opened => _opened;
+        public bool opened => _opened;
 
-	private void Start() {
-		gameController = GameObject.FindGameObjectWithTag("GameController");
-		buildController = gameController.GetComponent<BuildController>();
-		panel = transform.GetChild(0);
-		player = GameObject.FindGameObjectWithTag("Player").GetComponent<Player>();
-		crosshair = Crosshair.instance;
-		_pauseMenu = PauseMenu.instance;
-		hud = HUD.instance;
+        private void Start() {
+            gameController = GameObject.FindGameObjectWithTag("GameController");
+            buildController = gameController.GetComponent<BuildController>();
+            panel = transform.GetChild(0);
+            player = GameObject.FindGameObjectWithTag("Player").GetComponent<Player>();
+            crosshair = Crosshair.Crosshair.instance;
+            _pauseMenu = PauseMenu.PauseMenu.instance;
+            hud = HUD.HUD.instance;
 		
-		RemoveItems();
-		AddItems();
+            RemoveItems();
+            AddItems();
 		
-		Close();
-	}
+            Close();
+        }
 	
-	private void Update() {
-		if (Input.GetButtonDown("Open Building Menu"))
-		{
-			if (opened)
-				Close();
-			else
-				Open();
-		}
-		else if (opened && Input.GetButtonDown("Cancel"))
-		{
-			Close();
-		}
-	}
+        private void Update() {
+            if (Input.GetButtonDown("Open Building Menu"))
+            {
+                if (opened)
+                    Close();
+                else
+                    Open();
+            }
+            else if (opened && Input.GetButtonDown("Cancel"))
+            {
+                Close();
+            }
+        }
 
-	private void AddItems() {
-		foreach (BuildMenuItem item in items) {
-			GameObject newObj = Instantiate(button, panel);
-			Button newButton = newObj.GetComponent<Button>();
-			newButton.GetComponentInChildren<Text>().text = item.name;
-			newButton.onClick.AddListener(delegate { StartPlacing(item); } );
-			Input.ResetInputAxes();
-		}
-	}
+        private void AddItems() {
+            foreach (BuildMenuItem item in items) {
+                GameObject newObj = Instantiate(button, panel);
+                Button newButton = newObj.GetComponent<Button>();
+                newButton.GetComponentInChildren<Text>().text = item.name;
+                newButton.onClick.AddListener(delegate { StartPlacing(item); } );
+                Input.ResetInputAxes();
+            }
+        }
 	
-	private void RemoveItems() {
-		foreach (Transform item in panel) {
-			Destroy(item.gameObject);
-		}
-	}
+        private void RemoveItems() {
+            foreach (Transform item in panel) {
+                Destroy(item.gameObject);
+            }
+        }
 
 
-	private void StartPlacing(BuildMenuItem item) {
-		buildController.StartPlacing(item.gameObject);
+        private void StartPlacing(BuildMenuItem item) {
+            buildController.StartPlacing(item.gameObject);
 
-		Close();
-	}
+            Close();
+        }
 
-	public void Open() {
-		Cursor.visible = true;
-		Cursor.lockState = CursorLockMode.None;
+        public void Open() {
+            Cursor.visible = true;
+            Cursor.lockState = CursorLockMode.None;
 
-		Time.timeScale = 0.0f; //pause game
+            Time.timeScale = 0.0f; //pause game
 		
-		player.camLockState = true;
+            player.camLockState = true;
 		
-		foreach (Transform child in transform) { //enable all children
-			child.gameObject.SetActive(true);
-		}
+            foreach (Transform child in transform) { //enable all children
+                child.gameObject.SetActive(true);
+            }
 
-		crosshair.active = false;
-		_pauseMenu.block = true;
-		_opened = true;
-		hud.active = false;
-	}
+            crosshair.active = false;
+            _pauseMenu.block = true;
+            _opened = true;
+            hud.active = false;
+        }
 
-	public void Close() {
-		Cursor.visible = false;
-		Cursor.lockState = CursorLockMode.Locked;
+        public void Close() {
+            Cursor.visible = false;
+            Cursor.lockState = CursorLockMode.Locked;
 
-		Time.timeScale = 1.0f; //resume game
+            Time.timeScale = 1.0f; //resume game
 
-		player.camLockState = false;
+            player.camLockState = false;
 
-		foreach (Transform child in transform) { //disable all children
-			child.gameObject.SetActive(false);
-		}
+            foreach (Transform child in transform) { //disable all children
+                child.gameObject.SetActive(false);
+            }
 		
-		crosshair.active = true;
-		_pauseMenu.block = false;
-		_opened = false;
-		hud.active = true;
-	}
+            crosshair.active = true;
+            _pauseMenu.block = false;
+            _opened = false;
+            hud.active = true;
+        }
+    }
 }

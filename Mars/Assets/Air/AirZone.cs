@@ -1,9 +1,10 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
-public class AirZone : Zone
+namespace Assets.Air
 {
-    [SerializeField]
-    public Air air;
+    public class AirZone : Zone
+    {
+        [SerializeField]
+        public Air air;
+    }
 }

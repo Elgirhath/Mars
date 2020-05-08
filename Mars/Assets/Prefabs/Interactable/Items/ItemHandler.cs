@@ -1,24 +1,25 @@
 ﻿using System;
-using System.Collections;
-using System.Collections.Generic;
-using UnityEditor;
+using Assets.UI.Inventory;
 using UnityEngine;
 
-public class ItemHandler : MonoBehaviour {
+namespace Assets.Prefabs.Interactable.Items
+{
+    public class ItemHandler : MonoBehaviour {
     
-    public Item item;
+        public Item item;
 
-    private void Start() {
-        if (item.createInstances) {
-            if (item.stackLimit != 1) {
-                throw new Exception("Stack limit must be 1, when createInstances is set!");
+        private void Start() {
+            if (item.createInstances) {
+                if (item.stackLimit != 1) {
+                    throw new Exception("Stack limit must be 1, when createInstances is set!");
+                }
+                Item copy = Instantiate(item, null);
+                item = copy;
             }
-            Item copy = Instantiate(item, null);
-            item = copy;
         }
-    }
-    public void Interact() {
-        Inventory.instance.AddItem(item);
-        Destroy(gameObject);
+        public void Interact() {
+            Inventory.instance.AddItem(item);
+            Destroy(gameObject);
+        }
     }
 }
