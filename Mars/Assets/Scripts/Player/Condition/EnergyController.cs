@@ -1,142 +1,145 @@
 ﻿using System.Collections;
-using System.Collections.Generic;
+using Assets.UI.ConditionBar;
 using UnityEngine;
 
-public class EnergyController : MonoBehaviour
+namespace Assets.Scripts.Player.Condition
 {
-    public float maxEnergyLimit;
-    public float initEnergy;
-    public float regenerationSpeed;
-    public float sprintDropSpeed;
-    public float jumpDropValue;
-    public float secondsToUnlock;
-    public float energyLossInterval;
-    public float maxEnergyLossMultiplier;
-
-    private Player player;
-
-    private bool lockedTimer;
-    private float _energy;
-    private float _maxEnergy;
-    private bool _lockState;
-    public float energy {
-        get => _energy;
-        set => _energy = value;
-    }
-
-    public float maxEnergy
+    public class EnergyController : MonoBehaviour
     {
-        get => _maxEnergy;
-        set => _maxEnergy = value;
-    }
+        public float maxEnergyLimit;
+        public float initEnergy;
+        public float regenerationSpeed;
+        public float sprintDropSpeed;
+        public float jumpDropValue;
+        public float secondsToUnlock;
+        public float energyLossInterval;
+        public float maxEnergyLossMultiplier;
 
-    public bool LockState
-    {
-        get => _lockState;
-        set => _lockState = value;
-    }
+        private Player player;
 
-    public static EnergyController instance;
-    private EnergyBar energyBar;
+        private bool lockedTimer;
+        private float _energy;
+        private float _maxEnergy;
+        private bool _lockState;
+        public float energy {
+            get => _energy;
+            set => _energy = value;
+        }
 
-    private void Awake() {
-        if (!instance)
-            instance = this;
-        else if (instance != this)
-            Destroy(gameObject);
-    }
+        public float maxEnergy
+        {
+            get => _maxEnergy;
+            set => _maxEnergy = value;
+        }
 
-    private void Start() {
-        _energy = initEnergy;
-        _maxEnergy = maxEnergyLimit;
-        energyBar = EnergyBar.instance;
-        _lockState = false;
-        lockedTimer = false;
+        public bool LockState
+        {
+            get => _lockState;
+            set => _lockState = value;
+        }
+
+        public static EnergyController instance;
+        private EnergyBar energyBar;
+
+        private void Awake() {
+            if (!instance)
+                instance = this;
+            else if (instance != this)
+                Destroy(gameObject);
+        }
+
+        private void Start() {
+            _energy = initEnergy;
+            _maxEnergy = maxEnergyLimit;
+            energyBar = EnergyBar.instance;
+            _lockState = false;
+            lockedTimer = false;
         
-        player = Player.instance;
+            player = Player.instance;
         
-        InvokeRepeating(nameof(EnergyLoss),energyLossInterval, energyLossInterval);
-    }
+            InvokeRepeating(nameof(EnergyLoss),energyLossInterval, energyLossInterval);
+        }
 
-    private void ChangeEnergy(float diff)
-    {
-        if (_energy + diff <= 0)
+        private void ChangeEnergy(float diff)
         {
-            _energy = 0;
-            _lockState = true;
-        }
-        else if (_energy + diff > maxEnergy)
-        {
-            _energy = maxEnergy;
-        }
-        else
-        {
-            energy += diff;
-        }
-        energyBar.ChangeEnergyBar(energy/maxEnergy);
-        if(diff < 0)
-            ChangeMaxEnergy(diff*maxEnergyLossMultiplier);
-    }
-
-    private void ChangeMaxEnergy(float diff)
-    {
-        if (maxEnergy + diff < 0)
-        {
-            maxEnergy = 0;
-        }
-        else if (maxEnergy + diff > maxEnergyLimit)
-        {
-            maxEnergy = maxEnergyLimit;
-        }
-        else
-        {
-            maxEnergy += diff;
-        }
-        energyBar.ChangeMaxEnergyBar(maxEnergy/maxEnergyLimit);
-        
-        if (maxEnergy < energy)
-        {
-            energy = maxEnergy;
-            energyBar.ChangeEnergyBar(energy/maxEnergy);
-        }
-    }
-
-    private void EnergyLoss()
-    {
-        ChangeMaxEnergy(-0.01f);
-    }
-
-    private void Update()
-    {
-        if (LockState)
-        {
-            if (!lockedTimer)
-                StartCoroutine(LockRegeneration());
-        }
-        else
-        {
-            if (player.jumped)
+            if (_energy + diff <= 0)
             {
-                ChangeEnergy(-jumpDropValue);
+                _energy = 0;
+                _lockState = true;
             }
-            else if (player.IsGrounded()) 
+            else if (_energy + diff > maxEnergy)
             {
-                if(player.IsRunning())
-                    ChangeEnergy(-sprintDropSpeed);
-                else
+                _energy = maxEnergy;
+            }
+            else
+            {
+                energy += diff;
+            }
+            energyBar.ChangeEnergyBar(energy/maxEnergy);
+            if(diff < 0)
+                ChangeMaxEnergy(diff*maxEnergyLossMultiplier);
+        }
+
+        private void ChangeMaxEnergy(float diff)
+        {
+            if (maxEnergy + diff < 0)
+            {
+                maxEnergy = 0;
+            }
+            else if (maxEnergy + diff > maxEnergyLimit)
+            {
+                maxEnergy = maxEnergyLimit;
+            }
+            else
+            {
+                maxEnergy += diff;
+            }
+            energyBar.ChangeMaxEnergyBar(maxEnergy/maxEnergyLimit);
+        
+            if (maxEnergy < energy)
+            {
+                energy = maxEnergy;
+                energyBar.ChangeEnergyBar(energy/maxEnergy);
+            }
+        }
+
+        private void EnergyLoss()
+        {
+            ChangeMaxEnergy(-0.01f);
+        }
+
+        private void Update()
+        {
+            if (LockState)
+            {
+                if (!lockedTimer)
+                    StartCoroutine(LockRegeneration());
+            }
+            else
+            {
+                if (player.jumped)
                 {
-                    ChangeEnergy(regenerationSpeed);
+                    ChangeEnergy(-jumpDropValue);
+                }
+                else if (player.IsGrounded()) 
+                {
+                    if(player.IsRunning())
+                        ChangeEnergy(-sprintDropSpeed);
+                    else
+                    {
+                        ChangeEnergy(regenerationSpeed);
+                    }
                 }
             }
+            //Debug.Log(LockState);
         }
-        //Debug.Log(LockState);
-    }
 
-    private IEnumerator LockRegeneration()
-    {
-        lockedTimer = true;
-        yield return new WaitForSeconds(secondsToUnlock);
-        lockedTimer = false;
-        LockState = false;
+        private IEnumerator LockRegeneration()
+        {
+            lockedTimer = true;
+            yield return new WaitForSeconds(secondsToUnlock);
+            lockedTimer = false;
+            LockState = false;
+        }
     }
 }

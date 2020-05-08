@@ -1,9 +1,10 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using Assets.Air;
 
-public class SpawnControlZone : Zone
+namespace Assets.Scripts.RandomSpawning
 {
-    public RockSpawnController spawnController;
-    public float density;
+    public class SpawnControlZone : Zone
+    {
+        public RockSpawnController spawnController;
+        public float density;
+    }
 }

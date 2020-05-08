@@ -3,26 +3,29 @@ using System.Collections.Generic;
 using UnityEditor;
 using UnityEngine;
 
-public class ReadOnlyAttribute : PropertyAttribute
+namespace Assets.Extensions
 {
- 
-}
- 
-[CustomPropertyDrawer(typeof(ReadOnlyAttribute))]
-public class ReadOnlyDrawer : PropertyDrawer
-{
-    public override float GetPropertyHeight(SerializedProperty property,
-        GUIContent label)
+    public class ReadOnlyAttribute : PropertyAttribute
     {
-        return EditorGUI.GetPropertyHeight(property, label, true);
+ 
     }
  
-    public override void OnGUI(Rect position,
-        SerializedProperty property,
-        GUIContent label)
+    [CustomPropertyDrawer(typeof(ReadOnlyAttribute))]
+    public class ReadOnlyDrawer : PropertyDrawer
     {
-        GUI.enabled = false;
-        EditorGUI.PropertyField(position, property, label, true);
-        GUI.enabled = true;
+        public override float GetPropertyHeight(SerializedProperty property,
+            GUIContent label)
+        {
+            return EditorGUI.GetPropertyHeight(property, label, true);
+        }
+ 
+        public override void OnGUI(Rect position,
+            SerializedProperty property,
+            GUIContent label)
+        {
+            GUI.enabled = false;
+            EditorGUI.PropertyField(position, property, label, true);
+            GUI.enabled = true;
+        }
     }
 }

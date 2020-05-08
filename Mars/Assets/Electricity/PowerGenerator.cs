@@ -1,11 +1,12 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
-public class PowerGenerator : MonoBehaviour {
-    public float maxPower;
+namespace Assets.Electricity
+{
+    public class PowerGenerator : MonoBehaviour {
+        public float maxPower;
 
-    public float GetPower() {
-        return maxPower;
+        public float GetPower() {
+            return maxPower;
+        }
     }
 }

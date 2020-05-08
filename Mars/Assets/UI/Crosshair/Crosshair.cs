@@ -1,42 +1,43 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
-public class Crosshair : MonoBehaviour
+namespace Assets.UI.Crosshair
 {
-    [SerializeField]
-    private bool _active;
-
-    public bool active
+    public class Crosshair : MonoBehaviour
     {
-        get => _active;
-        set
+        [SerializeField]
+        private bool _active;
+
+        public bool active
         {
-            _active = value;
-            gameObject.SetActive(_active);
+            get => _active;
+            set
+            {
+                _active = value;
+                gameObject.SetActive(_active);
+            }
         }
-    }
     
-    public static Crosshair instance;
+        public static Crosshair instance;
     
-    private void Awake() {
-        if (!instance) {
-            instance = this;
+        private void Awake() {
+            if (!instance) {
+                instance = this;
+            }
+            else if (instance != this) {
+                Destroy(gameObject);
+            }
         }
-        else if (instance != this) {
-            Destroy(gameObject);
-        }
-    }
     
-    // Start is called before the first frame update
-    void Start()
-    {
-        active = true;
-    }
+        // Start is called before the first frame update
+        void Start()
+        {
+            active = true;
+        }
 
-    // Update is called once per frame
-    void Update()
-    {
+        // Update is called once per frame
+        void Update()
+        {
         
+        }
     }
 }

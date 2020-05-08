@@ -1,7 +1,8 @@
 ﻿using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
-namespace UnityEngine.UI {
+namespace Assets.UI {
 
 	public class CustomOutline : Shadow {
 		[Range (0, 15)]
@@ -10,9 +11,9 @@ namespace UnityEngine.UI {
 		public bool glintEffect;
 
 
-		[RangeAttribute (0, 5)]
+		[Range (0, 5)]
 		public int glintVertex = 0;
-		[RangeAttribute (0, 3)]
+		[Range (0, 3)]
 		public int glintWidth = 0;
 		public Color glintColor;
 

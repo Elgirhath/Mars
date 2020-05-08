@@ -1,4 +1,7 @@
 ﻿using System.Collections.Generic;
+using Assets.Air;
+using Assets.Air.Gases;
+using Assets.Air.Pump;
 using UnityEditor;
 using UnityEngine;
 

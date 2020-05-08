@@ -1,85 +1,89 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using Assets.Scripts.Interact;
+using Assets.Scripts.Player;
+using Assets.UI.Menu.PauseMenu;
 using UnityEngine;
 
-public class PlayerPanelController : MonoBehaviour {
-    /*
+namespace Assets.UI.Panels
+{
+    public class PlayerPanelController : MonoBehaviour {
+        /*
      * Player panel composed of Inventory and the ConditionPanel
      */
     
-    private bool opened;
+        private bool opened;
     
-    public static PlayerPanelController instance;
+        public static PlayerPanelController instance;
 
-    private void Awake() {
-        if (!instance)
-            instance = this;
-        else if (instance != this)
-            Destroy(gameObject);
-    }
-
-    void Start() {
-        Close();
-    }
-
-    void Update() {
-        if (Input.GetButtonDown("Inventory"))
-        {
-            if (opened)
-                Close();
-            else
-                Open();
+        private void Awake() {
+            if (!instance)
+                instance = this;
+            else if (instance != this)
+                Destroy(gameObject);
         }
-        else if (opened && Input.GetButtonDown("Cancel"))
-        {
+
+        void Start() {
             Close();
         }
-    }
+
+        void Update() {
+            if (Input.GetButtonDown("Inventory"))
+            {
+                if (opened)
+                    Close();
+                else
+                    Open();
+            }
+            else if (opened && Input.GetButtonDown("Cancel"))
+            {
+                Close();
+            }
+        }
     
-    public void Open() {
-        /*
+        public void Open() {
+            /*
          * Open the panels and handle cursor, HUD and other settings
          */
         
-        Cursor.visible = true;
-        Cursor.lockState = CursorLockMode.None;
+            Cursor.visible = true;
+            Cursor.lockState = CursorLockMode.None;
 
 //        Time.timeScale = 0.0f; //pause game
 		
-        Player.instance.camLockState = true;
+            Player.instance.camLockState = true;
 
-        Inventory.instance.Open();
-        ConditionPanel.instance.Open();
+            Inventory.Inventory.instance.Open();
+            ConditionPanel.instance.Open();
         
-        Crosshair.instance.active = false;
-        PauseMenu.instance.block = true;
+            Crosshair.Crosshair.instance.active = false;
+            PauseMenu.instance.block = true;
 
-        InteractController.instance.enabled = false;
+            InteractController.instance.enabled = false;
 
-        opened = true;
-        HUD.instance.active = false;
-    }
+            opened = true;
+            HUD.HUD.instance.active = false;
+        }
 
-    public void Close() {
-        /*
+        public void Close() {
+            /*
          * Close the panels
          */
         
-        Cursor.visible = false;
-        Cursor.lockState = CursorLockMode.Locked;
+            Cursor.visible = false;
+            Cursor.lockState = CursorLockMode.Locked;
 
 //        Time.timeScale = 1.0f; //resume game
 
-        Player.instance.camLockState = false;
+            Player.instance.camLockState = false;
 
-        Inventory.instance.Close();
-        ConditionPanel.instance.Close();
-        Crosshair.instance.active = true;
-        PauseMenu.instance.block = false;
+            Inventory.Inventory.instance.Close();
+            ConditionPanel.instance.Close();
+            Crosshair.Crosshair.instance.active = true;
+            PauseMenu.instance.block = false;
 
-        InteractController.instance.enabled = true;
+            InteractController.instance.enabled = true;
 
-        opened = false;
-        HUD.instance.active = true;
+            opened = false;
+            HUD.HUD.instance.active = true;
+        }
     }
 }

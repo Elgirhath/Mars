@@ -2,66 +2,69 @@
 using UnityEngine;
 using UnityEngine.UI;
 
-public class Tooltip : MonoBehaviour {
-	private string buttonName;
-	private string actionName;
-	private Text textField;
-	private RectTransform textTransform;
+namespace Assets.UI.Tooltip
+{
+    public class Tooltip : MonoBehaviour {
+        private string buttonName;
+        private string actionName;
+        private Text textField;
+        private RectTransform textTransform;
 
-    public static Tooltip instance { get; set; }
+        public static Tooltip instance { get; set; }
 
-    private Transform target;
+        private Transform target;
 
-	private Camera cam;
+        private Camera cam;
 
-	private void Awake() {
-		if (instance == null) {
-			instance = this;
-		}
-		else if (instance != this) {
-			Destroy(gameObject);
-		}
+        private void Awake() {
+            if (instance == null) {
+                instance = this;
+            }
+            else if (instance != this) {
+                Destroy(gameObject);
+            }
 
-		textField = GetComponentInChildren<Text>();
-		textField.gameObject.SetActive(false);
-		textTransform = textField.GetComponent<RectTransform>();
+            textField = GetComponentInChildren<Text>();
+            textField.gameObject.SetActive(false);
+            textTransform = textField.GetComponent<RectTransform>();
 
-		target = null;
+            target = null;
 
-		cam = GameObject.FindGameObjectWithTag("Player").GetComponentInChildren<Camera>();
-	}
+            cam = GameObject.FindGameObjectWithTag("Player").GetComponentInChildren<Camera>();
+        }
 
-	private void Update()
-    {
-        if (target)
+        private void Update()
+        {
+            if (target)
+                MoveToTarget();
+        }
+
+        private void MoveToTarget() {
+            if (!target)
+                throw new NullReferenceException();
+            textTransform.anchoredPosition = cam.WorldToScreenPoint(target.position);
+        }
+
+        public void SetText(string text)
+        {
+            textField.text = text;
+        }
+
+        public void OpenTooltip(Transform target, string text) {
+            this.target = target;
+            SetText(text);
             MoveToTarget();
-    }
-
-	private void MoveToTarget() {
-		if (!target)
-			throw new NullReferenceException();
-		textTransform.anchoredPosition = cam.WorldToScreenPoint(target.position);
-	}
-
-	public void SetText(string text)
-    {
-        textField.text = text;
-    }
-
-    public void OpenTooltip(Transform target, string text) {
-		this.target = target;
-		SetText(text);
-		MoveToTarget();
 		
-		Enable();
-	}
+            Enable();
+        }
 
-	public void Disable() {
-		textField.gameObject.SetActive(false);
-		target = null;
-	}
+        public void Disable() {
+            textField.gameObject.SetActive(false);
+            target = null;
+        }
 
-	public void Enable() {
-		textField.gameObject.SetActive(true);
-	}
+        public void Enable() {
+            textField.gameObject.SetActive(true);
+        }
+    }
 }
