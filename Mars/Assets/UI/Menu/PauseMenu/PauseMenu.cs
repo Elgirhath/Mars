@@ -1,8 +1,8 @@
-﻿using Assets.Scripts.Player;
+﻿using Scripts.Player;
 using UnityEngine;
 using UnityEngine.UI;
 
-namespace Assets.UI.Menu.PauseMenu
+namespace UI.Menu.PauseMenu
 {
     public class PauseMenu : MonoBehaviour
     {

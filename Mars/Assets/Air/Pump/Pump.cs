@@ -1,8 +1,8 @@
 ﻿using System.Collections;
-using Assets.Electricity;
+using Electricity;
 using UnityEngine;
 
-namespace Assets.Air.Pump
+namespace Air.Pump
 {
     public abstract class Pump : MonoBehaviour
     {

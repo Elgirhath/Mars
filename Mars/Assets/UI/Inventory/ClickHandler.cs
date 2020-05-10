@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using UnityEngine.EventSystems;
 
-namespace Assets.UI.Inventory
+namespace UI.Inventory
 {
     public class ClickHandler : MonoBehaviour, IPointerClickHandler {
         public delegate void ClickAction();

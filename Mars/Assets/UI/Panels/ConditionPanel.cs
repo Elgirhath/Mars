@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-namespace Assets.UI.Panels
+namespace UI.Panels
 {
     public class ConditionPanel : MonoBehaviour {
         public static ConditionPanel instance;

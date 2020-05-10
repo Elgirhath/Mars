@@ -1,9 +1,9 @@
-﻿using Assets.UI.Menu.BuildMenu;
+﻿using UI.Menu.BuildMenu;
 using UnityEngine;
 using Quaternion = UnityEngine.Quaternion;
 using Vector3 = UnityEngine.Vector3;
 
-namespace Assets.Scripts.Building
+namespace Scripts.Building
 {
     public class BuildController : MonoBehaviour {
         public float maxDistance;

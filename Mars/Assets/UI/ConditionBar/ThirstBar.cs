@@ -1,8 +1,8 @@
-﻿using Assets.Scripts.Player.Condition;
+﻿using Scripts.Player.Health;
 using UnityEngine;
 using UnityEngine.UI;
 
-namespace Assets.UI.ConditionBar
+namespace UI.ConditionBar
 {
     public class ThirstBar : MonoBehaviour {
         public int maxValue;

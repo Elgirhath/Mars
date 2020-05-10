@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-namespace Assets.Scripts.Player.Condition
+namespace Scripts.Player.Health
 {
     public class ThirstController : MonoBehaviour {
         public int maxThirst;

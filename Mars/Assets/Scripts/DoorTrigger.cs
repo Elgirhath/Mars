@@ -1,7 +1,7 @@
-﻿using Assets.Scripts.Player.Condition;
+﻿using Scripts.Player.Health;
 using UnityEngine;
 
-namespace Assets.Scripts
+namespace Scripts
 {
     public class DoorTrigger : MonoBehaviour {
         private Player.Player player;

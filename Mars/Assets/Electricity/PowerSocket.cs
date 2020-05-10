@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-namespace Assets.Electricity
+namespace Electricity
 {
     public class PowerSocket : MonoBehaviour {
         private PowerSupply powerSupply;

@@ -1,7 +1,7 @@
 ﻿using UnityEditor;
 using UnityEngine;
 
-namespace Assets.Extensions
+namespace Extensions
 {
     public class MenuExtension : MonoBehaviour {
         // GAMEOBJECT

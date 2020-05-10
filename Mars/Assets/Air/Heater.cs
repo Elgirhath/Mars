@@ -1,7 +1,7 @@
-﻿using Assets.Electricity;
+﻿using Electricity;
 using UnityEngine;
 
-namespace Assets.Air
+namespace Air
 {
     public class Heater : MonoBehaviour {
         public float temperature;

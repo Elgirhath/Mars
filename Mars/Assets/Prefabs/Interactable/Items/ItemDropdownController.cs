@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using Vector3 = UnityEngine.Vector3;
 
-namespace Assets.Prefabs.Interactable.Items
+namespace Prefabs.Interactable.Items
 {
     public class ItemDropdownController : MonoBehaviour {
         private Transform handle;

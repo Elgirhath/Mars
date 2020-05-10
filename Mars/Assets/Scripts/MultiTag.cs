@@ -1,7 +1,7 @@
 ﻿using System;
 using UnityEngine;
 
-namespace Assets.Scripts
+namespace Scripts
 {
     public class MultiTag : MonoBehaviour {
         public string[] tags;

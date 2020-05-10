@@ -1,10 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
-using Assets.Prefabs.Interactable.Items;
-using Assets.UI.ScrollingInfo;
+using Prefabs.Interactable.Items;
+using UI.ScrollingInfo;
 using UnityEngine;
 
-namespace Assets.UI.Inventory
+namespace UI.Inventory
 {
     public class Inventory : MonoBehaviour
     {

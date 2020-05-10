@@ -1,9 +1,9 @@
-﻿using Assets.Scripts.Building;
-using Assets.Scripts.Player;
+﻿using Scripts.Building;
+using Scripts.Player;
 using UnityEngine;
 using UnityEngine.UI;
 
-namespace Assets.UI.Menu.BuildMenu
+namespace UI.Menu.BuildMenu
 {
     public class BuildMenu : MonoBehaviour {
         public BuildMenuItem[] items;

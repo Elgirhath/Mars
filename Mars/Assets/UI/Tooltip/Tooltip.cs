@@ -2,7 +2,7 @@
 using UnityEngine;
 using UnityEngine.UI;
 
-namespace Assets.UI.Tooltip
+namespace UI.Tooltip
 {
     public class Tooltip : MonoBehaviour {
         private string buttonName;

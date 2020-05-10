@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-namespace Assets.UI.HUD
+namespace UI.HUD
 {
     public class HUD : MonoBehaviour
     {

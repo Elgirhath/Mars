@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-namespace Assets.Air.Pump
+namespace Air.Pump
 {
     public class GasTank : MonoBehaviour {
         public float maxGasWeight;

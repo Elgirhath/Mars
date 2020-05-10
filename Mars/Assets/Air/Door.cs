@@ -1,7 +1,7 @@
-﻿using Assets.Scripts.Player;
+﻿using Scripts.Player;
 using UnityEngine;
 
-namespace Assets.Air
+namespace Air
 {
     public class Door : MonoBehaviour {
         public enum axisEnum {

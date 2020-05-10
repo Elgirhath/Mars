@@ -1,9 +1,9 @@
 ﻿using System.Collections;
 using System.Linq;
-using Assets.Air;
+using Air;
 using UnityEngine;
 
-namespace Assets.Scripts.RandomSpawning
+namespace Scripts.RandomSpawning
 {
     public class RockSpawnController : MonoBehaviour
     {

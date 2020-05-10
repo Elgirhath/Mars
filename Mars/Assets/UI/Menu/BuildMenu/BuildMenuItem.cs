@@ -2,11 +2,11 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using Assets.Prefabs.Interactable.Items;
-using Assets.Scripts.Interact;
+using Prefabs.Interactable.Items;
+using Scripts.Interact;
 using UnityEngine;
 
-namespace Assets.UI.Menu.BuildMenu
+namespace UI.Menu.BuildMenu
 {
     public class BuildMenuItem : MonoBehaviour {
         public Sprite sprite;

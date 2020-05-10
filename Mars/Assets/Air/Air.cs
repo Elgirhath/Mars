@@ -1,11 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using Assets.Air.Gases;
+using Air.Gases;
 using UnityEngine;
 using Object = System.Object;
 
-namespace Assets.Air
+namespace Air
 {
     [Serializable]
     public class Air : Object{

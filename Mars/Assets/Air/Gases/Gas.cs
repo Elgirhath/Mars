@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using UnityEngine;
 
-namespace Assets.Air.Gases
+namespace Air.Gases
 {
     [CreateAssetMenu(fileName = "Gas", menuName="Gas")]
     public class Gas : ScriptableObject{

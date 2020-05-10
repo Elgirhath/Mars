@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-namespace Assets.Scripts.Building
+namespace Scripts.Building
 {
     public class Utilities {
         public static bool ArchRaycast(Vector3 origin, float radius, Vector3 startDir, Vector3 endDir, out RaycastHit hit, float angleStep) {

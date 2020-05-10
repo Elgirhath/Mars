@@ -2,7 +2,7 @@
 using UnityEngine;
 using UnityEngine.UI;
 
-namespace Assets.UI {
+namespace UI {
 
 	public class CustomOutline : Shadow {
 		[Range (0, 15)]

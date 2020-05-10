@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-namespace Assets.Prefabs.Log_Bench
+namespace Prefabs.Log_Bench
 {
     public class Bench : MonoBehaviour {
         public void Interact() {

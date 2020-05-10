@@ -1,11 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
-using Assets.UI.Tooltip;
-using UnityEditor;
+using UI.Tooltip;
 using UnityEngine;
 using UnityEngine.Events;
 
-namespace Assets.Scripts.Interact
+namespace Scripts.Interact
 {
     public class Interactable : MonoBehaviour {
 

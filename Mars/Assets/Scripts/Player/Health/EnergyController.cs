@@ -1,7 +1,7 @@
 ﻿using System.Collections;
 using UnityEngine;
 
-namespace Assets.Scripts.Player.Condition
+namespace Scripts.Player.Health
 {
     public class EnergyController : MonoBehaviour
     {

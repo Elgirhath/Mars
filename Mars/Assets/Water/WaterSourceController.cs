@@ -1,7 +1,7 @@
-﻿using Assets.Prefabs.WaterCollector;
+﻿using Prefabs.WaterCollector;
 using UnityEngine;
 
-namespace Assets.Water
+namespace Water
 {
     public class WaterSourceController : MonoBehaviour {
         public float minWaterAmount;

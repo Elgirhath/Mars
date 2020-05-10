@@ -1,9 +1,9 @@
-﻿using Assets.Scripts.Player;
-using Assets.Scripts.Player.Condition;
+﻿using Scripts.Player;
+using Scripts.Player.Health;
 using UnityEngine;
 using UnityEngine.UI;
 
-namespace Assets.UI.ConditionBar
+namespace UI.ConditionBar
 {
     public class EnergyBar : MonoBehaviour {
         private float longTermEnergyBarLengthLimit;

@@ -2,7 +2,7 @@
 using UnityEngine;
 using UnityEngine.UI;
 
-namespace Assets.Scripts.Player.Condition
+namespace Scripts.Player.Health
 {
     public class DebuffsController : MonoBehaviour
     {

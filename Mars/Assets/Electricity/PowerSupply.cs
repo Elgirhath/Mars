@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using UnityEngine;
 
-namespace Assets.Electricity
+namespace Electricity
 {
     public class PowerSupply : MonoBehaviour {
         public List<PowerGenerator> generators;

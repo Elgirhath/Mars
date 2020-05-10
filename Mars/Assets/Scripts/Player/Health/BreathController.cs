@@ -1,9 +1,9 @@
 ﻿using System.Linq;
-using Assets.Air;
-using Assets.UI.ConditionBar;
+using Air;
+using UI.ConditionBar;
 using UnityEngine;
 
-namespace Assets.Scripts.Player.Condition
+namespace Scripts.Player.Health
 {
     public class BreathController : MonoBehaviour {
         public int maxOxygen;

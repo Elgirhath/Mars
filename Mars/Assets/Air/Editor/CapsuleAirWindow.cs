@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
-using Assets.Air;
-using Assets.Air.Gases;
-using Assets.Air.Pump;
+using Air;
+using Air.Gases;
+using Air.Pump;
 using UnityEditor;
 using UnityEngine;
 
@@ -56,7 +56,7 @@ public class CapsuleAirWindow : EditorWindow {
 	}
 
 
-	private void ShowAirGUI(Air air) {
+	private void ShowAirGUI(Air.Air air) {
 		Dictionary<Gas, float> gases = air.gasProportions;
 		
 		GUILayout.Label("Gases", EditorStyles.label);

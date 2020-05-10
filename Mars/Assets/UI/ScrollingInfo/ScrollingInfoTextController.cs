@@ -2,7 +2,7 @@
 using UnityEngine;
 using UnityEngine.UI;
 
-namespace Assets.UI.ScrollingInfo
+namespace UI.ScrollingInfo
 {
     public class ScrollingInfoTextController : MonoBehaviour
     {

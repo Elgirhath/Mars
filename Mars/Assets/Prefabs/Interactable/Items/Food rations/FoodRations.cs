@@ -1,10 +1,10 @@
-﻿using Assets.Scripts.Player;
-using Assets.Scripts.Player.Condition;
-using Assets.UI.Inventory;
-using Assets.UI.ScrollingInfo;
+﻿using Scripts.Player;
+using Scripts.Player.Health;
+using UI.Inventory;
+using UI.ScrollingInfo;
 using UnityEngine;
 
-namespace Assets.Prefabs.Interactable.Items.Food_rations
+namespace Prefabs.Interactable.Items.Food_rations
 {
     [CreateAssetMenu(fileName = "FoodRations", menuName="Item/Food rations")]
     public class FoodRations : Item {

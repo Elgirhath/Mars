@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-namespace Assets.Scripts.Interact
+namespace Scripts.Interact
 {
     public class InteractController : MonoBehaviour {
         [Tooltip("Max distance from camera in which objects can be collected")]

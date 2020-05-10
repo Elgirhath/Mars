@@ -2,7 +2,7 @@
 using UnityEngine;
 using UnityEngine.UI;
 
-namespace Assets.UI.ConditionBar
+namespace UI.ConditionBar
 {
     public class OxygenBar : MonoBehaviour {
         public int maxValue;

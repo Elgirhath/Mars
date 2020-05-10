@@ -1,8 +1,8 @@
-﻿using Assets.Extensions;
-using Assets.Scripts.Player;
+﻿using Extensions;
+using Scripts.Player;
 using UnityEngine;
 
-namespace Assets.Water
+namespace Water
 {
     public class WaterSource : MonoBehaviour {
         private Vector3 position;

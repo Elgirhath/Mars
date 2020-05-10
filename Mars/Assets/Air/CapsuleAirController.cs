@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-namespace Assets.Air
+namespace Air
 {
     public class CapsuleAirController : MonoBehaviour {
 

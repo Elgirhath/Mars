@@ -1,8 +1,8 @@
 ﻿using System;
-using Assets.UI.Inventory;
+using UI.Inventory;
 using UnityEngine;
 
-namespace Assets.Prefabs.Interactable.Items
+namespace Prefabs.Interactable.Items
 {
     public class ItemHandler : MonoBehaviour {
     

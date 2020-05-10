@@ -1,6 +1,6 @@
-﻿using Assets.Water;
-using UnityEditor;
+﻿using UnityEditor;
 using UnityEngine;
+using Water;
 
 [CustomEditor(typeof(WaterSource))]
 public class WaterSourceEditor : Editor {

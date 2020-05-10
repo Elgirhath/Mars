@@ -1,7 +1,7 @@
-﻿using Assets.Air.Gases;
+﻿using Air.Gases;
 using UnityEngine;
 
-namespace Assets.Air.Pump
+namespace Air.Pump
 {
     public class NPump : Pump
     {

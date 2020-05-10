@@ -1,9 +1,9 @@
-﻿using Assets.Scripts.Player.Condition;
-using Assets.UI.Inventory;
-using Assets.UI.ScrollingInfo;
+﻿using Scripts.Player.Health;
+using UI.Inventory;
+using UI.ScrollingInfo;
 using UnityEngine;
 
-namespace Assets.Prefabs.Interactable.Items.Canteen
+namespace Prefabs.Interactable.Items.Canteen
 {
     [CreateAssetMenu(fileName = "Canteen", menuName="Item/Canteen")]
     public class Canteen : Item {

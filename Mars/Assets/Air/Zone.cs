@@ -2,7 +2,7 @@
 using System.Linq;
 using UnityEngine;
 
-namespace Assets.Air
+namespace Air
 {
     public class Zone : MonoBehaviour
     {

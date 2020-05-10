@@ -1,8 +1,8 @@
-﻿using Assets.Prefabs.Interactable.Items;
+﻿using Prefabs.Interactable.Items;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
-namespace Assets.UI.Inventory
+namespace UI.Inventory
 {
     public class DragHandler : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHandler {
         private Canvas canvas;

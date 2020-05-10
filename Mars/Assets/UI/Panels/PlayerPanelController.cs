@@ -1,9 +1,9 @@
-﻿using Assets.Scripts.Interact;
-using Assets.Scripts.Player;
-using Assets.UI.Menu.PauseMenu;
+﻿using Scripts.Interact;
+using Scripts.Player;
+using UI.Menu.PauseMenu;
 using UnityEngine;
 
-namespace Assets.UI.Panels
+namespace UI.Panels
 {
     public class PlayerPanelController : MonoBehaviour {
         /*

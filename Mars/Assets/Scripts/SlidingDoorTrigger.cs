@@ -2,7 +2,7 @@
 using UnityEngine;
 using UnityEngine.Events;
 
-namespace Assets.Scripts
+namespace Scripts
 {
     public class SlidingDoorTrigger : MonoBehaviour
     {

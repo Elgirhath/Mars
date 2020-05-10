@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-namespace Assets.UI.ConditionBar
+namespace UI.ConditionBar
 {
     public class ConditionBar : MonoBehaviour
     {

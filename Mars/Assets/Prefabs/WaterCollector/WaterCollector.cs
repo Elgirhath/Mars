@@ -1,10 +1,10 @@
-﻿using Assets.Electricity;
-using Assets.Prefabs.Interactable.Items.Canteen;
-using Assets.UI.Inventory;
-using Assets.Water;
+﻿using Electricity;
+using Prefabs.Interactable.Items.Canteen;
+using UI.Inventory;
 using UnityEngine;
+using Water;
 
-namespace Assets.Prefabs.WaterCollector
+namespace Prefabs.WaterCollector
 {
     public class WaterCollector : MonoBehaviour {
         [Tooltip("The ratio of how much water can be collected from a source with specified amount." +

@@ -1,7 +1,7 @@
-using Assets.Scripts.Player.Condition;
+using Scripts.Player.Health;
 using UnityEngine;
 
-namespace Assets.Scripts.Player
+namespace Scripts.Player
 {
     public class Player : MonoBehaviour {
         public float angleLimit;

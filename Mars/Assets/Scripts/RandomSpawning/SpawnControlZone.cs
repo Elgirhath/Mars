@@ -1,6 +1,6 @@
-﻿using Assets.Air;
+﻿using Air;
 
-namespace Assets.Scripts.RandomSpawning
+namespace Scripts.RandomSpawning
 {
     public class SpawnControlZone : Zone
     {
