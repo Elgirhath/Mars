@@ -2,6 +2,7 @@
 {
     public enum RequirementType
     {
-        O2VolumePercentage
+        O2VolumePercentage,
+        O2PartialPressure
     }
 }

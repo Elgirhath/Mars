@@ -2732,14 +2732,14 @@ MonoBehaviour:
   targetAir:
     volume: 300
     _gasProportions:
-      array:
+      elements:
       - gas: {fileID: 11400000, guid: 00e419d01be4ace4187e053c97f049d1, type: 2}
         ratio: 0.21
       - gas: {fileID: 11400000, guid: a8c3cecff9ad7d746bf8ab891d7a39e1, type: 2}
         ratio: 0.01
       - gas: {fileID: 11400000, guid: 736d38b6d7fa2e945a944c9ed14ab15d, type: 2}
         ratio: 0.78
-    pressure: 100000
+    pressure: 101325
     temperature: 22
     heatCapacity: 1012
 --- !u!1 &509127557
@@ -4403,14 +4403,14 @@ MonoBehaviour:
   air:
     volume: 300
     _gasProportions:
-      array:
+      elements:
       - gas: {fileID: 11400000, guid: 00e419d01be4ace4187e053c97f049d1, type: 2}
-        ratio: 0.1
+        ratio: 0.21
       - gas: {fileID: 11400000, guid: a8c3cecff9ad7d746bf8ab891d7a39e1, type: 2}
-        ratio: 0.3
+        ratio: 0.01
       - gas: {fileID: 11400000, guid: 736d38b6d7fa2e945a944c9ed14ab15d, type: 2}
-        ratio: 0.6
-    pressure: 100000
+        ratio: 0.78
+    pressure: 101325
     temperature: 10
     heatCapacity: 1012
 --- !u!1001 &662801946
@@ -6968,7 +6968,7 @@ MonoBehaviour:
   air:
     volume: 0
     _gasProportions:
-      array: []
+      elements: []
     pressure: 0
     temperature: 0
     heatCapacity: 1012

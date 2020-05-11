@@ -3,12 +3,12 @@ using System.Collections.Generic;
 using System.Linq;
 using Air.Gases;
 using UnityEngine;
-using Object = System.Object;
 
 namespace Air
 {
     [Serializable]
-    public class Air : Object{
+    public class Air
+    {
         public float volume;
 
         [SerializeField]
@@ -17,7 +17,7 @@ namespace Air
 
         public Dictionary<Gas, float> gasProportions {
             get => _gasProportions.ToDictionary();
-            set => _gasProportions = (SerializableGasDictionary)value;
+            set => _gasProportions = new SerializableGasDictionary(value);
         }
 
         [Tooltip("In kPa")] public float pressure;
@@ -52,13 +52,9 @@ namespace Air
             return pressure;
         }
 	
-        public float GetMolarMass() {
-            float sum = 0f;
-
-            foreach (var gas in gasProportions.Keys) {
-                sum += gasProportions[gas] * gas.molarMass;
-            }
-            return sum;
+        public float GetMolarMass()
+        {
+            return gasProportions.Keys.Sum(gas => gasProportions[gas] * gas.molarMass);
         }
 	
         public float GetDensity() {
@@ -102,27 +98,15 @@ namespace Air
         [Serializable]
         public class SerializableGasDictionary{
             [SerializeField]
-            public GasDictionaryPosition[] array;
+            public GasDictionaryPosition[] elements;
 
-            public Dictionary<Gas, float> ToDictionary() {
-                Dictionary<Gas, float> dictionary = new Dictionary<Gas, float>();
-                foreach (var position in array) {
-                    dictionary.Add(position.gas, position.ratio);
-                }
-
-                return dictionary;
-            }
-		
-            public static explicit operator SerializableGasDictionary(Dictionary<Gas, float> dictionary)
+            public SerializableGasDictionary(Dictionary<Gas, float> dictionary)
             {
-                SerializableGasDictionary gasDictionary = new SerializableGasDictionary();
-                gasDictionary.array = new GasDictionaryPosition[dictionary.Count];
-                int i = 0;
-                foreach (var pair in dictionary) {
-                    gasDictionary.array[i] = new GasDictionaryPosition(pair.Key, pair.Value);
-                    ++i;
-                }
-                return gasDictionary;
+                elements = dictionary.Select(kvp => new GasDictionaryPosition(kvp.Key, kvp.Value)).ToArray();
+            }
+            public Dictionary<Gas, float> ToDictionary()
+            {
+                return elements.ToDictionary(position => position.gas, position => position.ratio);
             }
         }
         [Serializable]

@@ -6,7 +6,14 @@ namespace Scripts.Player.Health.Condition
     {
         private static readonly Setting[] settings = 
         {
-            new Setting(RequirementType.O2VolumePercentage, new O2VolumePercentageProvider(), 0f, 10f, typeof(Breathlessness))
+            new Setting
+            (
+                RequirementType.O2PartialPressure,
+                new O2PartialPressureProvider(),
+                0f,
+                19000f,
+                typeof(Breathlessness)
+            )
         };
 
         public static Setting[] GetSettings()
