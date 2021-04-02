@@ -50,7 +50,7 @@ public class BuildMenuItem : MonoBehaviour {
             sb.Append(matPut + "/" + matN.count + "\n");
         }
 
-        interactable.tooltipText = sb.ToString();
+        interactable._tooltipText = sb.ToString();
     }
 
     private bool PutPart() {

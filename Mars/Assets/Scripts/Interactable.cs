@@ -5,16 +5,7 @@ using UnityEngine;
 using UnityEngine.Events;
 
 public class Interactable : MonoBehaviour {
-	private string _tooltipText;
-
-	public string tooltipText {
-		get => _tooltipText;
-		set {
-			_tooltipText = value;
-			if (isSelected)
-				Tooltip.instance.SetText(_tooltipText);
-		}
-	}
+	public string _tooltipText;
 	
 	public bool applyOutline = true;
 	public bool deselectOnInteract;
@@ -50,7 +41,7 @@ public class Interactable : MonoBehaviour {
 		}
 
 		isSelected = true;
-		tooltip.OpenTooltip(transform, GetComponent<Interactable>().tooltipText);
+		tooltip.OpenTooltip(transform, _tooltipText);
 	}
 
 	public void Deselect() {
